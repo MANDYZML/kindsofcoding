@@ -1,1 +1,2 @@
 C:\Users\manli\OneDrive\桌面\Code\Visual C＋＋\test 2\Debug\test 2.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\Debug\test 2.exe
