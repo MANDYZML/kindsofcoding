@@ -438,7 +438,7 @@
 //	int c = 5;
 //	       //a=5        c=5-1=1    b=1+2=3   然后b的结果赋给了d
 //	int d = (a = b + 2, c = a - 4, b = c + 2); //括号里的就是括号表达式 特点是 从左到右依次计算
-//											   //整个逗号表达式的结果是最后一个表达式的结果
+//						  //整个逗号表达式的结果是最后一个表达式的结果
 //	printf("%d\n", d);
 //
 //	return 0;
@@ -477,9 +477,91 @@
 //	return 0;
 //}
 
+//int main()
+//{
+//	//大量平凡被使用的数据，想放在寄存器中，提升效率
+//	register int num = 100;//建议num的值存放在寄存器中
+//
+//	return 0;
+//}
+
+//typedef  类型重定义/类型重命名
+//typedef unsigned int u_int;  //typedef 是把unsigned int 重新起了名字 叫u_int
+//
+//int main()
+//{
+//
+//	unsigned int num = 100;
+//	u_int num2 = 100;//这俩代码是一样的意思
+//	return 0;
+//}
+
+//static --静态的  3个用法
+//1.static 修饰局部变量
+//2.static 修饰全局变量
+//3.static 修饰函数
+
+//void test()
+//{//每一次去调test函数
+//	static int a = 1;//a是局部变量  特点是 test函数进入a  a创建 //第二次在新创建a  //a又是1
+//	a++; //变成2  //再次a++ ---2
+//	printf("%d ", a); //2  //再次打印--2   以此类推10次 结果是10个2  
+//}//出了局部范围以后  a就要销毁了 再往下走
+//
+//int main()   //！！代码从这开始！！
+//{
+//	int i = 0;
+//	while (i<10) //while循环 <10
+//	{
+//		test(); //test函数  //去调test函数，然后往上走
+//		//再次进来之后 i++   <10 又上去
+//		i++;
+//	}
+//	return 0;
+//}
+//int a 加了static后  结果变成2-11
+//第一次调test 函数 往上走 创建a a=1，++后变2 所以打印出来第一个数是2
+//因为 static 出了局部范围后 a没有销毁    说明生命周期变长了
+//下一次进入函数的时候 a 还在  那么static int a = 1;就没有意义了 因为a不等于1了
+//然后a=2 a++是3 然后以此类推10次  所以打印出来是2 3 4 5 6 7 8 9 10 11
+
+//声明  extern用来声明外部符号//（符号来自于其他地方）
+//extern int g_val; //不需要指定值 //只需要指定名字，类型
+//int main()
+//{
+//	printf("%d\n", g_val);
+//	return 0;
+//}
+
+//声明函数
+//extern int Add(int x, int y);
+// int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int sum = Add(a, b);
+//	printf("sum=%d\n", sum);
+//	return 0;
+//}
+
+//define 是一个预处理指令 两个用途
+//1.define 定义符号 定义标识符常量
+
+//#define MAX 1000//（MAX就是定义的一个符号）
+//
+//int main()
+//{
+//	printf("%d\n", MAX);
+//	return 0;
+//
+//}
+
+//2.define 定义宏
+#define ADD(X,Y)  ((X)+(Y))  //宏是有参数（X ,Y） 的  x+y
+                    //这是一个宏体  如果那括号括起来整个了的话 ×4是乘的是一个结果
 int main()
 {
-	register int num = 100;//建议num的值存放在寄存器中
-
+	
+	printf("%d\n", 4*ADD(2,3));
 	return 0;
 }
