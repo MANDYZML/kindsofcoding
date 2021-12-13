@@ -556,12 +556,108 @@
 //
 //}
 
-//2.define 定义宏
-#define ADD(X,Y)  ((X)+(Y))  //宏是有参数（X ,Y） 的  x+y
-                    //这是一个宏体  如果那括号括起来整个了的话 ×4是乘的是一个结果
+////2.define 定义宏
+//#define ADD(X,Y)  ((X)+(Y))  //宏是有参数（X ,Y） 的  x+y
+//                    //这是一个宏体  如果那括号括起来整个了的话 ×4是乘的是一个结果
+//int main()
+//{
+//	
+//	printf("%d\n", 4*ADD(2,3));
+//	return 0;
+//}
+
+
+////指针
+//int main()
+//{
+//
+//	int a = 10; //a在内存中要分配空间--4个字节
+//	printf("%p\n",&a); //&a拿到的是四个字节的每一个 第一个地址 //%p 是专门用来打印地址
+//	//打印出来的地址会一直变的
+//	int *pa = &a; // pa是用来存放地址的，在C语言中 pa 叫指针变量 //&a的地址是个值 值放到变量pa里
+//	//指针变量的定义方式是 int*
+//	//* 说明 pa是指针变量
+//	//int 说明pa指向的对象是int 类型
+//	//这里因为pa指向的对象是a  而a的类型是int（整型）所以 pa前面是int
+//
+//	char ch = 'w';
+//	char* pc = &ch;//这是pc的类型
+//	//pc前面有*  说明pc是指针   前面的char指向的变量的对象（ch）的类型是 char类型
+//
+//	return 0;
+//}
+//指针变量能够存在自身地址？
+//int main()
+//{
+//	int* pa = &pa; //(&pa 就变成二进制的了)
+//
+//	return 0;
+//}
+//这很奇怪
+
+//&a  就是单目操作符
+//int main()
+//{
+//
+//	int a = 10;
+//	int* pa =&a;//(拿到a的地址，之后放到pa里) pa里有a的地址，想通过pa里a的地址找到a
+//	           //怎么找
+//	*pa = 20;//因为pa里存的a的地址，所以*pa就是通过pa里的地址找到a
+//	        //  * 叫做解引用操作  *pa就是通过pa里边的地址，找到a
+//	printf("%d\n", a);//算a  因为*pa是20  所以a是20
+//	                //改a可以不通过a改变  只要把a的地址交给pa 
+//	             //然后pa解引用   就可以找到a  这是间接改变
+//
+//	return 0;
+//}
+//指针变量的大小
+//int main()
+//{
+//	//指针有类型  类型有各种各样
+//	printf("%d\n", sizeof(char*));  //字符指针用char*来计算
+//	printf("%d\n", sizeof(short*));
+//	printf("%d\n", sizeof(int*));
+//	printf("%d\n", sizeof(long*));
+//	printf("%d\n", sizeof(long long*));
+//	printf("%d\n", sizeof(float*));  //单精度浮点数
+//	printf("%d\n", sizeof(double*));  //双精度浮点数
+//	return 0;
+//}
+
+//结构体可以让C语言创建新的类型出来
+//用类型创建出来一个个变量
+
+//想创建  学生  这个类型
+
+struct Stu    //创造一个类型（学生）
+{
+
+	char name[20];//学生得有名字  //名字是字符串 所以用char（字符数组）
+	int age;
+	double score;  //double (带小数点)
+};  //学生  描述完了    一个学生是由几个数据组成的 
+   //这三个 name age score  是这个结构体里的成员变量
+
+//创建一个书的类型
+struct Book
+{
+
+	char name[20];//书得有名字
+	float price;  //书得有定价
+	char id[30];  //书得有书号
+};
 int main()
 {
-	
-	printf("%d\n", 4*ADD(2,3));
+	struct  Stu s = {"张三",20,85.5};  //创建了一个学生 但是不知道学生的名字，年龄和成绩
+	                   //给 学生s 赋值了  //结构体的创建和初始化//赋值后想打印出来
+	printf("1:%s %d %lf\n",s.name, s.age, s.score);//.操作符 （找到要打印的结构体的成员s  再找到s的成员）
+	     // 名字  年龄， （float）成绩    //结构体变量 .  成员变量
+	struct  Stu*ps = &s;  //ps是结构体的值  *ps 变指针  ps指s s的类型是 struct Stu 所以ps也是
+	//struct  Stu*  这是结构体的指针
+	printf("2:%s %d %lf\n", (*ps).name, (*ps).age, (*ps).score);
+	//打印第二次 不直接用s值  *ps是s 
+	printf("3:%s %d %lf\n", ps->name, ps->age, ps->score);//ps是个指针，他指向那个对象的名字
+														  //ps-> = *ps 一样的
+	//通过ps先找到表达对象  然后在找到成员里的内容    结构体指针->  成员变量名
 	return 0;
 }
