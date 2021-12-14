@@ -639,25 +639,123 @@ struct Stu    //创造一个类型（学生）
    //这三个 name age score  是这个结构体里的成员变量
 
 //创建一个书的类型
-struct Book
-{
+//struct Book
+//{
+//
+//	char name[20];//书得有名字
+//	float price;  //书得有定价
+//	char id[30];  //书得有书号
+//};
+//int main()
+//{
+//	struct  Stu s = {"张三",20,85.5};  //创建了一个学生 但是不知道学生的名字，年龄和成绩
+//	                   //给 学生s 赋值了  //结构体的创建和初始化//赋值后想打印出来
+//	printf("1:%s %d %lf\n",s.name, s.age, s.score);//.操作符 （找到要打印的结构体的成员s  再找到s的成员）
+//	     // 名字  年龄， （float）成绩    //结构体变量 .  成员变量
+//	struct  Stu*ps = &s;  //ps是结构体的值  *ps 变指针  ps指s s的类型是 struct Stu 所以ps也是
+//	//struct  Stu*  这是结构体的指针
+//	printf("2:%s %d %lf\n", (*ps).name, (*ps).age, (*ps).score);
+//	//打印第二次 不直接用s值  *ps是s 
+//	printf("3:%s %d %lf\n", ps->name, ps->age, ps->score);//ps是个指针，他指向那个对象的名字
+//														  //ps-> = *ps 一样的
+//	//通过ps先找到表达对象  然后在找到成员里的内容    结构体指针->  成员变量名
+//	return 0;
+//}
 
-	char name[20];//书得有名字
-	float price;  //书得有定价
-	char id[30];  //书得有书号
-};
+
+
+//作业
+//局部变量的作用域是?
+//局部变量是大括号内部
+//正解:局部变量所在的局部范围
+
+//void test()
+//{
+//	int b = 0;//这个b也是局部变量
+//}
+//int main()
+//{
+//
+//	int a = 10;//a是局部变量
+//	return 0;
+//}
+// 
+// 
+ //C99 标准中引入一个概念：变长数组
+//支持数组创建的时候，用变量指定大小，但是这个数组不能初始化
+//vs2019 不支持C99中变长数组的
+//int main()
+//{
+//	int n = 10;
+//	//int arr[n] = { 0 };//初始化=0 //这个表达式错误  必须含有常量值  n是变量
+//	int arr[n];
+//	return 0;
+//}
+
+//求两个数的较大值
+//int Max(int x, int y)  //返回类型 int //这个函数最终返回整型值 
+//          //要传a,b过来 要有接收值 //int x  int y是参数值
+//                   
+//{
+//	if (x > y)
+//		return x;
+//	else
+//		return y;//无论返回x还是返回y 都是整型类型 因为int
+//	             //之后值返回到m
+//	//一般写代码不建议把函数名字写成全大写 比如 MAX
+//}
+//int main()
+//{
+//
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);
+//	int m=Max(a,b);//把a，b传给max,之后max求出a，b较大值 之后把这个值返回
+//	                 //int m 保存返回值
+//	printf("%d\n", m);
+//	return 0;
+//}
+
+//飞机
+//int main()
+//{
+//
+//	printf("     **\n");
+//	printf("     **\n");
+//	printf("************\n");
+//	printf("************\n");
+//	printf("    *  *\n");
+//	printf("    *  *\n");
+// 
+//	return 0;
+//}
+
+//int main()
+//{
+//
+//	printf("     **     \n");
+//	printf("     **     \n");
+//	printf("************\n");
+//	printf("************\n");
+//	printf("    *  *    \n");
+//	printf("    *  *    \n");
+//
+//	return 0;
+//}
+
+
+//被5整除的问题--选择语句的问题
+#include<stdio.h>
 int main()
 {
-	struct  Stu s = {"张三",20,85.5};  //创建了一个学生 但是不知道学生的名字，年龄和成绩
-	                   //给 学生s 赋值了  //结构体的创建和初始化//赋值后想打印出来
-	printf("1:%s %d %lf\n",s.name, s.age, s.score);//.操作符 （找到要打印的结构体的成员s  再找到s的成员）
-	     // 名字  年龄， （float）成绩    //结构体变量 .  成员变量
-	struct  Stu*ps = &s;  //ps是结构体的值  *ps 变指针  ps指s s的类型是 struct Stu 所以ps也是
-	//struct  Stu*  这是结构体的指针
-	printf("2:%s %d %lf\n", (*ps).name, (*ps).age, (*ps).score);
-	//打印第二次 不直接用s值  *ps是s 
-	printf("3:%s %d %lf\n", ps->name, ps->age, ps->score);//ps是个指针，他指向那个对象的名字
-														  //ps-> = *ps 一样的
-	//通过ps先找到表达对象  然后在找到成员里的内容    结构体指针->  成员变量名
+	//输入 数据
+	 int m=0;
+	scanf("%d", &m);
+	//判断并输出
+	if (m % 5 == 0)  //说明被5整除了
+		printf("YES\n");
+	else
+		printf("NO\n");
+
 	return 0;
 }
