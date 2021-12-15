@@ -745,17 +745,206 @@ struct Stu    //创造一个类型（学生）
 
 
 //被5整除的问题--选择语句的问题
-#include<stdio.h>
+//#include<stdio.h>
+//int main()
+//{
+//	//输入 数据
+//	 int m=0;
+//	scanf("%d", &m);
+//	//判断并输出
+//	if (m % 5 == 0)  //说明被5整除了
+//		printf("YES\n");
+//	else
+//		printf("NO\n");
+//
+//	return 0;
+//}
+
+
+//分支语句  12/15
+
+//什么是语句
+//int main()
+//{
+//
+//	printf("hehe\n");
+//	3 + 5;
+//	;//这也是个语句  叫做空语句
+//	return 0;//用；隔开的就是一句语句
+//}
+
+//int main()
+//{
+//	int age = 170;
+//	//多分枝写法
+//	if (age < 18)
+//		printf("少年\n");
+//	/*else if (18 <= age < 26)*///else if 如果其他情况下
+//	else if (age >= 18 && age < 26)  //&&是并且的意思  age >= 18也可以写成18<=age
+//		printf("青年\n");
+//	else if (age >= 26 && age < 40)
+//		printf("中年\n");
+//	else if (age >= 40 && age < 60)
+//		printf("壮年\n");
+//	else if (age >= 60 && age < 100)
+//		printf("老年\n");
+//	else
+//		printf("老不死\n");
+
+
+	//if (age >= 18)
+	//{
+	//	printf("成年\n");
+	//}
+	//else
+	//{
+	//	printf("未成年\n");
+		//printf("不能谈恋爱\n");//这句话执行不了  因为if else 默认只能控制一句话//这是独立的一句话
+	//	printf("不能谈恋爱\n");
+	//}  //如果想让else管两句话  就要加上{}---叫做代码块
+	/*if (age >= 18)
+		printf("成年\n");*/
+
+	/*return 0;
+}*/
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 2;
+//	if (a == 1)
+//	{
+//		if (b == 2)
+//		{
+//			printf("hehe\n");
+//		}
+//	else //else和离他最近的if匹配
+//		{
+//			printf("haha\n");
+//		}
+//	}
+//	return 0;
+//}
+//这段代码什么都打印不出来
+// 第一个if语句进到底下的if else语句里 才有第二个if和else的事
+//因为第一个if a=0 但是if(a==1) 这个语句都没有进去底下的if else里所以直接就结束了
+
+//代码风格--书
+//<高质量C/C++编程>
+
+//if书写形式的对比
+//代码1
+// if(condition){    //if条件满足return x
+//	return x;
+//}
+//return y;
+//
+////代码2
+// if (condition)     //如果条件满足  返回x
+//{
+//	return x;
+//}
+//else
+//{
+//	return y;    //如果条件不满足   返回y
+//}
+
+//int test()
+//{
+//	if (0)//为真
+//		return  0;
+//
+//	printf("hehe\n");//按f10 这两句没执行  因为前面的return执行了后面的就不执行了
+//	return 1;//把上面的if(1)改成if(0)--假 return 1 就有机会执行了
+//}
+//int main()
+//{
+//	
+//	test();
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	int num = 3;
+//	//if (num = 5) 少写一个= 虽然打出来hehe 但是是错的代码 num=5 永远为真 就一直是5
+//	if(5==num)//这样写能防止代码错误  少写一个= 代码没法运行 num没法赋给5
+//		      //当两个整型变量进行比较的时候 把常量放左边
+//		printf("hehe\n");
+//
+//	return 0;
+//}
+
+//判断一个数是否为奇数
+
+//int main()
+//{
+//	int num = 15;//奇数是÷2 余1
+//	if (num % 2 == 1)//%2 就得到余数
+//		printf("奇数\n");
+//
+//	return 0;
+//}
+
+//输出1-100之间的奇数
+//用 for
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 100; i++)
+//	{
+//		if (i % 2 == 1)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//
+//}
+
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 100; i += 2)//i初始化从1开始
+//	{
+//		printf("%d", i);
+//	}
+//
+//	return 0;
+//}
+
+
+//switch 语句
 int main()
 {
-	//输入 数据
-	 int m=0;
-	scanf("%d", &m);
-	//判断并输出
-	if (m % 5 == 0)  //说明被5整除了
-		printf("YES\n");
-	else
-		printf("NO\n");
+	int day = 0;
+	scanf("%d", &day);//scanf 把数据输入到指定的变量当中
+	                  //把 输入的值 %d   放到day 里
+	switch (day) //整型表达式
+	{
+	case 1:   //switch 后面day是几 就进到case几
+		printf("星期1\n");
+		break;//break 跳出 停止的意思
+	case 2:
+		printf("星期2\n");
+		break;
+	case 3:
+		printf("星期3\n");
+		break;
+	case 4:
+		printf("星期4\n");
+		break;
+	case 5:
+		printf("星期5\n");
+		break;
+	case 6:
+		printf("星期6\n");
+		break;
+	case 7:
+		printf("星期天\n");
+		break;
+
+	}
 
 	return 0;
 }
