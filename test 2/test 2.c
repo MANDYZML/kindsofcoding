@@ -901,7 +901,19 @@ struct Stu    //创造一个类型（学生）
 //	return 0;
 //
 //}
-
+//int main()
+//{
+//	int a = 0;
+//	while (a <= 100)
+//	{
+//		if (a % 2 ==1)
+//		{
+//			printf("%d ", a);
+//		}
+//		a++;
+//	}
+//	return 0;
+//}
 //int main()
 //{
 //	int i = 0;
@@ -912,38 +924,166 @@ struct Stu    //创造一个类型（学生）
 //
 //	return 0;
 //}
-
+//int main()
+//{
+//	int a = 13;
+//	{
+//		if (a % 2 == 1)
+//		{
+//			printf("奇数\n");
+//		}
+//		else
+//		{
+//			printf("偶数\n");
+//		}
+//	}
+//	return 0;
+//}
 
 //switch 语句
+// 
+// int main()
+//{
+//int day = 0;
+//scanf("%d", &day);//scanf 把数据输入到指定的变量当中
+//				  //把 输入的值 %d   放到day 里
+//switch (day)
+//{
+//case 1:   //switch 后面day是几 就进到case几
+//	printf("星期1\n");
+//case 2:
+//	printf("星期2\n");
+//case 3:
+//	printf("星期3\n");
+//case 4:
+//	printf("星期4\n");
+//case 5:
+//	printf("星期5\n");
+//case 6:
+//	printf("星期6\n");
+//case 7:
+//	printf("星期天\n");
+//}
+//return 0;
+//	}
+
+//int main()
+//{
+//	int day = 0;
+//	scanf("%d", &day);//scanf 把数据输入到指定的变量当中
+//					  //把 输入的值 %d   放到day 里
+//	switch (day) //整型表达式
+//	{
+//	case 1:   //switch 后面day是几 就进到case几
+//		printf("星期1\n");
+//		break;//break 跳出 停止的意思
+//	case 2:
+//		printf("星期2\n");
+//		break;
+//	case 3:
+//		printf("星期3\n");
+//		break;
+//	case 4:
+//		printf("星期4\n");
+//		break;
+//	case 5:
+//		printf("星期5\n");
+//		break;
+//	case 6:
+//		printf("星期6\n");
+//		break;
+//	case 7:
+//		printf("星期天\n");
+//		break;
+//	}
+//
+//	return 0;
+//}
+//
+
+//输入1-5  工作日
+//6-7是休息日
+
+// int main()
+//{
+//int day = 0;
+//scanf("%d", &day);//scanf 把数据输入到指定的变量当中
+//				  //把 输入的值 %d   放到day 里
+//switch (day)
+//{
+//case 1:   //因为case1 后面没有break//所以从1进来也会往下走 直到遇到break
+//case 2:
+//case 3:
+//case 4:
+//case 5:
+//	printf("工作日\n");
+//	break;
+//case 6:
+//case 7:
+//	printf("休息日\n");
+//	break;
+//default:
+//	printf("输入错误\n");
+//	break;
+//}
+//return 0;
+//	}
+
+//int main()
+//{
+//	int n = 1;
+//	int m = 2;
+//	switch (n)//因为n=1 所以从case1进
+//	{
+//	case 1:
+//		m++;  //m=3
+//	case 2:  //因为case1 没有break 所以case2执行
+//		n++;  //n=2 m=3
+//	case 3:
+//		switch (n)//这里的n是2
+//		{//switch允许嵌套使用
+//
+//		case 1: //所以这个case1不执行
+//			n++;
+//		case 2://所以从case2进来
+//			m++; n++;  //m=4  n=3
+//			break;//这个break的跳出  只是跳出上面switch的 接着会来到case4
+//		}
+//	case 4:
+//		m++;  //m=5 n=3
+//		break;//这个break 是跳出最开头的switch的
+//	default:
+//		break;
+//	}
+//	printf("m=%d, n = %d\n", m, n);
+//	return 0;
+//}
+
+//if 语句
+//int main()
+//{
+//	while(1)// 1 为真
+//		printf("hehe\n");
+//	return 0;
+//}
+
+//while 语法结构
+//while (表达式)
+//    循环语句；
+
+
+//屏幕上打印1-10
 int main()
 {
-	int day = 0;
-	scanf("%d", &day);//scanf 把数据输入到指定的变量当中
-	                  //把 输入的值 %d   放到day 里
-	switch (day) //整型表达式
+	int i = 1;
+	while (i <= 10)
+		//在while循环中，break用于永久的终止循环
+		//只要break被执行，不管后面还有多少循环  都不运行了
 	{
-	case 1:   //switch 后面day是几 就进到case几
-		printf("星期1\n");
-		break;//break 跳出 停止的意思
-	case 2:
-		printf("星期2\n");
-		break;
-	case 3:
-		printf("星期3\n");
-		break;
-	case 4:
-		printf("星期4\n");
-		break;
-	case 5:
-		printf("星期5\n");
-		break;
-	case 6:
-		printf("星期6\n");
-		break;
-	case 7:
-		printf("星期天\n");
-		break;
-
+		if (i == 5)//本来有10次循环  但是到了第五次就不循环了  跳出
+			break;
+		printf("%d ", i);
+		i++;
 	}
 
 	return 0;
