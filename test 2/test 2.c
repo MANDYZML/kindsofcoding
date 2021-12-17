@@ -1073,18 +1073,69 @@ struct Stu    //创造一个类型（学生）
 
 
 //屏幕上打印1-10
-int main()
-{
-	int i = 1;
-	while (i <= 10)
-		//在while循环中，break用于永久的终止循环
-		//只要break被执行，不管后面还有多少循环  都不运行了
-	{
-		if (i == 5)//本来有10次循环  但是到了第五次就不循环了  跳出
-			break;
-		printf("%d ", i);
-		i++;
-	}
+//int main()
+//{
+//	int i = 1;
+// 
+// while (i <= 10)
+//		//在while循环中，break用于永久的终止循环
+//		//只要break被执行，不管后面还有多少循环  都不运行了
+//	{
+//		if (i == 5)//本来有10次循环  但是到了第五次就不循环了  跳出
+//			break;
+//		printf("%d ", i);
+//		i++;
+//	}
+//
+//	return 0;
+//}
 
-	return 0;
-}
+//把break换成continue
+//int main()
+//{
+//	int i = 1;
+//	while (i <= 10)
+//	{
+//		if (i == 5)//等i等于5以后  往上走  到while (i <= 10)重新往下
+//            //但是 因为不到i++ ，所以i一直是5 又往上 死循环了
+//			continue;//继续//这里continue的意思是跳过本次循环continue的后面代码,
+//		            //直接到判断部分，判断要不要进行下一次循环
+//		printf("%d ", i);
+//		i++;
+//	}
+//
+//	return 0;
+//}//打出来的是 1 2 3 4   进入死循环了
+
+
+//getchar 是读取一个字符
+//得到一个char 从一个留里面
+//或者得到一个char 从stdin（标准输入--键盘）
+//getchar的返回类型是int 类型
+//如果正确读取      每个函数读到的是字符  返回到整型是返回字符的ASCII值
+//如果读取的时候 读取错误或者文件结束   这个函数返回的是EOF
+//EOF--end of file ---文件的结束标志  就是  -1
+//int main()
+//{
+//	int ch = 0; //创建了  int类型  ch变量
+//	while ((ch = getchar()) != EOF)//正常读取 getchar读取字符放到ch
+//		                          //这个字符不等于EOF 说明不是遇到错误了
+//	{
+//		putchar(ch);//打印在屏幕上
+//	}
+//	return 0;
+//}
+
+//代码意义就是不断在屏幕上读取字符
+// 按ctrl + z  就是结束   也就是getchar 读取到了EOF
+
+
+
+//get char 工作原理
+//int main()
+//{
+//	int ch = getchar();//getchar 读取字符放到ch里
+//	//printf("%c\n", ch);
+//	putchar(ch);//输出字符
+//	return 0;
+//}
