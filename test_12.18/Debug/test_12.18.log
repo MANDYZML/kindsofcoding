@@ -1,0 +1,4 @@
+﻿  test.c
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test_12.18\test.c(59,23): warning C4474: scanf: 格式字符串中传递的参数太多
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test_12.18\test.c(59,23): message : 占位符和其参数预计 1 可变参数，但提供的却是 2 参数
+  test_12.18.vcxproj -> C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test_12.18\Debug\test_12.18.exe
