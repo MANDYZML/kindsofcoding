@@ -1119,7 +1119,10 @@ struct Stu    //创造一个类型（学生）
 //{
 //	int ch = 0; //创建了  int类型  ch变量
 //	while ((ch = getchar()) != EOF)//正常读取 getchar读取字符放到ch
-//		                          //这个字符不等于EOF 说明不是遇到错误了
+//		                          //这个()里ch的值不等于EOF 说明不是遇到错误了 getchar读取的是正常字符
+//                               //进入到while循环内部  然后 putchar
+//                         //如果getchar读取的值返回到ch 是EOF 那么 循环不再继续
+//                                 //!=是不等于的意思
 //	{
 //		putchar(ch);//打印在屏幕上
 //	}
@@ -1139,3 +1142,15 @@ struct Stu    //创造一个类型（学生）
 //	putchar(ch);//输出字符
 //	return 0;
 //}
+
+
+int main()
+{
+	int ch = 0; 
+	while ((ch = getchar()) != EOF)//getchar 读取字符放到ch里
+		                         
+	{
+		putchar(ch);//打印在屏幕上
+	}
+	return 0;
+}
