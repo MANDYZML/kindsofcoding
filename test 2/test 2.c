@@ -1144,13 +1144,46 @@ struct Stu    //创造一个类型（学生）
 //}
 
 
-int main()
-{
-	int ch = 0; 
-	while ((ch = getchar()) != EOF)//getchar 读取字符放到ch里
-		                         
-	{
-		putchar(ch);//打印在屏幕上
-	}
-	return 0;
-}
+//int main()
+//{
+//	int ch = 0; 
+//	while ((ch = getchar()) != EOF)//getchar 读取字符放到ch里
+//		                         
+//	{
+//		putchar(ch);//打印在屏幕上
+//	}
+//	return 0;
+//}
+
+
+//while 循环例子
+//输出1-10
+//int main()
+//{
+//	int i = 1;//这个给 i 的初始化值不是0！！
+//	while (i <= 10)//判断部分   <=
+//	{
+//		printf("%d ",i);
+//		i++;//调整部分
+//	}
+//	return 0;
+/*}*///三个部分任何一个部分发生变化  都会影响到循环
+
+
+//for 循环
+
+//把初始化  调整部分  循环结合在一起  不会离得太远
+//for循环 语法结构
+// for(表达式1；表达式2；表达式3)
+      //循环语句
+
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 10; i++)
+//	{
+//		printf("%d ", i);
+//	}
+//
+//	return 0;
+//}
