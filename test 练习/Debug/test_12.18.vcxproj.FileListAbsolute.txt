@@ -1,0 +1,2 @@
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test_12.18\Debug\test_12.18.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 练习\Debug\test_12.18.exe
