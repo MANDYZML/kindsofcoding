@@ -307,3 +307,82 @@
 //	}
 //	return 0;
 //}
+
+//4.多个字符从两端移动，向中间汇聚
+//假如说想在屏幕上打印   welcome to bit !!!!!!!
+//打出来的步骤是
+
+//#######################
+//w#####################!
+//we###################!!
+//wel#################!!!  以此类推
+//welcome to bit !!!!!!!！
+//直到全部漏出来
+
+//int main()
+//{
+//	char arr1[] = "welcome to bit !!!!!!!!";//首先必须得有两个数组arr
+//	char arr2[] = "#######################";
+//
+//	int left = 0;
+//	int right = strlen(arr1)-1; //strlen求字符长度
+//	                            //strlen(arr1)-1  求的是最后一个！的下标
+//	// 如果求
+//	//把w拿下来放在第一个#  //把arr1 放到 arr2
+//	arr2[left] = arr1[left];
+//	arr2[right] = arr1[right];
+//	printf("%s\n", arr2);
+//	left++;
+//	right--;
+//	return 0;
+//}
+
+
+//#include<string.h>
+//#include<windows.h>
+//int main()
+//{
+//	char arr1[] = "welcome to bit !!!!!!!!";//首先必须得有两个数组arr
+//	char arr2[] = "#######################";
+//
+//	int left = 0;
+//	int right = strlen(arr1) - 1; //strlen求字符长度
+//								//strlen(arr1)-1  求的是最后一个！的下标
+//								
+//	while (left<=right)//如果还有元素要往下那  条件就是left<=right
+//	{
+//		// 如果求
+//		//把w拿下来放在第一个#  //把arr1 放到 arr2
+//		arr2[left] = arr1[left];
+//		arr2[right] = arr1[right];
+//		printf("%s\n", arr2);
+//		Sleep(1000); //Sleep函数 单位是毫秒  1000毫秒就是1秒  作用是休眠一秒 动态的显示
+//		             //加了Sleep 是 一行一行显示
+//		system("cls");//执行一个指令 ---清空屏幕
+//		               //作用是 只有一行  w#####################!   两边往中间走
+//		left++;
+//		right--;
+//	}
+//	printf("%s\n", arr2);
+//	return 0;
+//}
+
+//5.模拟用户登录 ，只允许登陆三次。（只允许输入三次密码，如果密码正确则提示登陆成功）
+//三次都错误，则退出程序
+
+int mian()
+{
+	int i = 0;
+	//
+	char password[20] = { 0 };
+	for (i = 0; i < 3; i++)
+	{
+		printf("请输入密码:>");
+		scanf("%s", password);//把内容读取放到password
+		if()
+	
+	}
+
+
+	return 0;
+}
