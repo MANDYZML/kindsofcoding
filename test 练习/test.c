@@ -1,5 +1,102 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
+//作业
+//局部变量的作用域是?
+//局部变量是大括号内部
+//正解:局部变量所在的局部范围
+
+//void test()
+//{
+//	int b = 0;//这个b也是局部变量
+//}
+//int main()
+//{
+//
+//	int a = 10;//a是局部变量
+//	return 0;
+//}
+ 
+ //C99 标准中引入一个概念：变长数组
+//支持数组创建的时候，用变量指定大小，但是这个数组不能初始化
+//vs2019 不支持C99中变长数组的
+//int main()
+//{
+//	int n = 10;
+//	//int arr[n] = { 0 };//初始化=0 //这个表达式错误  必须含有常量值  n是变量
+//	int arr[n];
+//	return 0;
+//}
+
+//求两个数的较大值
+//int Max(int x, int y)  //返回类型 int //这个函数最终返回整型值 
+//          //要传a,b过来 要有接收值 //int x  int y是参数值
+//                   
+//{
+//	if (x > y)
+//		return x;
+//	else
+//		return y;//无论返回x还是返回y 都是整型类型 因为int
+//	             //之后值返回到m
+//	//一般写代码不建议把函数名字写成全大写 比如 MAX
+//}
+//int main()
+//{
+//
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);
+//	int m=Max(a,b);//把a，b传给max,之后max求出a，b较大值 之后把这个值返回
+//	                 //int m 保存返回值
+//	printf("%d\n", m);
+//	return 0;
+//}
+
+//飞机
+//int main()
+//{
+//
+//	printf("     **\n");
+//	printf("     **\n");
+//	printf("************\n");
+//	printf("************\n");
+//	printf("    *  *\n");
+//	printf("    *  *\n");
+// 
+//	return 0;
+//}
+
+//int main()
+//{
+//
+//	printf("     **     \n");
+//	printf("     **     \n");
+//	printf("************\n");
+//	printf("************\n");
+//	printf("    *  *    \n");
+//	printf("    *  *    \n");
+//
+//	return 0;
+//}
+
+
+//被5整除的问题--选择语句的问题
+//#include<stdio.h>
+//int main()
+//{
+//	//输入 数据
+//	 int m=0;
+//	scanf("%d", &m);
+//	//判断并输出
+//	if (m % 5 == 0)  //说明被5整除了
+//		printf("YES\n");
+//	else
+//		printf("NO\n");
+//
+//	return 0;
+//}
+
+
+//getchar
 //int main()
 //{
 //	int ch = 0;
@@ -370,19 +467,40 @@
 //5.模拟用户登录 ，只允许登陆三次。（只允许输入三次密码，如果密码正确则提示登陆成功）
 //三次都错误，则退出程序
 
-int mian()
+
+#include<string.h>
+//strlen    求字符串长度
+//strcmp  （字符串比较函数）专门用来比较字符块
+//都属于字符串函数
+int main()
 {
 	int i = 0;
-	//
+	//假设正确的密码是字符串“123456”
 	char password[20] = { 0 };
 	for (i = 0; i < 3; i++)
 	{
 		printf("请输入密码:>");
 		scanf("%s", password);//把内容读取放到password
-		if()
-	
+		//if (password == "123456")//判断密码是否正确
+			//这样的写法是错误的。 两个字符串比较，不能使用==  
+			//应该使用strcmp（字符串比较函数）专门用来比较字符块
+		if(strcmp(password,"123456") == 0)
+			//把password,"123456"同时传给strcmp
+			// strcmp就会把password和123456 比较一下
+			//如果strcmp发现password和123456 相等 就说明密码输对了
+			//函数strcmp 就会返回一个0 如果判断返回值=0  那么就是密码输对了
+		{
+			printf("登录成功\n");
+			break;
+		}
+		else
+		{
+			printf("密码错误，重新输入\n");
+		}
 	}
-
+	//当i=3  三次密码都输错了 也会跳到这
+	if (i == 3)
+		printf("三次密码均错误，退出程序\n");
 
 	return 0;
 }
