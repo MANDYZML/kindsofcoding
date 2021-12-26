@@ -617,22 +617,23 @@ int main()
 	scanf("%d%d%d", &a, &b, &c);//从小到大
 	if (a > b)
 	{
-		int tmp = b;
+		int tmp = a;
 		a = b;//a里面放b
 		b = tmp;
 	}
-	if (b > c)
-	{
-		int tmp = c;
-		b = c;
-		c = tmp;
-	}
 	if (a > c)
 	{
-		int tmp = c;
+		int tmp = a;
 		a = c;
 		c = tmp;
 	}
+	if (b > c)
+	{
+		int tmp = b;
+		b = c;
+		c = tmp;
+	}
+	
 	printf("%d%d%d\n", a, b, c);
 	return 0;
 }
