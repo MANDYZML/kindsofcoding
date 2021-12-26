@@ -467,40 +467,172 @@
 //5.模拟用户登录 ，只允许登陆三次。（只允许输入三次密码，如果密码正确则提示登陆成功）
 //三次都错误，则退出程序
 
-
-#include<string.h>
+//
+//#include<string.h>
 //strlen    求字符串长度
 //strcmp  （字符串比较函数）专门用来比较字符块
 //都属于字符串函数
+//int main()
+//{
+//	int i = 0;
+//	//假设正确的密码是字符串“123456”
+//	char password[20] = { 0 };
+//	for (i = 0; i < 3; i++)
+//	{
+//		printf("请输入密码:>");
+//		scanf("%s", password);//把内容读取放到password
+//		//if (password == "123456")//判断密码是否正确
+//			//这样的写法是错误的。 两个字符串比较，不能使用==  
+//			//应该使用strcmp（字符串比较函数）专门用来比较字符块
+//		   //password前面没加& 因为是字符数组  字符数组如果没加[]那么本身就是地址
+//		if(strcmp(password,"123456") == 0)
+//			//把password,"123456"同时传给strcmp
+//			// strcmp就会把password和123456 比较一下
+//			//如果strcmp发现password和123456 相等 就说明密码输对了
+//			//函数strcmp 就会返回一个0 如果判断返回值=0  那么就是密码输对了
+//		{
+//			printf("登录成功\n");
+//			break;
+//		}
+//		else
+//		{
+//			printf("密码错误，重新输入\n");
+//		}
+//	}
+//	//当i=3  三次密码都输错了 也会跳到这
+//	if (i == 3)
+//		printf("三次密码均错误，退出程序\n");
+//
+//	return 0;
+//}
+
+//12/26  练习题
+//#include <stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 0; i < 10; i++)//之后i++ 变成6 <10 又进来了
+//	{
+//		if (i = 5)//一个=是赋值 i等于5  然后打印一个5 上去
+//			//又赋值成5 有打印  循环了起来  因为乍一看是循环10次  但是
+//			//每次进来都是 i都被赋值成5  之后上去i++  变成六 没有机会 达到10
+//			printf("%d", i);
+//	}
+//	return 0;
+//}//死循环打印5
+
+
+//第二题
+//int func(int a)
+//{
+//	int b;//b没有赋值 
+//	switch (a)//func(1)就是a是1 也就是从case1进去
+//	{
+//	case 1:b = 30;//进来之后 b=30 因为没有break 所以底下的case都要执行
+//	case 2:b = 20;
+//	case3:b = 16;
+//	default:b = 0;//一直到这  然后switch语句结束 跳出  结果也就是0
+//	}
+//	return b;
+//}
+//
+////func(1)= 0
+//
+//int main()
+//{
+//	printf("%d\n", func(1));
+//
+//	return 0;
+//}
+
+//F10 ---逐语句
+//F11 ---逐过程
+
+//第三题
+//#include <stdio.h>
+//int main()
+//{
+//	int x = 3;
+//	int y = 3;
+//	switch (x % 2) //x=3 3%2 余1 所以
+//	{
+//	case 1://从case1 进去
+//		switch (y)//y=3 所以不会进case 0 和case 1
+//		{
+//		case 0:
+//			printf("first");
+//		case 1:
+//			printf("second");
+//			break;
+//		default: printf("hello");//那么就会打印hello  之后嵌套的switch语句就结束了
+//		}
+//	case 2://因为大的case 1后面没有出现break 所以case 2 也会执行
+//		printf("third");
+//	}
+//	return 0;
+//}//最终打印出来 hello  和 third
+
+
+//编程题
+//将三个代码从大到小输出
+
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int c = 0;
+//	//输入数据
+//	scanf("%d%d%d", &a, &b, &c);
+//
+//	//调整顺序--保证a是最大 c最小
+//	if (a < b)//a和b中的较大值
+//	{
+//		int tmp = a;
+//		a = b;//a里面放b
+//		b = tmp;
+//	}
+//	if (a < c)//把a和c中较大值放到a中
+//	{
+//		int tmp = a;
+//		a = c;
+//		c = tmp;
+//	}
+//	if (b < c)
+//	{
+//		int tmp = b;
+//		b = c;
+//		c = tmp;
+//	}
+//	//从大到小 输出
+//	printf("%d%d%d\n", a, b, c);
+//	return 0;
+//}
+
 int main()
 {
-	int i = 0;
-	//假设正确的密码是字符串“123456”
-	char password[20] = { 0 };
-	for (i = 0; i < 3; i++)
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	//输入数据
+	scanf("%d%d%d", &a, &b, &c);//从小到大
+	if (a > b)
 	{
-		printf("请输入密码:>");
-		scanf("%s", password);//把内容读取放到password
-		//if (password == "123456")//判断密码是否正确
-			//这样的写法是错误的。 两个字符串比较，不能使用==  
-			//应该使用strcmp（字符串比较函数）专门用来比较字符块
-		if(strcmp(password,"123456") == 0)
-			//把password,"123456"同时传给strcmp
-			// strcmp就会把password和123456 比较一下
-			//如果strcmp发现password和123456 相等 就说明密码输对了
-			//函数strcmp 就会返回一个0 如果判断返回值=0  那么就是密码输对了
-		{
-			printf("登录成功\n");
-			break;
-		}
-		else
-		{
-			printf("密码错误，重新输入\n");
-		}
+		int tmp = b;
+		a = b;//a里面放b
+		b = tmp;
 	}
-	//当i=3  三次密码都输错了 也会跳到这
-	if (i == 3)
-		printf("三次密码均错误，退出程序\n");
-
+	if (b > c)
+	{
+		int tmp = c;
+		b = c;
+		c = tmp;
+	}
+	if (a > c)
+	{
+		int tmp = c;
+		a = c;
+		c = tmp;
+	}
+	printf("%d%d%d\n", a, b, c);
 	return 0;
 }
