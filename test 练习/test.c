@@ -766,35 +766,69 @@
 //	return 0;
 //}
 
+//最大公约数 最小公倍数（另一种方法） 一起求
+//int main()
+//{
+//	int m = 0;
+//	int n = 0;
+//	scanf("%d%d", & m,& n);//比如m=24  n=18  找出那个数字能同时被18和24整除
+//	int max = 0;//设最大公约数为max
+//	int min = 0;
+//	//假设最大公约数就是m和n的较小值
+//
+//	if (m > n)//最大的公约数中最大能被mn整除 的就是m和n中的较小值
+//		max = n;//较小值是n
+//	else
+//		max = m;
+//	while (1)
+//	{
+//		if (m % max == 0 && n % max == 0)
+//		{
+//			printf("最大公约数就是:%d\n", max);
+//			break;
+//		}
+//		
+//		max--;
+//		
+//	}
+//	while (1)
+//	{
+//		if (min = m * n / max)
+//		{
+//			printf("最小公倍数:%d\n", min);
+//			break;
+//		}
+//	}
+//
+//	return 0;
+//}
+
+//4.打印闰年
+//打印1000年到2000年之间的闰年
 int main()
 {
-	int m = 0;
-	int n = 0;
-	scanf("%d%d", & m,& n);//比如m=24  n=18  找出那个数字能同时被18和24整除
-	int max = 0;//设最大公约数为max
-	int min = 0;
-	//假设最大公约数就是m和n的较小值
-
-	if (m > n)//最大的公约数中最大能被mn整除 的就是m和n中的较小值
-		max = n;//较小值是n
-	else
-		max = m;
-	while (1)
+	int y = 0;
+	int count = 0;
+	for (y = 1000; y <= 2000; y++)
 	{
-		if (m % max == 0 && n % max == 0)
+	//判断y是不是闰年
+    //闰年判断规则
+	//1.被4整除 不能被100整除 是闰年
+	//2.能被400整除 是闰年
+		if (y % 4 == 0)
 		{
-			printf("最大公约数就是:%d\n", max);
-			break;
+			if (y % 100 != 0)
+			{
+				printf("%d ", y);
+				count++;
+			}
 		}
-		
-		max--;
-		
+		if (y % 400 == 0)
+		{
+			printf("%d ", y);
+			count++;
+		}
 	}
-	while (1)
-	{
-		if (min == m * n / max)
-		printf("最小公倍数:%d\n",min);
-		break;
-	}
+	printf("\ncount =%d\n", count);
 	return 0;
 }
