@@ -574,7 +574,7 @@
 
 
 //编程题
-//将三个代码从大到小输出
+//1.将三个代码从大到小输出
 
 //int main()
 //{
@@ -587,7 +587,7 @@
 //	//调整顺序--保证a是最大 c最小
 //	if (a < b)//a和b中的较大值
 //	{
-//		int tmp = a;
+//		int tmp = a; //把较大值放a  所以写a
 //		a = b;//a里面放b
 //		b = tmp;
 //	}
@@ -608,32 +608,193 @@
 //	return 0;
 //}
 
+//从小到大输出
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int c = 0;
+//	//输入数据
+//	scanf("%d%d%d", &a, &b, &c);//从小到大
+//	if (a > b)
+//	{
+//		int tmp = a;//较小值放a里面 所以写a
+//		a = b;//a里面放b
+//		b = tmp;
+//	}
+//	if (a > c)
+//	{
+//		int tmp = a;
+//		a = c;
+//		c = tmp;
+//	}
+//	if (b > c)
+//	{
+//		int tmp = b;
+//		b = c;
+//		c = tmp;
+//	}
+//	
+//	printf("%d%d%d\n", a, b, c);
+//	return 0;
+//}
+
+//2.打印3的倍数
+//打印1-100之间所有3的倍数的数字
+
+//用for循环
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 100; i++)
+//	{
+//	//判断 i是否为3的倍数
+//		if (i % 3 == 0)//整除3
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
+
+//不判断
+//int main()
+//{
+//	int i = 0;
+//	for (i = 3; i <= 100; i+=3)
+//	{
+//			printf("%d ", i);//先打印3 然后+=变成6
+//	}
+//	return 0;
+//}
+
+//用while
+//int main()
+//{
+//	int i = 1;
+//	while (i <= 100)
+//	{
+//		if(i%3==0)
+//		printf("%d ", i);
+//		i++;
+//	}
+//	return 0;
+//}
+
+
+//3.最大公约数
+//给定两个数  求这两个数的最大公约数
+
+//第一种算法
+//int main()
+//{
+//	int m = 0;
+//	int n = 0;
+//	scanf("%d%d", & m,& n);//比如m=24  n=18  找出那个数字能同时被18和24整除
+//	int max = 0;//设最大公约数为max
+//
+//	//假设最大公约数就是m和n的较小值
+//
+//	if (m > n)//最大的公约数中最大能被mn整除 的就是m和n中的较小值
+//		max = n;//较小值是n
+//	else
+//		max = m;//m和n  的较小值放到max
+//
+//	//先把m和n的最小值 放到max里然后 先试着除 来判断最大公约数是不是mn的最小值
+//	//如果不是 那么max--  减到能同时被 m n 整除
+//
+//	//那究竟是不是呢--进行判断  max能不能同时整除m和n
+//	while (1)//1为真  让他一直循环
+//	{
+//		if (m % max == 0 && n % max == 0)
+//			//如果m和n 同时整除以最大公约数（max）=0  那么最大公约数就是max
+//		{
+//			printf("最大公约数就是:%d\n", max);
+//			break;//如果能整除  就跳出循环
+//		}
+//		//如果不能整除 
+//		max--;//-1以后接着算 上去 1为真  又进来 接着判断能否整除m和n
+//		      //直到找出最大公约数
+//	}
+//	return 0;
+//}
+
+//第二种算法--辗转相除法
+
+//int main()
+//{
+//	int m = 0;
+//	int n = 0;
+//	scanf("%d%d", &m, &n);//举例子 m=24 n=18
+//	int t = 0;
+//	while (m%n)//m%n 不等于0 就进来  //24 18  结果是6  进来
+//	{
+//		t = m % n;//把6 存到t
+//		m = n;
+//		n = t;
+//		//当有新的m n 再上去 m%n
+//		//结果为0 后 就不进来了
+//	}
+//	printf("最大公约数:%d\n", n);
+//
+//	return 0;
+//}
+
+
+//最小公倍数
+//int main()
+//{
+//	int m = 0;
+//	int n = 0;
+//	scanf("%d%d", &m, &n);
+//	int min = 0;
+//	//假设mn最小公倍数 是mn中较大值
+//	if (m > n)
+//		min = m;
+//	else
+//		min = n;
+//	while (1)
+//	{
+//		if (min % n == 0 && min % m==0)
+//		{
+//			printf("最小公倍数：%d\n",min);
+//			break;
+//		}
+//		min++;
+//	}
+//
+//	return 0;
+//}
+
 int main()
 {
-	int a = 0;
-	int b = 0;
-	int c = 0;
-	//输入数据
-	scanf("%d%d%d", &a, &b, &c);//从小到大
-	if (a > b)
+	int m = 0;
+	int n = 0;
+	scanf("%d%d", & m,& n);//比如m=24  n=18  找出那个数字能同时被18和24整除
+	int max = 0;//设最大公约数为max
+	int min = 0;
+	//假设最大公约数就是m和n的较小值
+
+	if (m > n)//最大的公约数中最大能被mn整除 的就是m和n中的较小值
+		max = n;//较小值是n
+	else
+		max = m;
+	while (1)
 	{
-		int tmp = a;
-		a = b;//a里面放b
-		b = tmp;
+		if (m % max == 0 && n % max == 0)
+		{
+			printf("最大公约数就是:%d\n", max);
+			break;
+		}
+		
+		max--;
+		
 	}
-	if (a > c)
+	while (1)
 	{
-		int tmp = a;
-		a = c;
-		c = tmp;
+		if (min == m * n / max)
+		printf("最小公倍数:%d\n",min);
+		break;
 	}
-	if (b > c)
-	{
-		int tmp = b;
-		b = c;
-		c = tmp;
-	}
-	
-	printf("%d%d%d\n", a, b, c);
 	return 0;
 }
