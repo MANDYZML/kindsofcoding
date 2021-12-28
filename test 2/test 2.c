@@ -1350,17 +1350,113 @@ struct Stu    //创造一个类型（学生）
 //代码死循环了  因为continue跳过 continue后面的代码  所以跳过i++  但是不跳过判断部分
 //i还是5  符合i<=10 又上去  然后又continue
 
+//int main()
+//{
+//	int i = 0;
+//	int n = 0;
+//	int ret = 1;
+//	scanf("%d", &n);
+//	for (i = 1; i <= n; i++)
+//	{
+//		ret *= i;
+//	}
+//	printf("%d\n", ret);
+//
+//	return 0;
+//}
+
+// go to 语句 12/28  
+//int main()
+//{
+//flag://也就是去到这里
+//	printf("hehe\n");//下来 打印
+//	printf("haha\n");
+//
+//	goto flag;//goto 就是去到哪里的意思 这里是去到flag
+//	return 0;
+//}//最终结果  hehe haha 死循环
+
+//关机程序
+//只要运行起来 电脑就在1分钟内关机
+//如果输入：我是猪，就取消关机
+
+//关机命令 --电脑中  命令提示符中输入
+//shutdown -s -t 60   s是设置关机 -t是设置时间关机   60 是设置60秒后关机
+//shutdown -a 取消关机
+
+//#include <string.h>
+//#include <stdlib.h>
+//int main()
+//{
+//	//关机
+//	//C语言提供了一个函数：system()-执行系统命令的
+//	char input[20] = { 0 };//存放输入的信息--我是猪
+//	system("shutdown -s -t 60");//头文件 <stdlib.h>
+//
+//again:
+//	printf("请注意，你的电脑在1分钟内关机，如果输入：我是猪，就取消关机\n");
+//	scanf("%s", input);// 我是猪  是字符串 所以%s
+//	//if (input == "我是猪")//两个字符串比较 不能用==的，应该使用 strcmp（）
+//		                   //string compare
+//	if(strcmp(input, "我是猪") == 0)//把input 和我是猪传给strcmp 进行比较
+//		                   //如果发现相等 就会返回一个0
+//		                 //头文件 <string.h>
+//	{
+//		system("shutdown -a");
+//	}
+//	else
+//	{
+//		goto again;
+//	}
+//	return 0;
+//}
+
+
+//还可以这样
+//#include <string.h>
+//#include <stdlib.h>
+//int main()
+//{
+//	//关机
+//	//C语言提供了一个函数：system()-执行系统命令的
+//	char input[20] = { 0 };//存放输入的信息--我是猪
+//	system("shutdown -s -t 60");//头文件 <stdlib.h>
+//	while (1)
+//	{
+//		printf("请注意，你的电脑在1分钟内关机，如果输入：我是猪，就取消关机\n");
+//		scanf("%s", input);// 我是猪  是字符串 所以%s
+//		//if (input == "我是猪")//两个字符串比较 不能用==的，应该使用 strcmp（）
+//							   //string compare
+//		if (strcmp(input, "我是猪") == 0)//把input 和我是猪传给strcmp 进行比较
+//							   //如果发现相等 就会返回一个0
+//							 //头文件 <string.h>
+//		{
+//			system("shutdown -a");
+//			break;
+//		}
+//	}
+//
+//	return 0;
+//}
+
+//goto语句 只能在一个函数范围内跳转，不能跨函数
+
+//void test()
+//{
+//flag:
+//	printf("test\n");
+//}
+//int main()
+//{
+//	//goto flag;//这是在两个函数中使用了 所以不行
+//	return 0;
+//}
+
+
+
+//函数
 int main()
 {
-	int i = 0;
-	int n = 0;
-	int ret = 1;
-	scanf("%d", &n);
-	for (i = 1; i <= n; i++)
-	{
-		ret *= i;
-	}
-	printf("%d\n", ret);
 
 	return 0;
 }
