@@ -1413,31 +1413,31 @@ struct Stu    //创造一个类型（学生）
 
 
 //还可以这样
-#include <string.h>
-#include <stdlib.h>
-int main()
-{
-	//关机
-	//C语言提供了一个函数：system()-执行系统命令的
-	char input[20] = { 0 };//存放输入的信息--我是猪
-	system("shutdown -s -t 60");//头文件 <stdlib.h>
-	while (1)
-	{
-		printf("请注意，你的电脑在1分钟内关机，如果输入：我是猪，就取消关机\n");
-		scanf("%s", input);// 我是猪  是字符串 所以%s
-		//if (input == "我是猪")//两个字符串比较 不能用==的，应该使用 strcmp（）
-							   //string compare
-		if (strcmp(input, "我是猪") == 0)//把input 和我是猪传给strcmp 进行比较
-							   //如果发现相等 就会返回一个0
-							 //头文件 <string.h>
-		{
-			system("shutdown -a");
-			break;
-		}
-	}
-
-	return 0;
-}
+//#include <string.h>
+//#include <stdlib.h>
+//int main()
+//{
+//	//关机
+//	//C语言提供了一个函数：system()-执行系统命令的
+//	char input[20] = { 0 };//存放输入的信息--我是猪
+//	system("shutdown -s -t 60");//头文件 <stdlib.h>
+//	while (1)
+//	{
+//		printf("请注意，你的电脑在1分钟内关机，如果输入：我是猪，就取消关机\n");
+//		scanf("%s", input);// 我是猪  是字符串 所以%s
+//		//if (input == "我是猪")//两个字符串比较 不能用==的，应该使用 strcmp（）
+//							   //string compare
+//		if (strcmp(input, "我是猪") == 0)//把input 和我是猪传给strcmp 进行比较
+//							   //如果发现相等 就会返回一个0
+//							 //头文件 <string.h>
+//		{
+//			system("shutdown -a");
+//			break;
+//		}
+//	}
+//
+//	return 0;
+//}
 
 //goto语句 只能在一个函数范围内跳转，不能跨函数
 
@@ -1453,10 +1453,136 @@ int main()
 //}
 
 
-
+//#include <string.h>
 //函数
+//strcpy
 //int main()
 //{
+//	char arr1[20] = { 0 };
+//	char arr2[] = "hello bit";//现在把arr2的内容放到arr1里面去  
+//							  //arr1[20] 里面能放下“hello bit”(一共9个字符，空格也算)
+//	strcpy(arr1,arr2);//第二个参数是源头，第一个参数是目的地  
+//	                  //所以 arr1是目的地  放到arr1里面  arr1写前头
+//	printf("%s", arr1);//打印arr1这个字符串%s--以字符串的格式来打印
 //
+//	return 0;
+//}
+
+//memset
+//int main()
+//{
+//	char arr[] = "hello bit";//hello bit的前五个字符 hello  换成xxxxx
+//	memset(arr,'x',5);//第一个参数空间是地址，第二个是设置的整型值，第三个是前几个字节
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//自定义函数
+#include<stdio.h>
+#include <string.h>
+//int main()
+//{
+//	char arr1[20] = { 0 };
+//	char arr2[] = "abc";
+//	strcpy(arr1, arr2);
+//	printf("%s", arr1);
+//
+//	return 0;
+//}
+
+//函数的组成
+//ret_type fun_name(para1, *)
+//{
+//	statement;//语句项
+//}
+//
+//ret_type 返回类型
+//fun_name 函数名
+//para1    函数参数
+//{}中 叫  函数体
+
+//例子
+//写一个函数可以找出两个整数中的最大值
+
+//定义函数
+//int get_max(int x, int y)// ( )里面放的是函数参数 接受类型是整型（int）
+//因为z的类型是整型  所以要明确告知函数get_max 运行以后 返回的是整型的值 所以前面加int
+/*{
+	int z = 0;
+	if (x > y)
+		z = x;
+	else
+		z = y;
+	return z;*///返回z--返回较大值
+//}//这个叫函数体  目的就是把x y 的较大值求出来
+
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	//函数的调用
+//	int max=get_max(a,b);//起的函数名--获取最大值--a和b  //获取最大的值后 返回到int max
+//	printf("max=%d\n", max);
+//	return 0;
+//}
+
+//例题2
+//写一个函数可以交换两个整形变量的内容
+
+//函数返回类型 的地方 写成void 表示 函数不返回任何值 也不需要返回
+//void Swap(int x, int y)
+//{
+//	int z = 0;
+//	z = x;
+//	x = y;
+//	y = z;
+//}//这个函数只需要交换  并不像上一题一样需要返回数
+//这么写代码有问题
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	//写一个函数--交换两个整形变量的值
+//	printf("交换前:a=%d b=%d\n", a, b);
+//	Swap(a, b);//Swap 交换
+//	printf("交换后:a=%d b=%d\n", a, b);
+//	return 0;
+//}
+
+
+//指针的概念
+//int main()
+//{
+//	int a = 10;//内存中创了4个字节的空间
+//	int* pa = &a;//pa就是一个指针变量   //把a的地址交给了pa变量  pa里面存放的是a的地址（&a）
+//	*pa=20;//pa前面加* 就是通过pa里面存的地址 找到所表达的对象  *pa=a  
+//	       //现在*pa 给了个20  也就是a现在=20
+//	printf("%d\n",a);
+//
+//	return 0;
+//}//可以通过指针变量来找到  存在指针变量中的对象
+
+
+//函数返回类型 的地方 写成void 表示 函数不返回任何值 也不需要返回
+//void Swap(int* pa,int* pb)//创建指针变量   指针变量大小也是固定的  要不4个字节 要不8个字节
+//                          //*pa=a *pb=b
+//{
+//	int z = 0;
+//	z = *pa;//通过*pa 来找a  之后把值-10 放到z里面   z=10
+//	*pa = *pb;//把b的值放到a里面  把20 放到a-10里面  也就是现在*pa=20
+//	*pb = z;//把z=10 放到*pb 里面  现在*pb=20  
+//	//现在交换了
+//	
+//}//这个函数只需要交换  并不像上一题一样需要返回数
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	//写一个函数--交换两个整形变量的值
+//	printf("交换前:a=%d b=%d\n", a, b);
+//	Swap(&a, &b);//Swap 交换
+//	printf("交换后:a=%d b=%d\n", a, b);
 //	return 0;
 //}
