@@ -1530,13 +1530,16 @@ struct Stu    //创造一个类型（学生）
 //写一个函数可以交换两个整形变量的内容
 
 //函数返回类型 的地方 写成void 表示 函数不返回任何值 也不需要返回
-//void Swap(int x, int y)
-//{
-//	int z = 0;
-//	z = x;
-//	x = y;
-//	y = z;
-//}//这个函数只需要交换  并不像上一题一样需要返回数
+
+//Swap1在被调用的时候，实参传给形参，其实形参是实参的一份临时拷贝
+// 改变形参，不能改变实参
+//void Swap1(int x, int y)
+/*{
+	int z = 0;
+	z = x;
+	x = y;
+	y = z;
+}*///这个函数只需要交换  并不像上一题一样需要返回数
 //这么写代码有问题
 //
 //int main()
@@ -1581,8 +1584,102 @@ struct Stu    //创造一个类型（学生）
 //	int a = 10;
 //	int b = 20;
 //	//写一个函数--交换两个整形变量的值
+// 
 //	printf("交换前:a=%d b=%d\n", a, b);
 //	Swap(&a, &b);//Swap 交换
 //	printf("交换后:a=%d b=%d\n", a, b);
 //	return 0;
 //}
+
+//void Swap1(int x, int y)----传值调用
+//{
+//	int z = 0;
+//	z = x;
+//	x = y;
+//	y = z;
+//}
+
+//void Swap2(int* pa, int* pb)---传址调用
+// //创建指针变量   *pa=a *pb=b
+//{
+//	int z = 0;
+//	z = *pa;//通过*pa 来找a  之后把值-10 放到z里面   z=10
+//	*pa = *pb;//把b的值放到a里面  把20 放到a-10里面  也就是现在*pa=20
+//	*pb = z;//把z=10 放到*pb 里面  现在*pb=20  
+//}
+
+//1/1
+//函数的嵌套调用和链式访问
+
+//每一个函数都应该在{}外独立存在  
+//int test1()
+//{
+//	int test2()
+//	{
+//	
+//	}
+//
+//}  这样是不对的 不能一个函数的{}里面嵌套另一个函数
+
+//函数是不能嵌套定义的
+//但是函数可以嵌套调用
+//void test3()
+//{
+//	printf("hehe\n");
+//}
+//int test2()
+//{
+//	test3();//又在test2里面调用了test3
+//	return 0;
+//}
+//int main()
+//{
+//	test2();//在梦函数里调用了test2
+//	return 0;
+//}
+
+
+//链式访问
+//求字符串长度
+//#include <string.h>
+//
+//int main()
+//{
+//	//int len = strlen("abc");//求长度
+//	//printf("%d\n", len);
+// //    另一种写法
+//	//链式访问
+//	//printf("%d\n", strlen("abc"));//strlen的返回值做了printf的参数
+//
+//	//char arr1[20] = { 0 };
+//	//char arr2[] = { "bit"};
+//	////strcpy(arr1, arr2);//把arr1的内容填充成arr2,也就是把arr2拷贝
+//	//printf("%s\n", strcpy(arr1, arr2));//strcpy的返回值做了printf的参数
+//
+//	printf("%d", printf("%d", printf("%d", 43))); //打印出来的是4321
+//	//printf函数返回的是打印在屏幕上的字符的个数
+//	//所以 最后的 printf("%d", 43) 首先打出来43
+//	//43 是两个字符 所以第二个printf打出来的是 2
+//	//然后 因为第二个 printf打出来的2 只有一个字符
+//	//所以第一个printf打出来的是1 ---一个字符
+//	return 0;
+//}
+
+//函数的定义
+
+int main()
+{
+	int a = 10;
+	int b = 20;
+	//当定义在后面时 应函数声明--告知
+	int Add(int, int);//add函数的两个参数是int类型  返回类型也是int
+
+	int c = Add(a, b);
+	printf("%d\n", c);
+	return 0;
+}
+//函数定义
+int Add(int x,int y)
+{
+	return x + y;
+}
