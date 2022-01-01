@@ -1117,4 +1117,26 @@
 //	return 0;
 //}
 
+//4.写一个函数，每调用一次这个函数，就会将num的值增加1
+void Add(int*p)
+{
+	(*p)++;//这增加  那么num也增加
 
+
+}
+int main()
+{
+
+	int num = 0;
+	Add(&num);//这个函数只要调用一次 num就增加1  说明add函数会改变num
+	           //函数内部想改变函数外部只能传地址
+	printf("%d\n", num); //打印1
+
+	Add(&num);
+	printf("%d\n", num);//2
+
+	Add(&num);
+	printf("%d\n", num);//3
+
+	return 0;
+}
