@@ -1770,7 +1770,7 @@ struct Stu    //创造一个类型（学生）
 
 //例题2.
 //编写函数不允许创建临时变量，求字符串的长度。
-#include <string.h>
+//#include <string.h>
 //普通求字符串的长度
 //int main()
 //{
@@ -1807,23 +1807,44 @@ struct Stu    //创造一个类型（学生）
 //     1+1+1+my_strlen('')空字符块
 //     1+1+1+0=3
 //大事化小
-int my_strlen(char* str)
-{
-	if (*str != '\0')
-		return 1 + my_strlen(str + 1);//第一次str 指向b 
-	                                 //my_strlen是('it')
-	                               //str+1 就是i 然后把i传上去  my_strlen就是（'t'）
-	                              //str+1 就是t
-	else
-		return 0;
-}
+//int my_strlen(char* str)//当my_strlen第一次开始工作时 str向后看到的是 bit\0
+//{
+//	if (*str != '\0')//第一次str 指向b  *str !=\0  进来
+//		return 1 + my_strlen(str + 1);//就 return 1 + my_strlen(str + 1)
+//	                            //str+1 就是i的地址 然后上去
+//	//现在给char* str传的就是i的地址  *str就是i  !=0 进来 // 向后看就是it\0 
+//	// 然后 return 1 + my_strlen(str + 1)  str+1 就是t的地址
+//	                //  现在给char*str传的就是t的地址  *str就是t  //向后看就是 t\0
+//	// 然后 return 1 + my_strlen(str + 1)  str+1 就是\0的地址
+//	// 现在给char*str传的就是\0的地址  *str=\0  就不进if语句了 走了else return 0;
+//	// 然后开始返回 每个的return 1 + my_strlen(str + 1) 1+0   1+1   1+2=3
+//	else
+//		return 0;
+//}
+//
+//int main()
+//{
+//	char arr[] = "bit";
+//	//['b']['i']['t']['\0']
+//	printf("%d\n", my_strlen(arr));//arr数组在传参的时候 传的是首元素的地址
+//	                                //也就是b的地址 b是字符 所以传过去的是字符的地址
+//
+//	return 0;
+//}
 
+
+//例题3. ---递归与迭代
+//求n的阶乘（不考虑溢出）--n! 1*2*3...n
 int main()
 {
-	char arr[] = "bit";
-	//['b']['i']['t']['\0']
-	printf("%d\n", my_strlen(arr));//arr数组在传参的时候 传的是首元素的地址
-	                                //也就是b的地址 b是字符 所以传过去的是字符的地址
-
+	int n = 0;//输入算n的阶乘
+	scanf("%d", &n);
+	int i = 0;
+	int ret = 1;//ret 打印字符数量
+	for (i = 1; i <= n; i++)
+	{
+		ret = ret * i;//累计乘
+	}
+	printf("%d\n", ret);//结果
 	return 0;
 }
