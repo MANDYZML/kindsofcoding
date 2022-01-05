@@ -1931,6 +1931,5 @@ int main()
 	scanf("%d", &n);
 	int ret = Fib(n);//第n个斐波那契数放到ret里面
 	printf("%d\n", ret);
-	
 	return 0;
 }
