@@ -1417,31 +1417,158 @@
 //2*1=2  2*2=4
 //3*1=3  3*2=6  3*3=9
 //第一行有一项  第二行有两项  第n行就有n项
-#include<stdio.h>
+//#include<stdio.h>
+//
+//void print_table(int n)
+//{
+//	int i = 0;
+//	//行
+//	for (i = 1; i <= n; i++)//1-n行
+//	{
+//		//一行有几项
+//		int j = 0;
+//		for (j=1;j<=i;j++)
+//		{
+//			printf("%d*%d=%d ", i, j, i * j);//i行 j列 
+//		}
+//		printf("\n");
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);//几行几列   输入9
+//	//写个函数
+//	print_table(n);//打印乘法口诀表
+//	//把n传过去--打印几行几列
+//
+//	//函数的起名是非常关键的，名字最好跟它的功能关联起来（体现函数的功能）
+//	return 0;
+//}
 
-void print_table(int n)
+//1/9 函数作业
+//根据下面递归函数，调用函数Fun(2),返回值是多少
+
+//int Fun(int n)//Fun(2)上来调用 2传给了n    n==2
+//{
+//	if (n == 5)//n=5 才 return 2
+//		return 2;
+//	else  //所以走了else
+//		return 2 * Fun(n + 1);//Fun(n + 1) 得去算 之后*2 才能返回一个值
+//	//调用Fun(n + 1)   刚才n是2 现在+1就是3 又走了else
+//	//又得算  调用Fun(n + 1) 刚才n=3 现在+1 n=4
+//	//n不等于5 又走了else 调用Fun(n + 1) 现在n=5
+//	//现在n=5  走if return 2
+//	//但是return 2 返回的是  n=4的Fun(n + 1)==2 2*2=4
+//	//然后接着返回  n=3的Fun(n + 1)=4  2*4=8
+//	//return 在返回  n=2的Fun(n + 1)=8  2*8=16
+//	// 因为函数Fun(2) 是从n=2的函数中调的 所以Fun(2) 的返回结果就是16
+//
+//}
+//
+//int main()
+//{
+//	printf("%d\n",Fun(2));//16
+//	return 0;
+//}
+
+
+//编程题
+//字符串逆序
+//编写一个函数 reverse_string(char*string)--递归实现
+//实现: 将参数字符串中的字符反向排列，不是逆序打印
+//要求：不能使用C函数库中的字符串操作函数。
+// /例如 char arr[]="abcdef"
+//逆序之后数组变成 fedcba
+
+//
+int my_strlen(char * str)//传过来指针str
 {
-	int i = 0;
-	//行
-	for (i = 1; i <= n; i++)//1-n行
+	int count = 0;
+	while (*str != '\0')//*str str指向的内容   !0 说明找到了不是\0的字符
 	{
-		//一行有几项
-		int j = 0;
-		for (j=1;j<=i;j++)
-		{
-			printf("%d*%d=%d ", i, j, i * j);//i行 j列 
-		}
-		printf("\n");
-	}
+		count++;
+		str++;//向后找一个字符
+	}//循环这个动作就是判断字符串的长度究竟有多少
+	return count;// 当*str=0 那么就不++了  返回count --里面就是字符串的长度
 }
+//void reverse_string(char* str)//接收a的地址
+////把 f a交换   e b 交换  d c 交换
+////找下标 fedcba中 给left下标 找到f  给right下标  找到 a
+////找到以后 就要找 e  b   然后 left++  right--
+//{
+//	int left = 0;
+//	int right = my_strlen(str)-1;//my_strlen(str)-1 字符串的长度-1=最后一个字符的下标
+//
+//	while(left<right)
+//	{
+//		char tmp = str[left];//=*(str+left) 用指针的写法 //临时变量=left
+//		*(str + left) = *(str + right);//进行交换  left 改成right
+//		*(str + right) = tmp;//也就是把right变left
+//		left++;
+//		right--;
+//	}
+//}
+
+void reverse_string(char* str)//接收a的地址
+{
+	char tmp = *str;//1. 首元素 也就是 a  放到临时变量
+	int len = my_strlen(str);//找到后面的f  求字符块的总长度
+	*str = *(str + len - 1);//2. f的内容 len - 1 是f的下标   str + len - 1 找到str的地址
+							//*(str + len - 1) 就找到f 元素了
+						   //*str 要把f放到最前面--首元素
+	*(str + len - 1) = '\0';//3. 要在bcde后面放上\0  这样从b开始往后看的时候 只能看到bcde
+	//判断条件
+	//加上限制条件
+	if (my_strlen(str + 1) >= 2)//当交换的时候 中间留下来的字符快长度如果是0 或者1 没有必要再逆序了
+							//跳过f 从d开始算字符快 如果>=两个字符快 才逆序
+	{
+		reverse_string(str + 1);//4. 逆序 中间的bcde  str指向的f  str+1 就是b的地址
+	}
+
+	*(str + len - 1) = tmp;//5. 把a(tmp)的值放到最后面
+}
+
 int main()
 {
-	int n = 0;
-	scanf("%d", &n);//几行几列   输入9
-	//写个函数
-	print_table(n);//打印乘法口诀表
-	//把n传过去--打印几行几列
-
-	//函数的起名是非常关键的，名字最好跟它的功能关联起来（体现函数的功能）
+	char arr[] = "abcdef";
+	reverse_string(arr);//数组名arr 是数组arr首元素的地址-也就是a的地址
+	//把arr传过去    reverse_string--把arr的内容逆序
+	printf("%s\n", arr);//打印出来 fedcba
 	return 0;
 }
+
+
+
+//用递归方式
+//大事化小
+// a b c d e f \0
+//可以看成 a 和 f 的交换 + bcde的逆序
+//然后 bcde的逆序 又可以看成  b e的交换 + c d 的逆序
+
+//void reverse_string(char* str)//接收a的地址
+//{
+//	char tmp = *str;//1. 首元素 也就是 a  放到临时变量
+//	int len = my_strlen(str);//找到后面的f  求字符块的总长度
+//	*str = *(str + len - 1);//2. f的内容 len - 1 是f的下标   str + len - 1 找到str的地址
+//	                        //*(str + len - 1) 就找到f 元素了
+//	                       //*str 要把f放到最前面--首元素
+//	*(str = len - 1) = '\0';//3. 要在bcde后面放上\0  这样从b开始往后看的时候 只能看到bcde
+//	//判断条件
+//	//加上限制条件
+//	if (my_strlen(str+1)>=2)//当交换的时候 中间留下来的字符快长度如果是0 或者1 没有必要再逆序了
+//		                    //跳过f 从d开始算字符快 如果>=两个字符快 才逆序
+//	{
+//		reverse_string(str + 1);//4. 逆序 中间的bcde  str指向的f  str+1 就是b的地址
+//	}
+//	*(str + len - 1) = tmp;//5. 把a(tmp)的值放到最后面
+//}
+//
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	reverse_string(arr);//数组名arr 是数组arr首元素的地址-也就是a的地址
+//	//把arr传过去    reverse_string--把arr的内容逆序
+//	printf("%s\n", arr);//打印出来 fedcba
+//	return 0;
+//}
