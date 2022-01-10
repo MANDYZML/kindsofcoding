@@ -1482,16 +1482,16 @@
 //逆序之后数组变成 fedcba
 
 //
-int my_strlen(char * str)//传过来指针str
-{
-	int count = 0;
-	while (*str != '\0')//*str str指向的内容   !0 说明找到了不是\0的字符
-	{
-		count++;
-		str++;//向后找一个字符
-	}//循环这个动作就是判断字符串的长度究竟有多少
-	return count;// 当*str=0 那么就不++了  返回count --里面就是字符串的长度
-}
+//int my_strlen(char * str)//传过来指针str
+//{
+//	int count = 0;
+//	while (*str != '\0')//*str str指向的内容   !0 说明找到了不是\0的字符
+//	{
+//		count++;
+//		str++;//向后找一个字符
+//	}//循环这个动作就是判断字符串的长度究竟有多少
+//	return count;// 当*str=0 那么就不++了  返回count --里面就是字符串的长度
+//}
 //void reverse_string(char* str)//接收a的地址
 ////把 f a交换   e b 交换  d c 交换
 ////找下标 fedcba中 给left下标 找到f  给right下标  找到 a
@@ -1510,33 +1510,33 @@ int my_strlen(char * str)//传过来指针str
 //	}
 //}
 
-void reverse_string(char* str)//接收a的地址
-{
-	char tmp = *str;//1. 首元素 也就是 a  放到临时变量
-	int len = my_strlen(str);//找到后面的f  求字符块的总长度
-	*str = *(str + len - 1);//2. f的内容 len - 1 是f的下标   str + len - 1 找到str的地址
-							//*(str + len - 1) 就找到f 元素了
-						   //*str 要把f放到最前面--首元素
-	*(str + len - 1) = '\0';//3. 要在bcde后面放上\0  这样从b开始往后看的时候 只能看到bcde
-	//判断条件
-	//加上限制条件
-	if (my_strlen(str + 1) >= 2)//当交换的时候 中间留下来的字符快长度如果是0 或者1 没有必要再逆序了
-							//跳过f 从d开始算字符快 如果>=两个字符快 才逆序
-	{
-		reverse_string(str + 1);//4. 逆序 中间的bcde  str指向的f  str+1 就是b的地址
-	}
-
-	*(str + len - 1) = tmp;//5. 把a(tmp)的值放到最后面
-}
-
-int main()
-{
-	char arr[] = "abcdef";
-	reverse_string(arr);//数组名arr 是数组arr首元素的地址-也就是a的地址
-	//把arr传过去    reverse_string--把arr的内容逆序
-	printf("%s\n", arr);//打印出来 fedcba
-	return 0;
-}
+//void reverse_string(char* str)//接收a的地址
+//{
+//	char tmp = *str;//1. 首元素 也就是 a  放到临时变量
+//	int len = my_strlen(str);//找到后面的f  求字符块的总长度
+//	*str = *(str + len - 1);//2. f的内容 len - 1 是f的下标   str + len - 1 找到str的地址
+//							//*(str + len - 1) 就找到f 元素了
+//						   //*str 要把f放到最前面--首元素
+//	*(str + len - 1) = '\0';//3. 要在bcde后面放上\0  这样从b开始往后看的时候 只能看到bcde
+//	//判断条件
+//	//加上限制条件
+//	if (my_strlen(str + 1) >= 2)//当交换的时候 中间留下来的字符快长度如果是0 或者1 没有必要再逆序了
+//							//跳过f 从d开始算字符快 如果>=两个字符快 才逆序
+//	{
+//		reverse_string(str + 1);//4. 逆序 中间的bcde  str指向的f  str+1 就是b的地址
+//	}
+//
+//	*(str + len - 1) = tmp;//5. 把a(tmp)的值放到最后面
+//}
+//
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	reverse_string(arr);//数组名arr 是数组arr首元素的地址-也就是a的地址
+//	//把arr传过去    reverse_string--把arr的内容逆序
+//	printf("%s\n", arr);//打印出来 fedcba
+//	return 0;
+//}
 
 
 
@@ -1553,7 +1553,7 @@ int main()
 //	*str = *(str + len - 1);//2. f的内容 len - 1 是f的下标   str + len - 1 找到str的地址
 //	                        //*(str + len - 1) 就找到f 元素了
 //	                       //*str 要把f放到最前面--首元素
-//	*(str = len - 1) = '\0';//3. 要在bcde后面放上\0  这样从b开始往后看的时候 只能看到bcde
+//	*(str + len - 1) = '\0';//3. 要在bcde后面放上\0  这样从b开始往后看的时候 只能看到bcde
 //	//判断条件
 //	//加上限制条件
 //	if (my_strlen(str+1)>=2)//当交换的时候 中间留下来的字符快长度如果是0 或者1 没有必要再逆序了
@@ -1572,3 +1572,108 @@ int main()
 //	printf("%s\n", arr);//打印出来 fedcba
 //	return 0;
 //}
+//#include <stdio.h>
+//int main()
+//{
+//	int x = 0;
+//	scanf("%d\n", &x);
+//	if (x < 0 && -10000<x)
+//	{
+//		printf("1\n");
+//	}
+//	else if(x > 0 && x<10000)
+//	{
+//		printf("-1\n");
+//	}
+//	else if(x == 0)
+//	{
+//		printf("0\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//int main(void)
+//
+//{
+//
+//	int x = 0;
+//
+//	scanf("%d", &x);
+//
+//	if (x<0 && x>-10000)
+//
+//	{
+//
+//		printf("1\n");
+//
+//	}
+//
+//	else if (x > 0 && x < 10000)
+//
+//	{
+//
+//		printf("-1\n");
+//
+//	}
+//
+//	else if (x == 0)
+//
+//	{
+//
+//		printf("0\n");
+//
+//	}
+//
+//	else
+//
+//	{
+//
+//		printf("错误\n");
+//
+//	}
+//
+//	return 0;
+//
+//}
+//#include <stdio.h>
+// int main()
+//{
+//	int m = 0;
+//	scanf("%d ", &m);
+//	if (m % 5 == 0)
+//	{
+//		printf("YES\n");
+//	}
+//	else 
+//	{
+//		printf("NO\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	//输入 数据
+//	 int m=0;
+//	scanf("%d", &m);
+//	//判断并输出
+//	if (m % 5 == 0)  //说明被5整除了
+//		printf("YES\n");
+//	else 
+//		printf("NO\n");
+//
+//	return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+	int a, i;
+	a = 6;
+	for (i = 1; i <= 3;i++)
+		printf("%d", a);
+	return 0;
+}
