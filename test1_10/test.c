@@ -93,22 +93,136 @@
 //    return 0;
 //}
 
+//#include<stdio.h>
+//int max(int x, int y)
+//{
+//	if (x > y)
+//	{
+//		return x;
+//	}
+//	else
+//		return y;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);
+//	int m = max(a, b);
+//	printf("%d\n", m);
+//	return 0;
+//}
+
+
+//一个全局变量不给初始化的话，默认会被初始化为0
+//#include<stdio.h>
+//int a;//全局变量
+//
+//int main()
+//{
+//	//一个局部变量不给初始化的话，默认是随机值--0xcccccc
+//	int b;
+//	printf("%d\n", b);//局部变量
+//	//printf("%d\n", a);
+//	return 0;
+//}//打印出来是0
+
+
+//作业
+//输入一个整数 表示1个人智商 如果智商>=140 输出“Genius”
+//多组输入！！
+//#include<stdio.h>
+//
+//int main()
+//{
+//	int iq = 0;
+//	//输入
+//	while (scanf("%d", &iq) != EOF)
+//	{
+//	//输出
+//		if (iq >= 140)
+//			printf("Genius\n");
+//	}
+//
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	int iq = 0;
+//	输入
+//	while (scanf("%d", &iq) == 1)
+//	{
+//		输出
+//		if (iq >= 140)
+//			printf("Genius\n");
+//	}
+//
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    float s1 = 0;
+//    float s2 = 0;
+//    float s3 = 0;
+//    scanf("%f %f %f", &s1, &s2, &s3);
+//    float sum = s1 + s2 + s3;
+//    float aver = (s1 + s2 + s3) / 3;
+//    printf("%.2lf %.2lf", sum,aver);
+//   
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    while (scanf("%d %d", &a, &b) == 2)
+//    {
+//        if (a == b)
+//            printf("%d = %d\n");
+//        else if (a > 0)
+//            printf("%d>0\n");
+//        else if (a < b)
+//            printf("%d<%d\n");
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    while ((scanf("%d %d", &a, &b)) != EOF)
+//    {
+//        if (a == b)
+//            printf("%d=%d\n", a, b);
+//        else if (a > b)
+//            printf("%d>%d\n", a, b);
+//        else if (a < b)
+//            printf("%d<%d\n", a, b);
+//    }
+//    return 0;
+//}
+
 #include<stdio.h>
-int max(int x, int y)
-{
-	if (x > y)
-	{
-		return x;
-	}
-	else
-		return y;
-}
 int main()
 {
-	int a = 0;
-	int b = 0;
-	scanf("%d %d", &a, &b);
-	int m = max(a, b);
-	printf("%d\n", m);
-	return 0;
+    int n = 0;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    int d = 0;
+    scanf("%d", &n);//1234
+    a = n % 10;//4
+    b = (n / 10) % 10;//3
+    c = (n / 100) % 10;//2
+    d = n / 1000;//1
+    printf("%d%d%d%d", a, b, c, d);
+    return 0;
 }
