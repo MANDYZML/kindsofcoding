@@ -1,2 +1,5 @@
 ﻿  test.c
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(249,17): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(251,17): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(253,17): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
   test1_10.vcxproj -> C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\Debug\test1_10.exe

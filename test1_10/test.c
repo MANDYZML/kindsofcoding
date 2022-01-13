@@ -210,19 +210,55 @@
 //    return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//    int n = 0;
+//    int a = 0;
+//    int b = 0;
+//    int c = 0;
+//    int d = 0;
+//    scanf("%d", &n);//1234
+//    a = n % 10;//4
+//    b = (n / 10) % 10;//3
+//    c = (n / 100) % 10;//2
+//    d = n / 1000;//1
+//    printf("%d%d%d%d", a, b, c, d);
+//    return 0;
+//}
+
+
+//#define ADD(x,y) ((x)+(y))// 把a b 传给了x y  之后在一加 
+////宏名是ADD 参数是x y  （x+y）是宏体
+//
+//
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int sum = ADD(a, b);//int sum = (a+b);
+//	printf("%d\n", sum);
+//
+//	return 0;
+//}
+
 #include<stdio.h>
+float max3(int x, int y, int z)
+{
+    if (x > y && x > z)
+        return x;
+    else if (y > x && y > z)
+        return y;
+    else 
+        return z;
+}
+
 int main()
 {
-    int n = 0;
     int a = 0;
     int b = 0;
     int c = 0;
-    int d = 0;
-    scanf("%d", &n);//1234
-    a = n % 10;//4
-    b = (n / 10) % 10;//3
-    c = (n / 100) % 10;//2
-    d = n / 1000;//1
-    printf("%d%d%d%d", a, b, c, d);
+    scanf("%d %d %d", &a, &b, &c);
+    printf("%.2f\n", max3(a + b, b, c) / (max3(a, b + c, c) + max3(a, b, b + c)));
     return 0;
 }
