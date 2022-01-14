@@ -1,5 +1,5 @@
 ﻿  test.c
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(249,17): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(251,17): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(253,17): warning C4244: “return”: 从“int”转换到“float”，可能丢失数据
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(330,19): warning C4476: "scanf": 格式说明符中的类型字段字符“.”未知
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(330,47): warning C4474: scanf: 格式字符串中传递的参数太多
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(330,47): message : 占位符和其参数预计 0 可变参数，但提供的却是 5 参数
   test1_10.vcxproj -> C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\Debug\test1_10.exe

@@ -242,23 +242,94 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-float max3(int x, int y, int z)
-{
-    if (x > y && x > z)
-        return x;
-    else if (y > x && y > z)
-        return y;
-    else 
-        return z;
-}
+//#include<stdio.h>
+//float max3(int x, int y, int z)
+//{
+//    if (x > y && x > z)
+//        return x;
+//    else if (y > x && y > z)
+//        return y;
+//    else 
+//        return z;
+//}
+//
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    int c = 0;
+//    scanf("%d %d %d", &a, &b, &c);
+//    printf("%.2f\n", max3(a + b, b, c) / (max3(a, b + c, c) + max3(a, b, b + c)));
+//    return 0;
+//}
 
+//#include<stdio.h>
+//int main()
+//{
+//    int i = 0;
+//    float s1 = 0;
+//    float s2 = 0;
+//    float s3 = 0;
+//    float s4 = 0;
+//    float s5 = 0;
+//    float sum = s1 + s2 + s3 + s4 + s5;
+//    scanf("%.1f %.1f %.1f %.1f %.1f", &s1, &s2, &s3, &s4, &s5);
+//    for (i = 0; i <= 5; i++)
+//    {
+//        printf("%.1f %.1f %.1f %.1f %.1f %.1f\n", s1, s2, s3, s4, s5, sum);
+//    }
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//    float a = 0;
+//    float b = 0;
+//    int i = 0;
+//    for (i = 0; i < 5; i++)
+//    {
+//        scanf("%f ", &a);
+//        b += a;
+//    }
+//    printf("%.2f", b / 5);
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//
+//    int a = 0;
+//    while (scanf("%d", &a) != EOF)
+//    {
+//        while (a)
+//        {
+//            printf("*");
+//                a--;
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+#include<stdio.h>
 int main()
 {
-    int a = 0;
-    int b = 0;
-    int c = 0;
-    scanf("%d %d %d", &a, &b, &c);
-    printf("%.2f\n", max3(a + b, b, c) / (max3(a, b + c, c) + max3(a, b, b + c)));
+    int i = 0;
+    for (i = 1; i <= 5; i++)
+    {
+        float s1 = 0;
+        float s2 = 0;
+        float s3 = 0;
+        float s4 = 0;
+        float s5 = 0;
+        float sum = s1 + s2 + s3 + s4 + s5;
+        for (i = 0; i < 5; i++)
+        {
+            scanf("%.1f %.1f %.1f %.1f %.1f", &s1, &s2, &s3, &s4, &s5);
+            printf("%.1f %.1f %.1f %.1f %.1f %.1f\n", s1, s2, s3, s4, s5, sum);
+        }
+    }
     return 0;
 }
