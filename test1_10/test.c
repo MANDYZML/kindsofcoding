@@ -313,23 +313,140 @@
 //    return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//    int i = 0;
+//    for (i = 1; i <= 5; i++)
+//    {
+//        float s1 = 0;
+//        float s2 = 0;
+//        float s3 = 0;
+//        float s4 = 0;
+//        float s5 = 0;
+//        float sum = s1 + s2 + s3 + s4 + s5;
+//        for (i = 0; i < 5; i++)
+//        {
+//            scanf("%.1f %.1f %.1f %.1f %.1f", &s1, &s2, &s3, &s4, &s5);
+//            printf("%.1f %.1f %.1f %.1f %.1f %.1f\n", s1, s2, s3, s4, s5, sum);
+//        }
+//    }
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    char a[10] = 0;
+//    scanf("%c\n",&a);
+//    printf("      %c  \n", a);
+//    printf("   %c    %c\n", a);
+//    printf("  %c  %c  %c\n", a);
+//    printf(" %c %c  %c %c\n", a);
+//    printf("%c %c %c %c %c\n", a);
+//
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 1;
+//	for(i=1;i<=100;i++)
+//	{
+//		if (i % 2 == 1)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//
+//}
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 1;
+//	while (i <= 100)
+//	{
+//		if (i % 2 == 1)
+//		{
+//			printf("%d ", i);
+//			
+//		}
+//		i++;
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int x = 0;
+//	int y = 0;
+//	int z = 0;
+//	scanf("%d %d %d", &x,&y,&z);
+//	if (x < y)
+//	{
+//		int i = x;
+//		x = y;
+//		y = i;
+//	}
+//	if (x < z)
+//	{
+//		int i = x;
+//		x = z;
+//		z = i;
+//	}
+//	if (y < z)
+//	{
+//		int i = y;
+//		y = z;
+//		z = i;
+//	}
+//	printf("%d %d %d\n", x,y,z);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1; i <= 100; i++)
+//	{
+//		if (i % 3 == 0)
+//		{
+//		
+//			printf("%d ", i);
+//		}
+//	
+//	}
+//
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-    int i = 0;
-    for (i = 1; i <= 5; i++)
-    {
-        float s1 = 0;
-        float s2 = 0;
-        float s3 = 0;
-        float s4 = 0;
-        float s5 = 0;
-        float sum = s1 + s2 + s3 + s4 + s5;
-        for (i = 0; i < 5; i++)
-        {
-            scanf("%.1f %.1f %.1f %.1f %.1f", &s1, &s2, &s3, &s4, &s5);
-            printf("%.1f %.1f %.1f %.1f %.1f %.1f\n", s1, s2, s3, s4, s5, sum);
-        }
-    }
-    return 0;
+	int a = 0;
+	int b = 0;
+	scanf("%d%d", &a, &b);
+	int i = 0;//¹«Ô¼Êý
+	if (a > b)
+	{
+		i = b;
+	}
+	else
+		i = a;
+	while (1)
+	{
+		if (a % i == 0 && b % i == 0)
+		{
+			printf("%d\n", i);
+			break;
+		}
+			i--;
+	}
+	return 0;
 }
