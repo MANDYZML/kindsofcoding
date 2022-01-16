@@ -426,27 +426,314 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d%d", &a, &b);
+//	int i = 0;//公约数
+//	if (a > b)
+//	{
+//		i = b;
+//	}
+//	else
+//		i = a;
+//	while (1)
+//	{
+//		if (a % i == 0 && b % i == 0)
+//		{
+//			printf("%d\n", i);
+//			break;
+//		}
+//			i--;
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1000; i <= 2000; i++)
+//	{
+//		if (i % 4 == 0)
+//		{
+//			if (i % 100 != 0)
+//			{
+//				printf("%d ", i);
+//			}
+//		}
+//		if (i % 400 == 0)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 100; i <= 200; i++)
+//	{
+//		int j = 0;//除
+//		for (j = 2; j < i; j++)
+//		{
+//			if (i % j == 0)//不是
+//			{
+//				break;
+//			}
+//		}
+//		//素数
+//		if (i == j)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	int count = 0;
+//	for (i = 1; i <= 100; i++)
+//	{
+//		if (i % 10 == 9)
+//		{
+//			printf("%d ", i);
+//			count++;
+//		}
+//		if (i / 10 == 9)
+//		{
+//			printf("%d ", i);
+//			count++;
+//		}
+//	}
+//	printf("\n");
+//	printf("一共有：%d\n", count);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[] = { -1,-2,-3,-4,-5,-6,-7,-8,-9,-10 };
+//	int max = arr[0];
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		if (arr[i] > max)
+//		{
+//			max = arr[i];
+//		}
+//	}
+//	printf("%d\n", max);
+//	return 0;
+//}
+
+
+//乘法表
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;//行
+//	int j = 0;//列
+//	for (i = 1; i <= 9; i++)
+//	{
+//		for (j=1; j <= i; j++)
+//		{
+//			printf("%d*%d=%-2d ",j,i, i*j);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	int i = 0;
+//	int j = 0;
+//	for (i = 1; i <= 9; i++)
+//	{
+//		for (j = 1; j <=i; j++)
+//		{
+//			printf("%d*%d=%-2d ", i, j, i * j);
+//		}
+//		printf("\n");
+//	}
+//
+//	return 0;
+//}
+
+
+//所有阶乘加一块
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int i = 0;
+//	int ret = 1;
+//	int sum = 0;
+//	for (n = 1; n <= 3; n++)
+//	{
+//		ret = 1;
+//		for (i = 1; i <= n; i++)//算一次阶乘
+//		{
+//			ret = ret * i;
+//		}
+//		sum = sum + ret;
+//	}
+//	
+//	printf("%d", sum);
+//	return 0;
+//}
+
+
+//猜数字游戏
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include <time.h>
+////菜单
+//void menu()
+//{
+//	printf("**********************\n");
+//	printf("******  1.play  ******\n");
+//	printf("******  0.exit  ******\n");
+//	printf("**********************\n");
+//}
+
+//猜数字游戏的实现
+
+//时间戳
+//time 函数--返回一个时间戳
+//void game()
+//{
+//	int guess = 0;
+//	//1.生成一个随机值
+//	int ret = rand() % 100 + 1;//1-100之间随机数
+//	//printf("%d\n", ret);
+//	//2.猜数字
+//	while (1)
+//	{
+//		printf("猜数字:>\n");
+//		scanf("%d", &guess);
+//		if (guess < ret)
+//		{
+//			printf("猜小了\n");
+//		}
+//		else if (guess > ret)
+//		{
+//			printf("猜大了\n");
+//		}
+//		else
+//		{
+//			printf("恭喜你，猜对了\n");
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int input = 0;
+//	srand((unsigned int)time(NULL));//传 一直发生变化的值
+//	do
+//	{
+//		menu();
+//		printf("请选择:>");
+//		scanf("%d", &input);//1 0 其他
+//		switch (input)
+//		{
+//		case 1:
+//			game();
+//			break;
+//		case 0:
+//			printf("退出游戏\n");
+//			break;
+//		default:
+//			printf("选择错误，重新选择\n");
+//			break;
+//		}
+//	} while (input);
+//
+//	return 0;
+//}
+
+
+//二分查找
+//编写代码在一个整形有序数组中查找具体的某个数
 #include<stdio.h>
 int main()
 {
-	int a = 0;
-	int b = 0;
-	scanf("%d%d", &a, &b);
-	int i = 0;//公约数
-	if (a > b)
+	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int k = 8;
+	//找 k
+	int sz = sizeof(arr) / sizeof(arr[0]);//元素个数
+//整个数组大小(字节) 4个字节*10个元素 /  第一个元素大小--4    
+	int left = 0;//左下标
+	int right = sz-1;//右下标
+
+	while (left<=right)
 	{
-		i = b;
-	}
-	else
-		i = a;
-	while (1)
-	{
-		if (a % i == 0 && b % i == 0)
+		//int mid = (left + right) / 2;//中间元素下标
+		int mid = left + (right - left) / 2;
+		if (arr[mid] < k)//arr[mid]  中间元素
 		{
-			printf("%d\n", i);
+			//说明要找的元素在中间元素右边
+			left = mid + 1;
+		}
+		else if (arr[mid] > k)
+		{
+			//在中间元素左边
+			right = mid - 1;
+		}
+		else
+		{
+			printf("找到了，下标是:%d\n", mid);
 			break;
 		}
-			i--;
 	}
+
+	if (left > right)
+		printf("找不到了\n");
 	return 0;
 }
+
+//#include <stdio.h>
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int k = 4;
+//	//找 k
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int left = 0;
+//	int right = sz - 1;
+//	while (left<=right)
+//	{
+//		int mid = left + (right - left) / 2;
+//		if (arr[mid] > k)
+//		{
+//			right = mid - 1;
+//		}
+//		else if (arr[mid] < k)
+//		{
+//			left = mid + 1;
+//		}
+//		else
+//		{
+//			printf("找到了，下标是: %d\n", mid);
+//			break;
+//		}
+//	}
+//	if (left > right)
+//		printf("找不到了\n");
+//	return 0;
+//}
