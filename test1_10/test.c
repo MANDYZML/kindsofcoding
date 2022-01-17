@@ -670,70 +670,75 @@
 
 //二分查找
 //编写代码在一个整形有序数组中查找具体的某个数
-#include<stdio.h>
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int k = 8;
+//	//找 k
+//	int sz = sizeof(arr) / sizeof(arr[0]);//元素个数
+////整个数组大小(字节) 4个字节*10个元素 /  第一个元素大小--4    
+//	int left = 0;//左下标
+//	int right = sz-1;//右下标
+//
+//	while (left<=right)
+//	{
+//		//int mid = (left + right) / 2;//中间元素下标
+//		int mid = left + (right - left) / 2;
+//		if (arr[mid] < k)//arr[mid]  中间元素
+//		{
+//			//说明要找的元素在中间元素右边
+//			left = mid + 1;
+//		}
+//		else if (arr[mid] > k)
+//		{
+//			//在中间元素左边
+//			right = mid - 1;
+//		}
+//		else
+//		{
+//			printf("找到了，下标是:%d\n", mid);
+//			break;
+//		}
+//	}
+//
+//	if (left > right)
+//		printf("找不到了\n");
+//	return 0;
+//}
+
+#include <stdio.h>
 int main()
 {
 	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
-	int k = 8;
+	int k = 4;
 	//找 k
-	int sz = sizeof(arr) / sizeof(arr[0]);//元素个数
-//整个数组大小(字节) 4个字节*10个元素 /  第一个元素大小--4    
-	int left = 0;//左下标
-	int right = sz-1;//右下标
-
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int left = 0;
+	int right = sz - 1;
 	while (left<=right)
 	{
-		//int mid = (left + right) / 2;//中间元素下标
 		int mid = left + (right - left) / 2;
-		if (arr[mid] < k)//arr[mid]  中间元素
+		if (arr[mid] > k)
 		{
-			//说明要找的元素在中间元素右边
-			left = mid + 1;
-		}
-		else if (arr[mid] > k)
-		{
-			//在中间元素左边
 			right = mid - 1;
+		}
+		else if (arr[mid] < k)
+		{
+			left = mid + 1;
 		}
 		else
 		{
-			printf("找到了，下标是:%d\n", mid);
+			printf("找到了，下标是: %d\n", mid);
 			break;
 		}
 	}
-
 	if (left > right)
 		printf("找不到了\n");
 	return 0;
 }
 
-//#include <stdio.h>
 //int main()
 //{
-//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
-//	int k = 4;
-//	//找 k
-//	int sz = sizeof(arr) / sizeof(arr[0]);
-//	int left = 0;
-//	int right = sz - 1;
-//	while (left<=right)
-//	{
-//		int mid = left + (right - left) / 2;
-//		if (arr[mid] > k)
-//		{
-//			right = mid - 1;
-//		}
-//		else if (arr[mid] < k)
-//		{
-//			left = mid + 1;
-//		}
-//		else
-//		{
-//			printf("找到了，下标是: %d\n", mid);
-//			break;
-//		}
-//	}
-//	if (left > right)
-//		printf("找不到了\n");
-//	return 0;
+//
 //}
