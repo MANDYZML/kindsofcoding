@@ -707,38 +707,198 @@
 //	return 0;
 //}
 
-#include <stdio.h>
-int main()
-{
-	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
-	int k = 4;
-	//找 k
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	int left = 0;
-	int right = sz - 1;
-	while (left<=right)
-	{
-		int mid = left + (right - left) / 2;
-		if (arr[mid] > k)
-		{
-			right = mid - 1;
-		}
-		else if (arr[mid] < k)
-		{
-			left = mid + 1;
-		}
-		else
-		{
-			printf("找到了，下标是: %d\n", mid);
-			break;
-		}
-	}
-	if (left > right)
-		printf("找不到了\n");
-	return 0;
-}
-
+//#include <stdio.h>
 //int main()
 //{
-//
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int k = 4;
+//	//找 k
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int left = 0;
+//	int right = sz - 1;
+//	while (left<=right)
+//	{
+//		int mid = left + (right - left) / 2;
+//		if (arr[mid] > k)
+//		{
+//			right = mid - 1;
+//		}
+//		else if (arr[mid] < k)
+//		{
+//			left = mid + 1;
+//		}
+//		else
+//		{
+//			printf("找到了，下标是: %d\n", mid);
+//			break;
+//		}
+//	}
+//	if (left > right)
+//		printf("找不到了\n");
+//	return 0;
 //}
+// 1/17  作业
+//转换以下ASCII码为对应字符并输出他们。
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[] = { 73,32,99,97,110,32,100,111,32,105,116,33 };
+//    int sz = sizeof(arr) / sizeof arr[0];//求元素个数
+//    int i = 0;// i是 数组下标 所以 <sz
+//    for (i = 0; i < sz; i++)
+//    {
+//        putchar(arr[i]);
+//    }
+//
+//    return 0;
+//}
+
+//小乐乐学校教学楼的电梯前排了很多人，他的前面有n个人在等电梯。
+//电梯每次可以乘坐12人，每次上下需要的时间为4分钟（上需要2分钟，下需要2分钟）。
+//请帮助小乐乐计算还需要多少分钟才能乘电梯到达楼上。（假设最初电梯在1层）
+
+//#include <stdio.h>
+//int main()
+//{
+//    int n = 0;//n个人
+//    int t = 0;//时间
+//    scanf("%d", &n);
+//    while (n / 12 != 0)// !0  等电梯的人数大于12
+//    {
+//        t += 4;//时间加4分钟
+//        n -= 12;//人少12个
+//    }
+//    printf("%d\n", t + 2);
+//    return 0;
+//}
+
+
+//实现字母的大小写转换。多组输入输出。
+//#include <stdio.h>
+//
+//int main()
+//{
+//    char a = 0;
+//    scanf("%c", &a);
+//    //输入大写
+//    while (a != EOF)
+//    {
+//        getchar();
+//        if (a >= 65 && a <= 90)
+//        {
+//            a += 32;
+//            printf("%c\n", a);
+//        }
+//    }
+//    return 0;
+//}
+
+//实现一个函数，判断一个数是不是素数。
+//利用上面实现的函数打印100到200之间的素数。
+
+// 返回 1  是素数
+// 返回 0 不是素数
+//#include <stdio.h>
+//#include <math.h>
+//int is_prime(int x)
+//{
+//	// 平方 试除  2-平方 的数
+//	int j = 0;
+//	for (j = 2; j <= sqrt(x); j++)
+//	{
+//		if (x % j == 0)
+//		{
+//			return 0;//不是素数
+//		}
+//	}
+//	//是素数
+//	return 1;
+//}
+//
+//int main()
+//{
+//	int i = 0;
+//	for (i = 100; i <= 200; i++) 
+//	{
+//		//判断 i 是不是素数
+//		if (is_prime(i) == 1)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
+
+
+//实现函数判断year是不是润年。
+//1000-2000年
+
+//#include <stdio.h>
+//int is_leap_year(int y)
+//{
+//	if ((y % 4 == 0) && (y % 100 != 0) || (y % 400 == 0))
+//		return 1;//是闰年
+//	else
+//		return 0;//不是
+//}
+//int main()
+//{
+//	int i = 0;
+//	for (i = 1000; i <= 2000; i++)
+//	{
+//		//判断 i 是不是闰年
+//		if (is_leap_year(i) == 1)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
+
+
+//实现一个函数来交换两个整数的内容。
+//#include <stdio.h>
+//void swap(int* pa, int* pb)
+//{
+//	int tmp = *pa;
+//	*pa = *pb;
+//	*pb = tmp;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);
+//	printf("交换前：a=%d,b=%d\n", a, b);
+//
+//	swap(&a, &b);//交换  传a b 地址
+//	printf("交换后：a=%d.b=%d\n", a, b);
+//	return 0;
+//}
+
+
+//实现一个函数，打印乘法口诀表，口诀表的行数和列数自己指定
+//如：输入9，输出9 * 9口诀表，输出12，输出12 * 12的乘法口诀表。
+
+#include <stdio.h>
+void mult_table(int *pa)
+{
+	int i = 0;
+	int j = 0;
+	for (i = 1; i <= *pa; i++)
+	{
+		for (j = 1; j <= i; j++)
+		{
+			printf("%d*%d=%-2d ", i, j, i * j);
+		}
+		printf("\n");
+	}
+}
+
+int main()
+{
+	int a = 0;
+	scanf("%d", &a);
+	mult_table(&a);
+	return 0;
+}
