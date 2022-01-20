@@ -880,25 +880,98 @@
 //实现一个函数，打印乘法口诀表，口诀表的行数和列数自己指定
 //如：输入9，输出9 * 9口诀表，输出12，输出12 * 12的乘法口诀表。
 
+//#include <stdio.h>
+//void mult_table(int *pa)
+//{
+//	int i = 0;
+//	int j = 0;
+//	for (i = 1; i <= *pa; i++)
+//	{
+//		for (j = 1; j <= i; j++)
+//		{
+//			printf("%d*%d=%-2d ", i, j, i * j);
+//		}
+//		printf("\n");
+//	}
+//}
+//
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	mult_table(&a);
+//	return 0;
+//}
+
+//打印一个整数的每一位--递归
+//#include <stdio.h>
+//void print(int n)
+//{
+//	if (n > 9)//两位数以上数字
+//	{
+//		print(n / 10);//1234 
+//					  //n/10 --123 打印
+//	}
+//	printf("%d ", n % 10);//打印4
+//}
+//
+//int main()
+//{
+//	unsigned int num = 0;
+//	scanf("%d", &num);//1234
+//	print(num);//print函数可以把num的每一位打印出来
+//	//print(1234)
+//	//print(123) 4
+//	//print(12) 3 4
+//	//print(1) 2 3 4
+//	// 1 2 3 4
+//	return 0;
+//}
+
+
+//递归和非递归分别实现求n的阶乘（不考虑溢出的问题）
+//#include <stdio.h>
+//非递归
+//int main()
+//{
+//	int i = 0;
+//	int n = 0;
+//	int ret = 1;
+//	scanf("%d", &n);
+//	for (i = 1; i <= n; i++)
+//	{
+//		ret = ret * i;
+//	}
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//用递归
 #include <stdio.h>
-void mult_table(int *pa)
+fac1(int n)
 {
-	int i = 0;
-	int j = 0;
-	for (i = 1; i <= *pa; i++)
-	{
-		for (j = 1; j <= i; j++)
-		{
-			printf("%d*%d=%-2d ", i, j, i * j);
-		}
-		printf("\n");
-	}
+	if (n <= 1)
+		return 1;
+	else
+		return n * fac(n - 1);
 }
 
+fac(int n)
+{
+	int i = 0;
+	int ret = 1;
+	for (i = 1; i <= n; i++)
+	{
+		ret = ret * i;
+	}
+	return ret;
+}
 int main()
 {
-	int a = 0;
-	scanf("%d", &a);
-	mult_table(&a);
+	int n = 0;
+	scanf("%d", &n); 
+	int ret = fac(n);//求n的阶乘 放到ret
+	printf("%d\n", ret);
 	return 0;
+ 
 }
