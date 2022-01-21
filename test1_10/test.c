@@ -947,31 +947,199 @@
 //}
 
 //用递归
-#include <stdio.h>
-fac1(int n)
-{
-	if (n <= 1)
-		return 1;
-	else
-		return n * fac(n - 1);
-}
+//#include <stdio.h>
+//fac1(int n)
+//{
+//	if (n <= 1)
+//		return 1;
+//	else
+//		return n * fac(n - 1);
+//}
+//
+//fac(int n)//非递归
+//{
+//	int i = 0;
+//	int ret = 1;
+//	for (i = 1; i <= n; i++)
+//	{
+//		ret = ret * i;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n); 
+//	int ret = fac(n);//求n的阶乘 放到ret
+//	printf("%d\n", ret);
+//	return 0;
+//}
+//递归和迭代可以同时进行
 
-fac(int n)
-{
-	int i = 0;
-	int ret = 1;
-	for (i = 1; i <= n; i++)
-	{
-		ret = ret * i;
-	}
-	return ret;
-}
-int main()
-{
-	int n = 0;
-	scanf("%d", &n); 
-	int ret = fac(n);//求n的阶乘 放到ret
-	printf("%d\n", ret);
-	return 0;
- 
-}
+
+//递归和非递归分别实现strlen
+//#include <stdio.h>
+
+//非递归-创建临时变量
+//int my_strlen(char* str)//传数组首元素地址-a
+//{
+//	int count = 0;//统计字符个数
+//	while (*str != "\0")
+//	{
+//		count++;
+//		str++;
+//	}
+//	return count;//个数
+//
+//}
+//用递归
+//int my_strlen(char* str)
+//{
+//	if (*str != '\0');
+//	{
+//		return 1 + my_strlen(str + 1);
+//	}
+//		return 0;
+//}
+//int main()
+//{
+//	char arr[] = "abcdef";
+//		int len = strlen(arr);
+//		printf("%d\n", len);
+//
+//	return 0;
+//}
+
+
+//编写一个函数 reverse_string(char * string)（递归实现）
+//实现：将参数字符串中的字符反向排列，不是逆序打印。
+//要求：不能使用C函数库中的字符串操作函数。
+//#include <stdio.h>
+//int my_strlen(char* string)
+//{
+//	int count = 0;
+//	while (*string != '\0')
+//	{
+//		count++;
+//		string++;
+//	}
+//	return count;
+//}
+//void reverse_string(char* string)
+//{
+//	int left = 0;
+//	int right = my_strlen(string)-1;
+//	while (left < right)
+//	{
+//		char tmp = string[left];
+//		string[left] = string[right];
+//		string[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//void reverse_string(char* str)
+//{
+//	int left = 0;
+//	int right = my_strlen(str) - 1;
+//
+//	while (left < right)
+//	{
+//		char temp = *(str + left);
+//		*(str + left) = *(str + right);
+//		*(str + right) = temp;
+//		left++;
+//		right--;
+//	}
+//}
+
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	reverse_string(arr);
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+
+//计算一个数的每位之和（递归实现）
+//写一个递归函数DigitSum(n)，输入一个非负整数，返回组成它的数字之和
+//例如，调用DigitSum(1729)，则应该返回1 + 7 + 2 + 9，它的和是19
+//输入：1729，输出：19
+//#include <stdio.h>
+//DigitSum(int n)
+//{
+//	int ret = 0;
+//	if (n > 9)
+//	{
+//		ret = DigitSum(n / 10);
+//	}
+//	return (n % 10) + ret;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	DigitSum(n);//求数的和
+//	printf("%d\n", DigitSum(n));
+//	return 0;
+//}
+
+//编写一个函数实现n的k次方，使用递归实现。
+//#include <stdio.h>
+//int squart(int x, int y)
+//{
+//	int i = 1;
+//	if (y > 1)
+//	{
+//		i = squart(x, y - 1);
+//	}
+//	return x * i;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	scanf("%d %d", &n, &k);
+//	squart(n, k);
+//	printf("%d\n", squart(n, k));
+//	return 0;
+//}
+
+//递归和非递归分别实现求第n个斐波那契数
+//例如：
+//输入：5  输出：5
+//输入：10， 输出：55
+//输入：2， 输出：1
+//#include <stdio.h>
+//递归
+//int fib(int n)
+//{
+//	if (n <= 2)
+//		return 1;
+//	else
+//		return fib(n - 1) +fib(n - 2);
+//}
+//非递归
+//int fib2(int n)
+//{
+//	int a = 1;
+//	int b = 1;
+//	int c = 1;
+//
+//	while (n > 2)
+//	{
+//		c = a + b;
+//		a = b;
+//		b = c;
+//		n--;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	printf("%d\n", fib(n));
+//	printf("%d\n", fib2(n));
+//}
