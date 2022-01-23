@@ -1,152 +1,200 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
-//猜数字游戏实现
-// 基本逻辑
-//1.会自动产生1-100的随机数
-//2.然后猜数字
-//  如果在猜的过程中猜对了--就 恭喜你，游戏结束
-//  如果猜错--会告诉 猜大了还是猜小了，继续猜，直到猜对
-//3.游戏可以一直玩  除非退出游戏
-
-
-//#include <stdlib.h>
-//#include <time.h>
-////两个选项  一个开始游戏  一个退出游戏
-//void menu()
-//{
-//	printf("******************************\n");
-//	printf("********  1.play   ***********\n");
-//	printf("********  0.exit   ***********\n");
-//	printf("******************************\n");
-//}
-//
-////time_t
-//void game()
-//{
-//	//猜数字游戏的实现
-//	//1.生成随机数
-//	 //rand 函数返回了0-32767之间的数字
-//	 //电脑的   时间（发生变化）---时间戳
-//
-//
-//	 //srand((unsigned int)time(NULL)); 写在这里的话  随机数不够随机
-//	 //随机数起点的设置 只需要设置一次就可以了
-//
-//	int ret = rand()%100 + 1;//rand之前需要调用srand  game在底下 所以确实是在rand之前
-//						 //%100的余数是0-99  然后+1 范围就是1-100
-//	//printf("%d\n", ret); //猜数字就不能打印出来
-//
-//	//2.猜数字
-//	int guess = 0;
-//	while (1)
-//	{
-//		printf("请猜数字:>");
-//		scanf("%d", &guess);//猜的数字要存起来  guess 就是猜的值
-//		//当猜的值放到guess里面后  进行比较
-//		if (guess < ret)
-//		{
-//			printf("猜小了\n");
-//		}
-//		else if (guess > ret)
-//		{
-//			printf("猜大了\n");
-//		}
-//		else
-//		{
-//			printf("恭喜你，猜对了\n");
-//			break;
-//		}
-//	}
-//}
-//int main()
-//{
-//	int input = 0;
-//	srand((unsigned int)time(NULL));//这里需要一个变的量
-//	 //time 库函数 会返回一个时间戳  调用函数的时间点和计算机的起始时间的时间戳
-//	//NULL--控制值
-//	//srand  需要的是unsigned int 类型的值  所以把time强制转换成unsigned int类型
-//	//放到主函数里 梦函数一进来 就设置起点数
-//
-//	do
-//	{
-//		menu();//打印菜单---menu函数
-//		printf("请选择:>");
-//		scanf("%d", &input);//input选值 可以是1 0 或者其他数
-//		switch (input)//根据输入的值进行判断
-//		{
-//		case 1:
-//			game();//game函数
-//			break;
-//		case 0:
-//			printf("退出游戏\n");
-//			break;
-//		default://输入的不是1不是0
-//			printf("选择错误,重新选择\n");
-//			break;
-//		}
-//	} while (input);//上面的switch语句跳出后 来到这进行判断
-//	return 0;
-//}
-
-#include<stdio.h>
-#include <stdlib.h>
-#include <time.h>
-void menu()
+#include "game.h"
+//初始化棋盘 全变空格
+void InitBoard(char board[ROW][COL], int row, int col)//char 类型数组  行  列
 {
-	printf("******************************\n");
-	printf("********  1.play   ***********\n");
-	printf("********  0.exit   ***********\n");
-	printf("******************************\n");
+    int i = 0;
+   for (i = 0; i < row; i++)
+   {
+	int j = 0;
+	  for (j = 0; j < col; j++)
+	  {
+		board[i][j] = ' ';//九宫格里 初始化成空格
+
+	  }
+   }
 }
 
-void game()
+//打印棋盘
+//void DisplayBoard(char board[ROW][COL], int row, int col)
+//{
+//	int i = 0;
+//	for (i = 0; i < row; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < col; j++)
+//		{
+//			printf("%c", board[i][j]);//打印一行
+//		}
+//		printf("\n");//换行
+//	}
+//}
+
+//这个写死了  如果想10*10 就不行了
+//void DisplayBoard(char board[ROW][COL], int row, int col)
+//{
+//	int i = 0;
+//	for (i = 0; i < row; i++)//打印三行
+//	{
+//		//一组数据打印--数据和分割行
+//		printf(" %c | %c | %c \n", board[i][0], board[i][1], board[i][2]);
+//		//打印分割行
+//		if(i<row-1)
+//			printf("---|---|---\n");
+//	}
+//}
+
+void DisplayBoard(char board[ROW][COL], int row, int col)
 {
-	int ret = rand() % 100 + 1;
-	//printf("%d\n", ret); 
-//2.猜数字
-	int guess = 0;
+	int i = 0;
+	for (i = 0; i < row; i++)//打印三行
+	{
+		//一组数据打印      --数据和分割行
+		int j = 0;
+		for (j = 0; j < col; j++)
+		{
+			printf(" %c ", board[i][j]);
+			if(j < col - 1)
+			printf("|");
+		}
+		printf("\n");
+		//打印分割行
+		if (i < row - 1)
+		{
+			for (j = 0; j < col; j++)
+			{
+				printf("---");
+				if (j < col - 1)
+					printf("|");
+			}
+			printf("\n");
+		}
+			
+	}
+}
+
+//玩家下棋 --实现
+void player_move(char board[ROW][COL], int row, int col)
+{
+	int x = 0;
+	int y = 0;
+	printf("玩家下棋\n");
+	printf("请输入坐标:>");
 	while (1)
 	{
-		printf("请猜数字:>");
-		scanf("%d", &guess);
-		if (guess < ret)
+		scanf("%d %d", &x, &y);
+		if (x >= 1 && x <= row && y >= 1 && y <= col)
 		{
-			printf("猜小了\n");
-		}
-		else if (guess > ret)
-		{
-			printf("猜大了\n");
+			//下棋
+			//判断输入的坐标有没有被占用
+			if (board[x - 1][y - 1] == ' ')
+			{
+				board[x - 1][y - 1] = '*';
+				break;
+			}
+			else
+			{
+				printf("该坐标被占用，请重新输入\n");
+			}
 		}
 		else
 		{
-			printf("恭喜你，猜对了\n");
-			break;
+			printf("坐标非法，请重新输入\n");
 		}
 	}
 }
 
-int main()
+//电脑下棋--实现
+void computer_move(char board[ROW][COL], int row, int col)
 {
-	int input = 0;
-	srand((unsigned int)time(NULL));
-
-	do
+	int x = 0;
+	int y = 0;
+	printf("电脑下棋:>\n");
+	while (1)//如果电脑下的坐标 发现有问题  会上来重新生成
+		//所以是循环
 	{
-		menu();
-		printf("请选择:>");
-		scanf("%d", &input);
-		switch (input)
+		//电脑随机下--生成坐标
+		x = rand() % row;//0-2范围
+		y = rand() % col;//0-2
+
+		//判断这个坐标有没有下过棋
+		if (board[x][y] == ' ')
 		{
-		case 1:
-			game();
-			break;
-		case 0:
-			printf("退出游戏\n");
-			break;
-		default:
-			printf("选择错误,重新选择\n");
+			board[x][y] = '#';//电脑下棋
 			break;
 		}
-	} while (input);
-	return 0;
+	
+	}
+}
+
+
+//判断输赢函数--实现   就是对棋盘上的位置进行判断
+static int if_full(char board[ROW][COL], int row, int col)//只是为了（is_win 函数）判断输赢 不用放到头文件里面
+//只在本文件内使用就行
+{
+	int i = 0;
+	for (i = 0; i < row; i++)
+	{
+		int j = 0;
+		for (j = 0; j < col; j++)
+		{
+			if (board[i][j] == ' ')//判断等不等于 空格
+			{
+			//假设里面有空格--就说明并没有满
+				return 0;//说明没满
+			}
+		}
+	}
+	return 1;//说明满了
+}
+//行，列，--三组 对角线 --两组
+char is_win(char board[ROW][COL], int row, int col)
+{
+	int i = 0;
+	//判断行
+	for (i = 0; i < row; i++)
+	{
+		//一行里面 三个元素
+		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][1] != ' ')
+			//一行三个元素相等 且一个不等于空格 剩下两个也不等于空格
+			//那就是有人赢了 判断是什么字符
+		{
+			return board[i][1];//三个字符一样，判断并返回一个就行
+		}
+	}
+	//判断列
+	for (i = 0; i < col; i++)
+	{
+		//一行里面 三个元素
+		if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[1][i] != ' ')
+			//一行三个元素相等 且一个不等于空格 剩下两个也不等于空格
+			//那就是有人赢了 判断是什么字符
+		{
+			return board[1][i];//三个字符一样，判断并返回一个就行
+		}
+	}
+	//对角线-- 从左上到右下的对角线
+	if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != ' ')
+	{
+	//如果有人赢了
+		return board[1][1];
+	}
+	//对角线--右上到左下
+	if (board[0][2] == board[1][1] && board[2][0] == board[2][2] && board[1][1] != ' ')
+	{
+		//如果有人赢了
+		return board[1][1];
+	}
+
+	//如果以上情况都没发生 --没人赢的情况下，棋盘上已经没有空余位置了
+	//判断平局--判断数组有没有空格
+	if (if_full(board, row, col) == 1)//如果返回1就是都满了
+	{
+		return 'Q';  
+	}
+
+	//游戏继续-上面的情况都不是
+	return 'C';
+
 }

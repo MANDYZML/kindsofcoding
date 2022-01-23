@@ -1,0 +1,6 @@
+﻿  game.c
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\游戏代码12_26\game.c(17,8): warning C4013: “printf”未定义；假设外部返回 int
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\游戏代码12_26\game.c(71,8): warning C4013: “scanf”未定义；假设外部返回 int
+game.obj : error LNK2001: 无法解析的外部符号 _printf
+game.obj : error LNK2001: 无法解析的外部符号 _scanf
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\游戏代码12_26\Release\游戏代码12_26.exe : fatal error LNK1120: 2 个无法解析的外部命令
