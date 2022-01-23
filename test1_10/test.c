@@ -1014,6 +1014,7 @@
 //编写一个函数 reverse_string(char * string)（递归实现）
 //实现：将参数字符串中的字符反向排列，不是逆序打印。
 //要求：不能使用C函数库中的字符串操作函数。
+
 //#include <stdio.h>
 //int my_strlen(char* string)
 //{
@@ -1052,7 +1053,22 @@
 //		right--;
 //	}
 //}
-
+//用递归
+//abcdef
+//交换a和f,reverse_string逆序("bcde")
+//交换b e  逆序c d
+//交换c d
+//#include <stdio.h>
+//void reverse_string(char* str)
+//{
+//	int len = strlen(str);
+//	char tmp = *str;//把第一个字符保存
+//	*str=*(str + len - 1);//把最后一个字符放到第一个
+//	*(str + len - 1) = '\0';//交换完后给最后一个字符赋上\0
+//	if(strlen(str + 1) >= 2)//向后看到的字符>=2
+//	reverse_string(str + 1);//逆序中间的
+//	*(str + len - 1) = tmp;
+//}
 //int main()
 //{
 //	char arr[] = "abcdef";
@@ -1143,3 +1159,57 @@
 //	printf("%d\n", fib(n));
 //	printf("%d\n", fib2(n));
 //}
+
+
+//创建一个整形数组，完成对数组的操作
+//实现函数init() 初始化数组为全0
+//实现print()  打印数组的每个元素
+//实现reverse()  函数完成数组元素的逆置。
+//要求：自己设计以上函数的参数，返回值。
+
+#include <stdio.h>
+void init(int arr[],int sz)
+{
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		arr[i] = 0;//找到下标为i的元素，赋值成0
+	}
+}
+void print(int arr[],int sz)
+{
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+void reverse(int arr[],int sz)
+{
+	int left = 0;//左下标
+	int right = sz - 1;
+
+	while (left < right)
+	{
+		int tmp = arr[left];
+		arr[left] = arr[right];
+		arr[right]= tmp;
+		left++;
+		right--;
+	}
+
+}
+int main()
+{
+	int arr[10] = { 1,2,3,4,5,6,7,8,9,10};
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	print(arr, sz);
+	//逆序
+	reverse(arr,sz);
+	print(arr, sz);
+	//初始化
+	//init(arr,sz);
+	//print(arr, sz);
+	return 0;
+}

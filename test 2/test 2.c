@@ -637,13 +637,13 @@
 
 //想创建  学生  这个类型
 
-struct Stu    //创造一个类型（学生）
-{
-
-	char name[20];//学生得有名字  //名字是字符串 所以用char（字符数组）
-	int age;
-	double score;  //double (带小数点)
-};  //学生  描述完了    一个学生是由几个数据组成的 
+//struct Stu    //创造一个类型（学生）
+//{
+//
+//	char name[20];//学生得有名字  //名字是字符串 所以用char（字符数组）
+//	int age;
+//	double score;  //double (带小数点)
+//};  //学生  描述完了    一个学生是由几个数据组成的 
    //这三个 name age score  是这个结构体里的成员变量
 
 //创建一个书的类型
@@ -1486,8 +1486,8 @@ struct Stu    //创造一个类型（学生）
 //}
 
 //自定义函数
-#include<stdio.h>
-#include <string.h>
+//#include<stdio.h>
+//#include <string.h>
 //int main()
 //{
 //	char arr1[20] = { 0 };
@@ -2040,7 +2040,7 @@ struct Stu    //创造一个类型（学生）
 
 //二维数组的创建
 //三行五列
-#include<stdio.h>
+//#include<stdio.h>
 //int main()
 //{
 //	//int arr[3][5] = {1,2,3,4,5,6};//15个元素 没有全部初始化
@@ -2109,54 +2109,54 @@ struct Stu    //创造一个类型（学生）
 //冒泡排序
 //数组中2个相邻的元素进行比较，如果不满足就交换
 //排序为升序
-
+//#include<stdio.h>
 //用整型指针来接收
-//void bubble_sort(int * arr)
-void bubble_sort(int arr[],int sz)//数组传参--本质也是指针 数组接收
-{
-	//不能在这求
-	//int sz = sizeof(arr) / sizeof(arr[0]);//元素个数
-	//先进行确定趟数
-	//趟数跟元素个数有关系 10个元素 9趟  n个元素 n-1趟
-	int i = 0;
-	for (i = 0; i < sz-1 ; i++)
-	{
-		int flag = 1;//假设已经有序
-	//每一趟冒泡排序的过程 一行几对进行比较
-		int j = 0;
-		for (j = 0; j < sz-1-i; j++)
-		{
-			if (arr[j] > arr[j + 1])//相邻元素进行比较
-			{
-				flag = 0;
-			//不符合升序  交换
-				int tmp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = tmp;
-			}
-		}
-		if (1 == flag)//没有把flag置成0 说明没有交换 
-			//说明已经有序了
-		{
-			break;
-		}
-	}
-}
-int main()
-{
-	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
-	//写一个冒泡排序的函数，来排序arr数组的内容
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	bubble_sort(arr,sz);//传参传的数组名
-	//arr-表示的首元素的地址
-	//也就是arr[0]的地址--&arr[0]
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		printf("%d ", arr[i]);
-	}
-	return 0;
-}
+  //void bubble_sort(int * arr)
+//void bubble_sort(int arr[],int sz)//数组传参--本质也是指针 数组接收
+//{
+//	//不能在这求
+//	//int sz = sizeof(arr) / sizeof(arr[0]);//元素个数
+//	//先进行确定趟数
+//	//趟数跟元素个数有关系 10个元素 9趟  n个元素 n-1趟
+//	int i = 0;
+//	for (i = 0; i < sz-1 ; i++)
+//	{
+//		int flag = 1;//假设已经有序
+//	//每一趟冒泡排序的过程 一行几对进行比较
+//		int j = 0;
+//		for (j = 0; j < sz-1-i; j++)
+//		{
+//			if (arr[j] > arr[j + 1])//相邻元素进行比较
+//			{
+//				flag = 0;
+//			//不符合升序  交换
+//				int tmp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = tmp;
+//			}
+//		}
+//		if (1 == flag)//没有把flag置成0 说明没有交换 
+//			//说明已经有序了
+//		{
+//			break;
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+//	//写一个冒泡排序的函数，来排序arr数组的内容
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	bubble_sort(arr,sz);//传参传的数组名
+//	//arr-表示的首元素的地址
+//	//也就是arr[0]的地址--&arr[0]
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 
 //数组名
 //int main()
@@ -2173,3 +2173,5 @@ int main()
 //有两个例外：
 //1.sizeof(数组名)，数组名不是数组首元素的地址，数组名表示整个数组
 //2. &数组名，数组名不是数组首元素的地址，数组名表示整个数组，取出的是整个数组的地址
+
+
