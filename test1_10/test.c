@@ -1167,49 +1167,69 @@
 //实现reverse()  函数完成数组元素的逆置。
 //要求：自己设计以上函数的参数，返回值。
 
+//#include <stdio.h>
+//void init(int arr[],int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		arr[i] = 0;//找到下标为i的元素，赋值成0
+//	}
+//}
+//void print(int arr[],int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//}
+//void reverse(int arr[],int sz)
+//{
+//	int left = 0;//左下标
+//	int right = sz - 1;
+//
+//	while (left < right)
+//	{
+//		int tmp = arr[left];
+//		arr[left] = arr[right];
+//		arr[right]= tmp;
+//		left++;
+//		right--;
+//	}
+//
+//}
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10};
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	print(arr, sz);
+//	//逆序
+//	reverse(arr,sz);
+//	print(arr, sz);
+//	//初始化
+//	//init(arr,sz);
+//	//print(arr, sz);
+//	return 0;
+//}
+
+
+//将数组A中的内容和数组B中的内容进行交换。（数组一样大）
+//数组名是地址
 #include <stdio.h>
-void init(int arr[],int sz)
-{
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		arr[i] = 0;//找到下标为i的元素，赋值成0
-	}
-}
-void print(int arr[],int sz)
-{
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
-}
-void reverse(int arr[],int sz)
-{
-	int left = 0;//左下标
-	int right = sz - 1;
-
-	while (left < right)
-	{
-		int tmp = arr[left];
-		arr[left] = arr[right];
-		arr[right]= tmp;
-		left++;
-		right--;
-	}
-
-}
 int main()
 {
-	int arr[10] = { 1,2,3,4,5,6,7,8,9,10};
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	print(arr, sz);
-	//逆序
-	reverse(arr,sz);
-	print(arr, sz);
-	//初始化
-	//init(arr,sz);
-	//print(arr, sz);
+	int arr1[] = { 1,3,5,7,9 };
+	int arr2[] = { 2,4,6,8,0 };
+
+	int sz = sizeof(arr1) / sizeof(arr1[0]);
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		int tmp = arr1[i];//一个一个交换
+		arr1[i] = arr2[i];
+		arr2[i] = tmp;
+	}
 	return 0;
 }
