@@ -1,3 +1,2 @@
 ﻿  test 2.c
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c(2810,1): warning C4133: “初始化”: 从“int *”到“char *”的类型不兼容
   test 2.vcxproj -> C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\Debug\test 2.exe
