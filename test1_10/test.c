@@ -1405,7 +1405,7 @@ int main()
 	int i = 0;
 	int tmp = 0;
 	int sum = 0;
-	for (i = 0; i <= 5; i++)//i=2 i+1=22*10+22
+	for (i = 0; i < 5; i++)//i=2 i+1=22*10+22
 	{
 		tmp = tmp * 10 + a;
 		sum = sum + tmp;
