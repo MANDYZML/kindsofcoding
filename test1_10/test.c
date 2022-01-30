@@ -1264,18 +1264,18 @@
 
 //打印整数二进制的奇数位和偶数位
 //获取一个整数二进制序列中所有的偶数位和奇数位，分别打印出二进制序列
-#include <stdio.h>
+//#include <stdio.h>
 //void printbit(int num)
 //{
 //	int i = 0;
-//	for (i = 31; i >= 1; i -= 2)
+//	for (i = 31; i >= 1; i -= 2)//打印16位
 //	{
-//		printf("%d ", (num >> i) & 1);
+//		printf("%d ", (num >> i) & 1);//奇数
 //	}
 //	printf("\n");
 //	for (i = 30; i >= 0; i -= 2)
 //	{
-//		printf("%d ", (num >> i) & 1);
+//		printf("%d ", (num >> i) & 1);//偶数
 //	}
 //	printf("\n");
 //}
@@ -1283,41 +1283,133 @@
 //{
 //	int num = 0;
 //	scanf("%d", &num);
-//	int odd = 0;//奇数
-//	int even = 0;//偶数
-//	int i = 0;
-//	for (i = 0; i < 32; i++)
-//	{
-//		if ((num & 1) == 1)
-//		{
-//			odd++;
-//		}
-//		else
-//			even++;
-//		num = num >> 1;
-//	}
-//	printf("奇数位：%d\n偶数位：%d\n", odd, even);
+	//int odd = 0;//奇数
+	//int even = 0;//偶数
+	//int i = 0;
+	/*for (i = 0; i < 32; i++)
+	{
+		if ((num & 1) == 1)
+		{
+			odd++;
+		}
+		else
+			even++;
+		num = num >> 1;
+	}
+	printf("奇数位：%d\n偶数位：%d\n", odd, even);*/
 //	printbit(num);
 //	return 0;
 //}
 
 
 //输入一个整数 n ，输出该数32位二进制表示中1的个数。其中负数用补码表示。
+//#include <stdio.h>
+//int main()
+//{
+//	int m = 0;
+//	scanf("%d", &m);
+//	int i = 0;
+//	int count = 0;
+//	for (i = 0; i < 32; i++)
+//	{
+//		if ((m & 1) == 1)
+//		{
+//			count++;
+//		}
+//		m = m >> 1;
+//	}
+//	printf("%d个1\n", count);
+//	return 0;
+//}
 #include <stdio.h>
+//int main()
+//{
+//	int num = 0;
+//	int count = 0;
+//	scanf("%d", &num);
+//	while (num)//直到num都是0000000   就会跳出循环
+//	{
+//		num = num & (num - 1);//每次-1 都会去掉num 最右边的1 然后就会有越来越多的0
+//		count++;//累计按位与 之后 1的个数
+//	}
+//	printf("%d\n", count);
+//	return 0;
+//}
+
+//不允许创建临时变量，交换两个整数的内容
+//int main()
+//{
+//	int a = 1;
+//	int b = 2;
+//	printf("交换前：%d %d\n", a, b);
+//	a = a ^ b;
+//	b = a ^ b;
+//	a = a ^ b;
+//	printf("交换后：%d %d\n", a, b);
+//	return 0;
+//}
+
+
+//写一个函数打印arr数组的内容，不使用数组下标，使用指针。
+//arr是一个整形一维数组。
+//void print(int* p,int len)
+//{
+//	int i = 0;
+//	for (i = 0; i < len; i++)
+//	{
+//		printf("%d", *(p + i));
+//	}
+//
+//}
+//int main()
+//{
+//	int arr[5] = { 1,2,3,4,5 };
+//	int len = sizeof(arr) / sizeof(arr[0]);
+//	int* p = arr;
+//	print(p,len);
+//	return 0;
+//}
+
+
+//写一个函数，可以逆序一个字符串的内容。
+//void reverse(char* str, int len)
+//{
+//	char* left = str;
+//	char *right = str + (len - 1);
+//	while (left < right)
+//	{
+//		char tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//		left++;
+//		right--;
+//	}
+//
+//}
+//int main()
+//{
+//	char arr[] = "hello bit";
+//	int len = strlen(arr);//包括 \0
+//	reverse(arr, len);
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+
+//求Sn=a+aa+aaa+aaaa+aaaaa的前5项之和，其中a是一个数字，
+//例如：2 + 22 + 222 + 2222 + 22222
 int main()
 {
-	int m = 0;
-	scanf("%d", &m);
+	int a = 0;
+	scanf("%d", &a);
 	int i = 0;
-	int count = 0;
-	for (i = 0; i < 32; i++)
+	int tmp = 0;
+	int sum = 0;
+	for (i = 0; i <= 5; i++)//i=2 i+1=22*10+22
 	{
-		if ((m & 1) == 1)
-		{
-			count++;
-		}
-		m = m >> 1;
+		tmp = tmp * 10 + a;
+		sum = sum + tmp;
 	}
-	printf("%d个1\n", count);
+	printf("%d\n", sum);
 	return 0;
 }
