@@ -1372,44 +1372,44 @@
 
 
 //写一个函数，可以逆序一个字符串的内容。
-//void reverse(char* str, int len)
-//{
-//	char* left = str;
-//	char *right = str + (len - 1);
-//	while (left < right)
-//	{
-//		char tmp = *left;
-//		*left = *right;
-//		*right = tmp;
-//		left++;
-//		right--;
-//	}
-//
-//}
-//int main()
-//{
-//	char arr[] = "hello bit";
-//	int len = strlen(arr);//包括 \0
-//	reverse(arr, len);
-//	printf("%s\n", arr);
-//	return 0;
-//}
+void reverse(char* str, int len)
+{
+	char* left = str;
+	char *right = str + (len - 1);
+	while (left < right)
+	{
+		char tmp = *left;
+		*left = *right;
+		*right = tmp;
+		left++;
+		right--;
+	}
+
+}
+int main()
+{
+	char arr[] = "hello bit";
+	int len = strlen(arr);//包括 \0
+	reverse(arr, len);
+	printf("%s\n", arr);
+	return 0;
+}
 
 
 //求Sn=a+aa+aaa+aaaa+aaaaa的前5项之和，其中a是一个数字，
 //例如：2 + 22 + 222 + 2222 + 22222
-int main()
-{
-	int a = 0;
-	scanf("%d", &a);
-	int i = 0;
-	int tmp = 0;
-	int sum = 0;
-	for (i = 0; i < 5; i++)//i=2 i+1=22*10+22
-	{
-		tmp = tmp * 10 + a;
-		sum = sum + tmp;
-	}
-	printf("%d\n", sum);
-	return 0;
-}
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	int i = 0;
+//	int tmp = 0;
+//	int sum = 0;
+//	for (i = 0; i < 5; i++)//i=2 i+1=22*10+22
+//	{
+//		tmp = tmp * 10 + a;
+//		sum = sum + tmp;
+//	}
+//	printf("%d\n", sum);
+//	return 0;
+//}
