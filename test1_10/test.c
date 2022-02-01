@@ -1372,28 +1372,28 @@
 
 
 //写一个函数，可以逆序一个字符串的内容。
-void reverse(char* str, int len)
-{
-	char* left = str;
-	char *right = str + (len - 1);
-	while (left < right)
-	{
-		char tmp = *left;
-		*left = *right;
-		*right = tmp;
-		left++;
-		right--;
-	}
-
-}
-int main()
-{
-	char arr[] = "hello bit";
-	int len = strlen(arr);//包括 \0
-	reverse(arr, len);
-	printf("%s\n", arr);
-	return 0;
-}
+//void reverse(char* str, int len)
+//{
+//	char* left = str;
+//	char *right = str + (len - 1);
+//	while (left < right)
+//	{
+//		char tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//		left++;
+//		right--;
+//	}
+//
+//}
+//int main()
+//{
+//	char arr[] = "hello bit";
+//	int len = strlen(arr);//包括 \0
+//	reverse(arr, len);
+//	printf("%s\n", arr);
+//	return 0;
+//}
 
 
 //求Sn=a+aa+aaa+aaaa+aaaaa的前5项之和，其中a是一个数字，
@@ -1413,3 +1413,4 @@ int main()
 //	printf("%d\n", sum);
 //	return 0;
 //}
+
