@@ -2264,20 +2264,20 @@
 //}
 
 // ^  按位异或
-#include <stdio.h>
-int main()
-{
-	int a = 3;
-	int b = -5;
-	int c = a ^ b;
-	printf("%d\n", c);
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 3;
+//	int b = -5;
+//	int c = a ^ b;
+//	printf("%d\n", c);
 //	//依旧算出 3和-5的补码  进行异或
 //	//00000000000000000000000000000011-- 3的补码
 //	//11111111111111111111111111111011-> - 5的补码
 //	//对应的二进制位，相同为0，相异为1
 //	//11111111111111111111111111111000--按位异或
-	return 0;
-}
+//	return 0;
+//}
 
 
 //a^a=0   两个相同的数异或 为0
@@ -3038,3 +3038,125 @@ int main()
 //	}
 //	return 0;
 //}
+ 
+// 结构体 2/18
+
+//结构体类型的说明--学生
+//struct Stu
+//{
+//// {}里面 是为了描述清楚学生所带有的属性
+//	char name[20]; //名字
+//	int age;//年龄
+//	char sex[8];//性别
+//	float score;
+//}s1,s2,s3;//变量列表  可以写多个 
+////s1,s2,s3 是通过struct Stu类型创建的变量
+////s1,s2,s3 是全局变量
+//
+////typedef 类型重定义/类型重命名
+//typedef struct Stu Stu;//意思是把struct Stu 类型 重新起一个新名字
+
+//另一种写法
+//typedef struct Stu
+//{
+//	char name[20]; //名字
+//	int age;//年龄
+//	char sex[8];//性别
+//	float score;
+//}Stu;//这里的 Stu 是将 struct Stu 重新起了个名字叫Stu
+////不能写 s1 s2 s3
+//
+//int main()
+//{
+//	//s4,s5 是局部变量
+//	//struct Stu 才是结构体类型，不能随便省略struct
+//
+//	struct Stu s4;//也是创建出来的结构体变量
+//	struct Stu s5;
+//	Stu s6;//这里的stu 是把struct Stu重新产生一个新名字的Stu
+//	//也就是说 struct Stu=Stu
+//	return 0;
+//}
+
+//结构体的定义和初始化
+//定义一个坐标  横坐标 x 纵坐标 y
+//struct Point
+//{
+//	int x;
+//	int y;
+//}p1 = {10,15};//初始化 x 和y的值
+////这也是创建的变量  两种方法
+//
+//struct S //在定义一个结构体
+//{
+//	char c;
+//	struct Point sp;
+//	double d;
+//	char arr[20];
+//};
+//
+//
+//int main()
+//
+//{
+//	struct Point p = {100,200};//p 就是创建的一个结构体变量
+//	struct S ss = { 'w',{100,200},5.5,"hello"};//初始化
+//	//括号中的括号是 对struct Point里面的结构体sp初始化 所以+ {}
+//	//struct Point 里面又有两个整型 x y
+//	return 0;
+//}
+
+//结构成员访问操作符
+// .    左边 结构体变量.结构体成员  右边
+// ->   左边  结构体指针 ->  结构体成员
+
+struct Point
+{
+	int x;
+	int y;
+}p1 = { 10,15 };//初始化 x 和y的值
+//这也是创建的变量  两种方法
+
+struct S //在定义一个结构体
+{
+	char c;
+	struct Point sp;
+	double d;
+	char arr[20];
+};
+
+void print1(struct S s)//把ss传过来 用s来接收
+//ss变量是struct S类型  重新创建一个s也用struct S类型来接收
+{
+	//打印ss中的内容
+	printf("%c\n", s.c);
+	printf("%d %d\n", s.sp.x, s.sp.y);
+	printf("%lf\n", s.d);
+	printf("%s\n", s.arr);
+}
+void print2(struct S* ps)//把地址传过来了 放到了ps里面  那ps必须是指针
+//所以 ps 是 结构体指针  ps现在指向了ss
+{
+	//打印ss
+	printf("%c\n", ps->c);
+	printf("%d %d\n", ps->sp.x, ps->sp.y);
+	printf("%lf\n", ps->d);
+	printf("%s\n", ps->arr);
+}
+int main()
+
+{
+	struct Point p = { 100,200 };
+	struct S ss = { 'w',{100,200},5.5,"hello" };
+	ss.c = 'b'; //修改结构体成员
+	ss.sp.x = 1000;
+	ss.sp.y = 2000;
+	ss.d = 3.14;
+	// ss.arr="world";这样是不行的
+	strcpy(ss.arr, "world");//strcpy 字符串拷贝
+	//把world 拷贝放到 arr 空间里面去
+
+	print1(ss);//打印 struct S类型的变量
+	print2(&ss);
+	return 0;
+}
