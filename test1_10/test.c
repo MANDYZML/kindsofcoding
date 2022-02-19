@@ -1414,3 +1414,20 @@
 //	return 0;
 //}
 
+//2/19 结构体
+//喝汽水，1瓶汽水1元，2个空瓶可以换一瓶汽水，给20元，可以多少汽水（编程实现）。
+int main()
+{
+	int money = 20;
+	int drink = 0;//喝了的瓶
+	int empty = 0;//空瓶
+	drink = money;
+	empty = money;
+	while (empty >= 2)
+	{
+		drink += empty / 2;//每次喝的+喝了的/2  换来的新的
+		empty = (empty / 2) + (empty % 2);// 5瓶/2 换两瓶 1空瓶
+	}
+	printf("%d\n", drink);
+	return 0;
+}
