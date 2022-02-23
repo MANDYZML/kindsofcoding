@@ -1,3 +1,2 @@
 ﻿  test 2.c
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c(3156,8): warning C4013: “strcpy”未定义；假设外部返回 int
   test 2.vcxproj -> C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\Debug\test 2.exe

@@ -3109,54 +3109,309 @@
 //结构成员访问操作符
 // .    左边 结构体变量.结构体成员  右边
 // ->   左边  结构体指针 ->  结构体成员
+//#include<string.h>//strcpy 是库函数 要引用头文件
+//struct Point
+//{
+//	int x;
+//	int y;
+//}p1 = { 10,15 };//初始化 x 和y的值
+////这也是创建的变量  两种方法
+//
+//struct S //在定义一个结构体
+//{
+//	char c;
+//	struct Point sp;
+//	double d;
+//	char arr[20];
+//};
+//
+//void print1(struct S s)//把ss传过来 用s来接收
+////ss变量是struct S类型  重新创建一个s也用struct S类型来接收
+//{
+//	//打印ss中的内容
+//	printf("%c\n", s.c);
+//	printf("%d %d\n", s.sp.x, s.sp.y);
+//	printf("%lf\n", s.d);
+//	printf("%s\n", s.arr);
+//}
+//void print2(struct S* ps)//把地址传过来了 放到了ps里面  那ps必须是指针
+////所以 ps 是 结构体指针  ps现在指向了ss
+//{
+//	//打印ss
+//	printf("%c\n", ps->c);
+//	printf("%d %d\n", ps->sp.x, ps->sp.y);
+//	printf("%lf\n", ps->d);
+//	printf("%s\n", ps->arr);
+//}
+//int main()
+//
+//{
+//	struct Point p = { 100,200 };
+//	struct S ss = { 'w',{100,200},5.5,"hello" };
+//	ss.c = 'b'; //修改结构体成员
+//	ss.sp.x = 1000;
+//	ss.sp.y = 2000;
+//	ss.d = 3.14;
+//	// ss.arr="world";这样是不行的
+//	strcpy(ss.arr, "world");//strcpy 字符串拷贝
+//	//把world 拷贝放到 arr 空间里面去
+//
+//	print1(ss);//打印 struct S类型的变量
+//	print2(&ss);
+//	return 0;
+//}
 
-struct Point
-{
-	int x;
-	int y;
-}p1 = { 10,15 };//初始化 x 和y的值
-//这也是创建的变量  两种方法
 
-struct S //在定义一个结构体
-{
-	char c;
-	struct Point sp;
-	double d;
-	char arr[20];
-};
+//调试
+//实现代码  求1！+2！+3！...+n!
+//int main()
+//{
+//	int n = 0;//创建求几的阶乘
+//	scanf("%d", &n);
+//	int i = 0;
+//	int ret = 1;//不能=0 要不然0乘任何数都=0
+//	for (i = 1; i <= n; i++)
+//	{
+//		ret *= i;
+//	}
+//	printf("%d\n", ret);
+//	return 0;
+//}
 
-void print1(struct S s)//把ss传过来 用s来接收
-//ss变量是struct S类型  重新创建一个s也用struct S类型来接收
+//int main()
+//{
+//	int n = 0;//创建求几的阶乘
+//	int i = 0;
+//	//int ret = 1;//不能=0 要不然0乘任何数都=0
+//	int sum = 0;
+//	//3的阶乘 1！=1  2！=2  3！=6
+//	//结果应该是 9
+//	//但是现在算出来是15   代码写错了
+//	for (n = 1; n <= 3; n++)
+//	{
+//		ret = 1;//初始化 才能之后ret*i 不是累计*上一个阶乘的结果
+//		//而是从1开始乘
+//     // int ret = 1;//也可以在这每次创建
+// 
+//		for (i = 1; i <= n; i++)
+//		{
+//			ret *= i;//求2的阶乘是 ret=2 之后ret没有初始化成1
+//			//而是累计2*1*2*3  所以调试结果是12 
+//			//然后=2的阶乘=2 +1的阶乘=1
+//			//结果是15(错误)
+//		}
+//		sum += ret;
+//	}
+//	
+//	printf("%d\n", sum);
+//	return 0;
+//}
+
+//更快的写法
+//int main()
+//{
+//	int n = 0;//创建求几的阶乘
+//	int i = 0;
+//	//int ret = 1;//不能=0 要不然0乘任何数都=0
+//	int sum = 0;
+//	//3的阶乘 1！=1  2！=2  3！=6
+//	//结果应该是 9
+//	//但是现在算出来是15   代码写错了
+//
+//	int ret = 1;
+//	for (n = 1; n <= 3; n++)
+//	{
+//		ret *= n;//每次不用从1开始成 2*3就是三的阶乘  6*4 就是4的阶乘
+//		sum += ret;
+//	}
+//	
+//	printf("%d\n", sum);
+//	return 0;
+//}
+
+//例子2
+/*int main()
 {
-	//打印ss中的内容
-	printf("%c\n", s.c);
-	printf("%d %d\n", s.sp.x, s.sp.y);
-	printf("%lf\n", s.d);
-	printf("%s\n", s.arr);
-}
-void print2(struct S* ps)//把地址传过来了 放到了ps里面  那ps必须是指针
-//所以 ps 是 结构体指针  ps现在指向了ss
+	int i = 0;
+	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+
+	for (i = 0; i <= 12; i++)
+	{
+		arr[i] = 0;
+		printf("hehe\n");
+	}
+	return 0;
+}*///运行结果是死循环 hehe
+//用调试 当arr[10] arr[11] 时 也会被改成0 然后打印 hehe
+//当i=12时 恰巧&i 和&arr[12]的地址一样
+//arr[12]时 被改成0 i也被改成0 没办法到arr[13]
+//所以一直死循环 打印hehe
+
+//解释
+//因为 栈区里面存放局部变量  函数形参
+//int i  int arr[10]  都是局部变量  在栈区
+//栈区使用习惯是 先使用高地址 在使用低地址
+//所以在栈区先创建 int i  之后在下面创建 10个数组的空间
+// 数组随着下标的增长   地址是由低到高而变化的
+// 在栈区中从arr[0]到arr[9]是从下往上创建空间的
+//所以可能int i 空间 和int arr[9] 之间空了两个空间
+//int arr[10]  arr[11] 虽然越界了 但是占了中间的两个空间
+//当int arr[12]时 就占了int i 的空间  所以把arr[2]改成0的时候
+//int i也改成了 0
+
+//模拟实现库函数：strcpy
+#include <string.h>
+
+//void my_strcpy(char* dest, char* src)//传地址用指针接收 
+//							//dest 目的地  src 源头
+//	//数组名是首元素地址  src接收的就是h的地址  dest接收的就是 第一个x的地址
+//{
+//	while (*src !='\0')//不等于\0 就进来  
+//		//但是有问题 \0也需要拷贝  这样写\0不能拷贝下来
+//	{
+//		*dest = *src;//*src指向的h 赋给*dest指向的x
+//		dest++;
+//		src++;
+//	}
+//	*dest = *src;//拷贝\0
+//}
+//int main()
+//{
+//	char arr1[] = "hello bit";
+//	char arr2[20] = "xxxxxxxxxxxxxx";
+//
+//	my_strcpy(arr2, arr1);//要放到哪里 放前面   要传的发那个 放后面
+//	                      //传地址
+//	printf("%s\n", arr2);
+//
+//	return 0;
+//}
+
+//优化
+//void my_strcpy(char* dest, char* src)//传地址用指针接收 
+//							//dest 目的地  src 源头
+//	//数组名是首元素地址  src接收的就是h的地址  dest接收的就是 第一个x的地址
+//{
+//	while (*src != '\0')//不等于\0 就进来  
+//		//但是有问题 \0也需要拷贝  这样写\0不能拷贝下来
+//	{
+//		*dest++ = *src++;//*src指向的h 赋给*dest指向的x
+//	}
+//	*dest = *src;//拷贝\0
+//}
+
+//再优化
+//void my_strcpy(char* dest, char* src)//传地址用指针接收 
+//							//dest 目的地  src 源头
+//	//数组名是首元素地址  src接收的就是h的地址  dest接收的就是 第一个x的地址
+//{
+//	while (*dest++ = *src++)//*src指向的是h 赋给*dest
+//		//表达式的结果也就是 h的ASCII值 ！=0 之后进来
+//		//直到++到\0  \0先赋值过去
+//		//\0的ASCII=0 为假  不进入底下循环
+//	{
+//		;
+//	}
+//}
+
+//再次优化
+//#include<assert.h>
+//void my_strcpy(char* dest, char* src)//万一传过来的是空指针
+//{
+//	//assert(dest != NULL);//断言   如果传了空指针会报错
+//	//assert(src != NULL);
+//	//断言的意思是  assert后面的表达式如果为假 就会报错
+//	assert(dest && src); 
+//	while (*dest++ = *src++)
+//	{
+//		;
+//	}
+//}
+//
+//
+//int main()
+//{
+//	char arr1[] = "hello bit";
+//	char arr2[20] = "";
+//
+//	my_strcpy(arr2, arr1);//要放到哪里 放前面   要传的发那个 放后面
+//						  //传地址
+//	printf("%s\n", arr2);
+//
+//	return 0;
+//}
+
+//又一次优化
+
+//健壮性/鲁棒性
+//#include<assert.h>
+////my_strcpy函数设计返回值类型是为了实现函数的链式访问
+//char * my_strcpy(char* dest,const char* src)//const 修饰变量
+//              //const *src 是限制 scr不能被修改
+//{
+//	assert(dest && src);
+//	char* ret = dest;//ret保存的是起始位置
+//	while (*dest++ = *src++)//如果这里写反了 加上const就会编都编不过去
+//	
+//	{
+//		;
+//	}
+//	return ret;
+//}
+//
+//
+//int main()
+//{
+//	char arr1[] = "hello bit";
+//	char arr2[20] = "xxxxxxxxxxxx";
+//	char* p = NULL;
+//	
+//	printf("%s\n", my_strcpy(arr2, arr1));
+//
+//	return 0;
+//}
+
+
+//const
+//const 放在*左边和右边  意义不一样
+//int main()
+//{
+//	int num = 10;
+//	num = 20;//改num 方法1
+//	int* p = &num;
+//	*p = 100;//方法2
+
+//	const int num = 10;// 
+//	//num = 20;//加了const 就没法改了
+//	//int* p = &num;//这种方法虽然把num改了  但是是不合理的
+//	int n = 100; 
+//	const int* p = &num;//这样就是const限制了*p  不能改了
+//	//*p = 20; 
+//	p = &n;//*p不能改  p可以改
+//
+//	printf("%d\n", num);
+//	return 0;
+//}
+
+
+//模拟实现一个strlen函数
+#include<assert.h>
+int my_strlen(const char*str)//传地址 通过地址找里面的内容
+                              //用指针
 {
-	//打印ss
-	printf("%c\n", ps->c);
-	printf("%d %d\n", ps->sp.x, ps->sp.y);
-	printf("%lf\n", ps->d);
-	printf("%s\n", ps->arr);
+	int count = 0;
+	assert(str != NULL);
+
+	while (*str != '\0')
+	{
+		count++;
+		str++;//指向的字符也向后走
+	}
+	return count;
 }
 int main()
-
 {
-	struct Point p = { 100,200 };
-	struct S ss = { 'w',{100,200},5.5,"hello" };
-	ss.c = 'b'; //修改结构体成员
-	ss.sp.x = 1000;
-	ss.sp.y = 2000;
-	ss.d = 3.14;
-	// ss.arr="world";这样是不行的
-	strcpy(ss.arr, "world");//strcpy 字符串拷贝
-	//把world 拷贝放到 arr 空间里面去
-
-	print1(ss);//打印 struct S类型的变量
-	print2(&ss);
+	int len = my_strlen("abcdef");
+	printf("%d\n", len);
 	return 0;
 }
