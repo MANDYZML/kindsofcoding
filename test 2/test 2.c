@@ -3411,7 +3411,7 @@ int my_strlen(const char*str)//传地址 通过地址找里面的内容
 }
 int main()
 {
-	int len = my_strlen("abcdef");
+	int len = my_strlen("abcdef");//不包括\0
 	printf("%d\n", len);
 	return 0;
 }
