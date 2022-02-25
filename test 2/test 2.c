@@ -3395,23 +3395,33 @@
 
 
 //模拟实现一个strlen函数
-#include<assert.h>
-int my_strlen(const char*str)//传地址 通过地址找里面的内容
-                              //用指针
-{
-	int count = 0;
-	assert(str != NULL);
+//#include<assert.h>
+//int my_strlen(const char*str)//传地址 通过地址找里面的内容
+//                              //用指针
+//{
+//	int count = 0;
+//	assert(str != NULL);
+//
+//	while (*str != '\0')
+//	{
+//		count++;
+//		str++;//指向的字符也向后走
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int len = my_strlen("abcdef");//不包括\0
+//	printf("%d\n", len);
+//	return 0;
+//}
 
-	while (*str != '\0')
-	{
-		count++;
-		str++;//指向的字符也向后走
-	}
-	return count;
-}
 int main()
 {
-	int len = my_strlen("abcdef");//不包括\0
-	printf("%d\n", len);
-	return 0;
+	int a = 10;
+	int b = 20;
+	int c = Add(a, b);
+	printf("%d\n", c);
+
+
 }
