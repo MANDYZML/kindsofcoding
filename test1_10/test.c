@@ -1416,18 +1416,34 @@
 
 //2/19 结构体
 //喝汽水，1瓶汽水1元，2个空瓶可以换一瓶汽水，给20元，可以多少汽水（编程实现）。
+//int main()
+//{
+//	int money = 20;
+//	int drink = 0;//喝了的瓶
+//	int empty = 0;//空瓶
+//	drink = money;
+//	empty = money;
+//	while (empty >= 2)
+//	{
+//		drink += empty / 2;//每次喝的+喝了的/2  换来的新的
+//		empty = (empty / 2) + (empty % 2);// 5瓶/2 换两瓶 1空瓶
+//	}
+//	printf("%d\n", drink);
+//	return 0;
+//}
+
+
+//调整数组使奇数全部都位于偶数前面。
+//题目：
+//输入一个整数数组，实现一个函数，
+//来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分，
+//所有偶数位于数组的后半部分。
+
 int main()
 {
-	int money = 20;
-	int drink = 0;//喝了的瓶
-	int empty = 0;//空瓶
-	drink = money;
-	empty = money;
-	while (empty >= 2)
-	{
-		drink += empty / 2;//每次喝的+喝了的/2  换来的新的
-		empty = (empty / 2) + (empty % 2);// 5瓶/2 换两瓶 1空瓶
-	}
-	printf("%d\n", drink);
+	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+	
+
+
 	return 0;
 }
