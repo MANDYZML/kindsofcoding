@@ -1471,23 +1471,175 @@
 //}
 
 //模拟实现库函数strcpy
-char*my_strcpy(char*dest,const char*src)
+//char*my_strcpy(char*dest,const char*src)
+//{
+//	assert(dest && src);
+//	char* ret = dest;
+//	while (*dest++ = *src++)
+//	{
+//		;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[] = "hello bit";
+//	char arr2[] = "xxxxxxxxxxxxxxxxxxx";
+//	char* p = NULL;
+//
+//	printf("%s\n", my_strcpy(arr2, arr1));
+//
+//	return 0;
+//}
+
+//考试题
+//#include<stdio.h>
+//int cnt = 0;
+//int fib(int n)//fib(8) 也就是n=8
+//{
+//	cnt++;//就是求 n进来一共求了多少次
+//	if (n == 0)
+//		return 1;
+//	else if (n == 1)
+//		return 2;
+//	else
+//		return fib(n - 1) + fib(n - 2);//n=8 进到这 递归
+//}
+
+//                      8 --1
+//                   7     6  n-1  n-2 --2
+//               6        5          5        4  --4
+//           5     4    4   3     4     3   3    2  --8
+//        4    3   3   2   3    2   2   1  3   2   2  1  2 1 1 0  --16
+//      3  2  2 1  2  1 1 0 2 1 1 0 1 0   2  1 1 0  1 0  1 0      --22
+//    2 1 1 0 1 0 1 0      1  0         1 0                      -- 12
+//   1 0                                                         -- 2
+//1+2+4+8+16+22+12+2=67
+//void main()
+//{
+//	fib(8);
+//	printf("%d", cnt);
+//
+//}
+
+//以下程序的输出结果
+//#include<stdio.h>
+//int x = 1;
+//do{
+//	printf("%2d\n", x++);//x=1 打印1 之后++ 变成2
+//} while (x--);//x=2 判断 之后x-- 是 1为真 又上去 打印1 ++变成2
+//也就是一直 判断的时候为2 打印的时候是1
+//所以结果是 陷入死循环
+
+/*int i = 1;
+int j;
+j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
+//i是2，j是1
+
+
+//int a = 1;
+//void test()
+//{
+//	int a = 2;
+//	a += 1;//局部优先  这里的a是2 +=之后 a=3
+//}//但是a=3 出来以后 就销毁了 
+//int main()
+//{
+//	test();
+//	printf("%d\n", a);//所以这里的打印是打印全局的a
+//	return 0;
+//}
+
+
+//编程题
+//最小公倍数
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);
+//   //找出输入的两个数的较大值
+//	int m = (a > b ? a : b);//较大值放到m
+//	//假设M是最小公倍数，去试除 较大数
+//	while (1)
+//	{
+//		if (m % a == 0 && m % b == 0)//说明m是最小公倍数
+//		{
+//			break;
+//		}
+//		m++;//较大值一直++  直到能同时除以两个数
+//	}
+//	printf("%d\n", m);
+//	return 0;
+//}
+
+//优化
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d %d", &a, &b);
+//	int i = 1;
+//	while (a * i % b != 0)//假设 输入 5 7 每次5*1   5*2进来  
+//		                //直到5*7 % 7 =0 说明 a*i这个数既能整除5 也能整除7  这个数就是最小公倍数
+//	{
+//		i++;
+//	}
+//	printf("%d\n", a*i);
+//	return 0;
+//}
+
+//倒置字符串
+//i like beijing.
+//beijing. like i
+#include<stdio.h>
+#include<assert.h>
+reverse(char *l,char*r)
 {
-	assert(dest && src);
-	char* ret = dest;
-	while (*dest++ = *src++)
+	assert(l && r);
+	while (l < r)
 	{
-		;
+		char tmp = *l;
+		*l = *r;
+		*r = tmp;
+		l++;
+		r--;
 	}
-	return ret;
-}
+}//1.逆序整个字符串
 int main()
 {
-	char arr1[] = "hello bit";
-	char arr2[] = "xxxxxxxxxxxxxxxxxxx";
-	char* p = NULL;
+	char arr[100] = { 0 };
+	//scanf("%[^\n]", arr);//这样也行
+	//输入
+	gets(arr);//不能用scanf 因为它不能读空格后头的
+	int len = strlen(arr);
+	//逆序
+	//1.逆序整个字符串
+	char* left = arr;
+	char* right = arr + len - 1;
+	reverse(left,right);//逆序函数
 
-	printf("%s\n", my_strcpy(arr2, arr1));
-
+	//2.逆序每个单词
+	char* cur = arr;//数组名首元素地址 赋给cur
+	char* start = arr;
+	
+	while (*cur !='\0')
+	{
+		//这是一个单词的逆序
+		while (*cur != ' ' && *cur!='\0')//不等于空格就让他往后走
+			//这里的判断方式 是当逆序完全部字符串后 停下来
+		{
+			cur++;//cur是字符串中的一个单词 +空格
+		}
+		reverse(start, cur - 1);//start 是逆序单词的起始地址
+		//cur-1 是要逆序的单词的最后一个的地址
+	  //当要逆序第二个单词的时候
+		start = cur + 1;//cur是到空格 +1 是到空格的下一个单词的起始位置 
+		if(*cur!='\0')//如果cur已经等于\0 再++ 就是把\0跳过去了 
+			//就有问题了 可能会导致代码不会停下来
+		cur++;
+	}
+	printf("%s\n", arr);
 	return 0;
 }
