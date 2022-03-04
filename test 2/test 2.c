@@ -3924,22 +3924,120 @@
 //	return 0;
 //}
 
+//int main()
+//{
+//	int a = 10;
+//	int* p = &a;
+//
+//	int arr[10] = { 0 };//怎么拿到数组地址
+//	//数组名arr 是首元素地址-下标为0的元素
+//	  
+//	printf("%p\n", arr);//arr表示数组首元素地址，arr拿出的地址类型是int*
+//	printf("%p\n", arr+1);//整型指针+1  跳过一个整型--4个字节
+//
+//	printf("%p\n", &arr[0]);//类型int*  第一个元素地址
+//	printf("%p\n", &arr[0]+1);//整型指针+1  跳过4个字节
+//
+//	printf("%p\n", &arr);//数组地址 类型 int(*p)[10]=&arr;
+//	printf("%p\n", &arr+1);//数组地址+1 跳过一个数组
+//
+//	return 0;
+//}
+
+//数组到底有什么用？
+
+//形参写成数组
+//void print1(int arr[],int sz)//形参也写成数组形式
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//}
+
+//形参写成指针
+//void print1(int* arr, int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", *(arr + i));//找到下标为i的元素
+//	}
+//	printf("\n");
+//}
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	//写一个函数 打印arr数组的内容
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	print1(arr,sz);//实参是数组  数组名是首元素地址--整型地址
+//
+//	return 0;
+//}
+
+//void print1(int(*p)[10], int sz)//数组指针来接收
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", *(*p + i));//*p相当于整个数组 整个数组相当于数组名
+//		//数组名又相当于 首元素地址 首元素地址+i  是数组里下标为i的地址
+//		//所以*p就相当于是&arr[0]--1的地址
+//	}
+//	printf("\n");
+//}
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	//写一个函数 打印arr数组的内容
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	print1(&arr, sz);//把数组地址传过去
+//	return 0;
+//}
+
+//二维数组例子
+//形参写成数组
+//void print2(int arr[3][5], int c, int r)
+//{
+//	int i = 0;
+//	for (i = 0; i < c; i++)//行
+//	{
+//		int j = 0;
+//		for (j = 0; j < r; j++)//列
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//}
+
+//形参写成指针
+void print2(int(*p)[5], int c, int r)//[5]是每行有5个元素
+{
+	int i = 0;
+	for (i = 0; i < c; i++)//行
+	{
+		int j = 0;
+		for (j = 0; j < r; j++)//列
+		{
+			//printf("%d ", *(*(p+i)+j) );//打印第几行第几个元素
+			//p+i 是指向第i行
+			//*(p+i)相当于拿到了第i行，就是第i行的数组名
+			//数组名表示首元素地址，*(p+i)就是第i行第一个元素的地址
+			printf("%d ", p[i][j]);
+		}
+		printf("\n");
+	}
+}
+
 int main()
 {
-	int a = 10;
-	int* p = &a;
-
-	int arr[10] = { 0 };//怎么拿到数组地址
-	//数组名arr 是首元素地址-下标为0的元素
-	  
-	printf("%p\n", arr);//arr表示数组首元素地址，arr拿出的地址类型是int*
-	printf("%p\n", arr+1);
-
-	printf("%p\n", &arr[0]);//int*
-	printf("%p\n", &arr[0]+1);
-
-	printf("%p\n", &arr);//数组地址
-	printf("%p\n", &arr+1);
-
+	int arr[3][5] = { {1,2,3,4,5},{2,3,4,5,6},{3,4,5,6,7} };
+	//写一个函数，打印arr数组
+	print2(arr,3,5);//数组名表示首元素地址，
+	          //二维数组的首元素 表示第一行的地址
+	         //1 2 3 4 5--五个整型的一维数组
 	return 0;
 }
