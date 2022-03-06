@@ -1593,53 +1593,80 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //倒置字符串
 //i like beijing.
 //beijing. like i
+//#include<stdio.h>
+//#include<assert.h>
+//reverse(char *l,char*r)
+//{
+//	assert(l && r);
+//	while (l < r)
+//	{
+//		char tmp = *l;
+//		*l = *r;
+//		*r = tmp;
+//		l++;
+//		r--;
+//	}
+//}//1.逆序整个字符串
+//int main()
+//{
+//	char arr[100] = { 0 };
+//	//scanf("%[^\n]", arr);//这样也行
+//	//输入
+//	gets(arr);//不能用scanf 因为它不能读空格后头的
+//	int len = strlen(arr);
+//	//逆序
+//	//1.逆序整个字符串
+//	char* left = arr;
+//	char* right = arr + len - 1;
+//	reverse(left,right);//逆序函数
+//
+//	//2.逆序每个单词
+//	char* cur = arr;//数组名首元素地址 赋给cur
+//	char* start = arr;
+//	
+//	while (*cur !='\0')
+//	{
+//		//这是一个单词的逆序
+//		while (*cur != ' ' && *cur!='\0')//不等于空格就让他往后走
+//			//这里的判断方式 是当逆序完全部字符串后 停下来
+//		{
+//			cur++;//cur是字符串中的一个单词 +空格
+//		}
+//		reverse(start, cur - 1);//start 是逆序单词的起始地址
+//		//cur-1 是要逆序的单词的最后一个的地址
+//	  //当要逆序第二个单词的时候
+//		start = cur + 1;//cur是到空格 +1 是到空格的下一个单词的起始位置 
+//		if(*cur!='\0')//如果cur已经等于\0 再++ 就是把\0跳过去了 
+//			//就有问题了 可能会导致代码不会停下来
+//		cur++;
+//	}
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//实现一个函数，可以左旋字符串中的k个字符。
+//例如：
+//ABCD左旋一个字符得到BCDA
+//ABCD左旋两个字符得到CDAB
+
 #include<stdio.h>
-#include<assert.h>
-reverse(char *l,char*r)
-{
-	assert(l && r);
-	while (l < r)
-	{
-		char tmp = *l;
-		*l = *r;
-		*r = tmp;
-		l++;
-		r--;
-	}
-}//1.逆序整个字符串
+#include<string.h>
 int main()
 {
-	char arr[100] = { 0 };
-	//scanf("%[^\n]", arr);//这样也行
-	//输入
-	gets(arr);//不能用scanf 因为它不能读空格后头的
-	int len = strlen(arr);
-	//逆序
-	//1.逆序整个字符串
-	char* left = arr;
-	char* right = arr + len - 1;
-	reverse(left,right);//逆序函数
-
-	//2.逆序每个单词
-	char* cur = arr;//数组名首元素地址 赋给cur
-	char* start = arr;
+	char arr[] = {0};
 	
-	while (*cur !='\0')
+	while (1)
 	{
-		//这是一个单词的逆序
-		while (*cur != ' ' && *cur!='\0')//不等于空格就让他往后走
-			//这里的判断方式 是当逆序完全部字符串后 停下来
+		gets(arr);
+		int len = strlen(arr);
+		if (len != 0)
 		{
-			cur++;//cur是字符串中的一个单词 +空格
+			printf("请输入姓名:hello %s !\n", arr);
 		}
-		reverse(start, cur - 1);//start 是逆序单词的起始地址
-		//cur-1 是要逆序的单词的最后一个的地址
-	  //当要逆序第二个单词的时候
-		start = cur + 1;//cur是到空格 +1 是到空格的下一个单词的起始位置 
-		if(*cur!='\0')//如果cur已经等于\0 再++ 就是把\0跳过去了 
-			//就有问题了 可能会导致代码不会停下来
-		cur++;
+		else 
+		{
+			printf("请输入姓名:输入错误\n");
+		}
 	}
-	printf("%s\n", arr);
 	return 0;
 }
