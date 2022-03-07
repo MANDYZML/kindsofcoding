@@ -1651,22 +1651,234 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 
 #include<stdio.h>
 #include<string.h>
+//int main()
+//{
+//	char arr[] = {0};
+//	
+//	while (1)
+//	{
+//		gets(arr);
+//		int len = strlen(arr);
+//		if (len != 0)
+//		{
+//			printf("请输入姓名:hello %s !\n", arr);
+//		}
+//		else 
+//		{
+//			printf("请输入姓名:输入错误\n");
+//		}
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	 
+//
+//
+//
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int i;//全局变量如果没有初始化，默认会被初始化为0
+//int main()
+//{
+//	i--;//-1
+//	if (i > sizeof(i))//sizeof 算出来是4
+//	{
+//		printf(">\n");
+//	}
+//	else
+//	{
+//		printf("<\n");
+//	}
+//	return 0;
+//}//结果是>
+//sizeof 是一个操作符，这个操作符返回的结果是size_t
+//sizeof的返回类型是size_t--是无符号整型
+//当表达式出现 有符号和无符号进行比较，要发生--算术转换
+//int会被转换成 无符号
+//-1的补码 11111111111111111111111111111111
+//把-1 进行算术转换成无符号 就会被认为这是无符号的二进制序列
+//那么就是非常大的正数 会大于4
+//所以输出 >
+
+//写一个函数打印arr数组的内容，不使用数组下标，使用指针。
+//arr是一个整形一维数组。
+//print(int* p, int sz)
+//{
+//		int i = 0;
+//		for (i = 0; i < sz; i++)
+//		{
+//			printf("%d ", *(p + i));
+//			
+//		}
+//
+//}
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	print(arr, sz);
+//	
+//	return 0;
+//}
+
+//#include<stdio.h>
+//void reverse(char* left, char* right)
+//{
+//	char tmp = 0;
+//	while (left< right)
+//	{
+//		tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//		left++;
+//		right--;
+//	}
+//	
+//}
+//int main()
+//{
+//	char str[10000] = { 0 };
+//	gets(str);
+//	int len = strlen(str);
+//	reverse(str, str + len - 1);
+//	printf("%s\n", str);
+//	return 0;
+//}
+
+//求Sn = a + aa + aaa + aaaa + aaaaa的前5项之和，其中a是一个数字，
+//例如：2 + 22 + 222 + 2222 + 22222
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	int i = 0;
+//	int tmp = 0;
+//	int sum = 0;
+//	for (i = 0; i < 5; i++)
+//	{
+//		tmp= tmp * 10 + a;
+//		sum = sum + tmp;
+//	}
+//	printf("%d\n", sum);
+//}
+
+//求出0～100000之间的所有“水仙花数”并输出。
+//“水仙花数”是指一个n位数，其各位数字的n次方之和确好等于该数本身，如 : 153＝1 ^ 3＋5 ^ 3＋3 ^ 3，则153是一个“水仙花数”。
+//#include <math.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 0; i < 100000; i++)
+//	{
+//	//判断i是否是自幂数
+//		//1.计算i的位数-n位
+//		int n = 1;//数字最少一位数 假设输入1234  /10 之后=123  12  但是当i=1时 1/10 商0就进不去了
+//		//所以少一位  所以n从1开始
+//		int tmp = i;
+//		while (tmp /= 10)
+//		{
+//			n++;
+//		}
+//		//2.计算每一位的n次方之和
+//		tmp = i;//1234
+//		int sum = 0;
+//		while (tmp)
+//		{
+//			sum += (int)pow(tmp % 10, n);//拿下数的每一位 算n次方
+//		//算出来每一位的平方 加起来放到 sum
+//			tmp /= 10;//算完1234 之后 /10 算123
+//		}
+//	//比较 i是否是自幂数
+//		if (sum == i)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
+
+//打印菱形
+//int main()
+//{
+//	int n = 0;//输入上半部分的菱形
+//	scanf("%d", &n);
+//	//打印上半部分菱形--n行
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//	//打印一行
+//	//打印空格--一次打印一个空格
+//		int j = 0;
+//		for (j = 0;j < n - 1 - i;j++)
+//		{
+//			printf(" ");
+//		
+//		}
+//	//打印*
+//		for (j = 0; j < 2 * i + 1; j++)
+//		{
+//			printf("*"); 
+//		}
+//		printf("\n");
+//	}
+//
+//	//打印下半部分  n-1行  
+//	//因为只有奇数的行数 才能打印出来菱形
+//	for (i = 0; i < n-1; i++)
+//	{
+//		//打印一行
+//		//打印空格--一次打印一个空格
+//		int j = 0;
+//		for (j = 0; j <= i; j++)
+//		{
+//			printf(" ");
+//
+//		}
+//		//打印*
+//		for (j = 0; j <(n-1-i)*2-1 ; j++)
+//		{
+//			printf("*");
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include <math.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int a=(int)pow(2, n);
+//	printf("%d\n", a);
+//	
+//	return 0;
+//}
+#include<stdio.h>
+reverse(char* left, char* right)
+{
+   int tmp = 0;
+    while (left < right)
+    {
+        tmp = *left;
+        *left = *right;
+        *right = tmp;
+		left++;
+		right--;
+    }
+   
+}
 int main()
 {
-	char arr[] = {0};
-	
-	while (1)
-	{
-		gets(arr);
-		int len = strlen(arr);
-		if (len != 0)
-		{
-			printf("请输入姓名:hello %s !\n", arr);
-		}
-		else 
-		{
-			printf("请输入姓名:输入错误\n");
-		}
-	}
-	return 0;
+    char str[10000] = { 0 };
+    gets(str);
+    int len = strlen(str);
+    reverse(str, str + len - 1);
+	printf("%s\n",str);
+    return 0;
 }
