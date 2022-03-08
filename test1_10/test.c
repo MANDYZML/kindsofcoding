@@ -1859,26 +1859,102 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	
 //	return 0;
 //}
+//#include<stdio.h>
+//void reverse(char* left, char* right)
+//{
+//   char tmp = 0;
+//    while (left < right)
+//    {
+//        tmp = *left;
+//        *left = *right;
+//        *right = tmp;
+//		left++;
+//		right--;
+//    }
+//   
+//}
+//int main()
+//{
+//    char str[10000] = { 0 };
+//    gets(str);
+//    int len = strlen(str);
+//    reverse(str, str + len - 1);
+//	printf("%s\n",str);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char ch;
+//	scanf("%c", &ch);
+//	printf("%d", ch);
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 0;
+//	a = getchar();
+//	printf("%d\n", a);
+//
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 0;
+//	scanf("%c", &a);
+//	int i = 0;
+//	for (i = 0; i < 4; i++)//行
+//	{
+//		int j = 0;
+//		for (j = 0; j < 3; j++)//列
+//		{
+//			printf("%c", a);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
 #include<stdio.h>
-reverse(char* left, char* right)
-{
-   int tmp = 0;
-    while (left < right)
-    {
-        tmp = *left;
-        *left = *right;
-        *right = tmp;
-		left++;
-		right--;
-    }
-   
-}
 int main()
 {
-    char str[10000] = { 0 };
-    gets(str);
-    int len = strlen(str);
-    reverse(str, str + len - 1);
-	printf("%s\n",str);
-    return 0;
+	char ch = 0;
+	scanf("%c", &ch);
+	//打印上半部分菱形
+	//打印空格
+	int i = 0;
+	int n = 3;
+	int j = 0;
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n - 1-i; j++)//总行数-当前行数
+		{
+			printf(" ");
+		}
+		//打印符号
+		for (j = 0; j = 2 * i + 1; j++)//2*当前行数-1
+		{
+			printf("%c", ch);
+		}
+		printf("\n");
+	}
+	//打印下半部分
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < i; j++)//空格数=当前行数
+		{
+			printf(" ");
+		}
+		for (j = 0; j < (n-1 - i)*2-1; j++)
+		{
+			printf("%c", ch);
+		}
+		printf("\n");
+	}
+
+	return 0;
 }
