@@ -1918,42 +1918,176 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	}
 //	return 0;
 //}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	char ch = 0;
+//	scanf("%c", &ch);
+//	//打印上半部分菱形
+//	//打印空格
+//	int i = 0;
+//	int n = 5;
+//	int j = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		for (j = 0; j < n - 1-i; j++)//总行数-当前行数
+//		{
+//			printf(" ");
+//		}
+//		//打印符号
+//		for (j = 0; j = 2 * i + 1; j++)//2*当前行数-1
+//		{
+//			printf("%c", ch);
+//		}
+//		printf("\n");
+//	}
+//	//打印下半部分
+//	for (i = 0; i < n; i++)
+//	{
+//		for (j = 0; j < i; j++)//空格数=当前行数
+//		{
+//			printf(" ");
+//		}
+//		for (j = 0; j < (n-1 - i)*2-1; j++)
+//		{
+//			printf("%c", ch);
+//		}
+//		printf("\n");
+//	}
+//
+//	return 0;
+//}
 
-#include<stdio.h>
+//喝汽水问题
+//1瓶汽水1元，2个空瓶可以换一瓶汽水，20元 可以换多少汽水
+//int main()
+//{
+//	int money = 0;
+//	scanf("%d", &money);//20
+//	int total = money;//用钱买的瓶
+//	int empty = money;//用钱买完喝了的空瓶
+//
+//	//置换
+//	while (empty >= 2)//只要2个空瓶就可以换一瓶汽水
+//	{
+//		total += empty / 2;//总共喝了瓶数 + =空瓶/2（=可以换几瓶新的）
+//		empty = empty / 2 + empty % 2;//空瓶=换回来的+剩余的1个没换的
+//		                   //比如剩5个空瓶 /2  换回两个  剩下一个空瓶
+//	}
+//	printf("%d\n", total);//一共换了多少瓶
+//	return 0;
+//}
+
+//另一种写法
+//int main()
+//{
+//	int money = 0;
+//	scanf("%d", &money);//20
+//	int total = 0;
+//	if (money <= 0)
+//		total = 0;
+//	else
+//	 total = money*2-1;//相当于1个空瓶0.5 20/0.5=40个空瓶 -1 可以喝39瓶
+//	printf("%d\n", total);//一共换了多少瓶
+//	return 0;
+//}
+
+
+//调整奇数偶数顺序
+//调整数组使奇数全部位于偶数前面
+//void move(int arr[],int sz)//arr里面是首元素地址
+//{
+//	int left = 0;//下标
+//	int right = sz - 1;
+//
+//	while (left < right)//进行多次交换
+//	{
+//		//从左到右找偶数
+//		while ((left < right) && arr[left] % 2 == 1)//%2余1是奇数
+//			//如果不加上(left < right) 如果数组全是奇数 就要一直进来 left++
+//			//可能会造成往右 越界访问
+//		{
+//			left++;
+//		}
+//		//从右往左找奇数
+//		while ((left < right) && arr[right] % 2 == 0)//如果是偶数 就进来-- 找下一个
+//			//如果数组全是偶数 从右往左都会进来一直-- 
+//			//可能会造成 往左越界访问
+//		{
+//			right--;
+//		}
+//		//奇偶交换
+//		if (left < right)
+//		{
+//			int tmp = arr[left];
+//			arr[left] = arr[right];
+//			arr[right] = tmp;
+//		}
+//	}
+//}
+//void print(int arr[], int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	move(arr,sz);//arr传的是首元素地址
+//	print(arr, sz);
+//	return 0;
+//}
+
+//杨辉三角
+//           1
+//          1 1
+//         1 2 1
+//        1 3 3 1
+//       1 4 6 4 1
+//   .....
+
+//1
+//1 1
+//1 2 1
+//1 3 3 1
+//1 4 6 4 1
+
 int main()
 {
-	char ch = 0;
-	scanf("%c", &ch);
-	//打印上半部分菱形
-	//打印空格
+	int arr[10][10] = { 0 };
 	int i = 0;
-	int n = 3;
-	int j = 0;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < 10; i++)//行
 	{
-		for (j = 0; j < n - 1-i; j++)//总行数-当前行数
+		int j = 0;
+		for (j = 0; j < 10; j++)//列
 		{
-			printf(" ");
+			if (j == 0)
+				arr[i][j] = 1;//所有第0列 不同的行赋值成1
+			if (i == j)
+				arr[i][j] = 1;//对角线 第二行第二个元素 第三行第三个元素 
+			                  //。。。 赋值成1
+			//计算三角中的数字
+			if (i >= 2 && j >= 1)//行从第二行(0 1 2) 并且列从第1列(0 1 )才开始计算
+			{
+				arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];//要计算的元素的上一行两个元素相加
+			}
 		}
-		//打印符号
-		for (j = 0; j = 2 * i + 1; j++)//2*当前行数-1
-		{
-			printf("%c", ch);
-		}
-		printf("\n");
 	}
-	//打印下半部分
-	for (i = 0; i < n; i++)
+	for (i = 0; i < 10; i++)//行
 	{
-		for (j = 0; j < i; j++)//空格数=当前行数
+		int j = 0;
+		for (j = 0; j <= i; j++)//列 第几行就打印几个数
 		{
-			printf(" ");
-		}
-		for (j = 0; j < (n-1 - i)*2-1; j++)
-		{
-			printf("%c", ch);
+			printf("%d ", arr[i][j]);
 		}
 		printf("\n");
+		 
 	}
 
 	return 0;
