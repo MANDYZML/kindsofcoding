@@ -4385,6 +4385,151 @@
 //}
 
 
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int Div(int x, int y)
+//{
+//	return x / y;
+//}
+//
+////实现一个计算器
+//void menu()
+//{
+//	printf("************************\n");
+//	printf("*** 1.Add    2.Sub *****\n");
+//	printf("*** 3.Mul    4.Div *****\n");
+//	printf("*** 0.exit         *****\n");
+//	printf("************************\n");
+//}
+//int main()
+//{
+//	int input = 0;
+//	int x = 0;
+//	int y = 0;
+//	int ret = 0;
+//	//转移表
+//	int (*pfArr[5])(int, int) = { 0, Add, Sub, Mul, Div };
+//	do
+//	{
+//		menu();
+//		printf("请选择:>");
+//		scanf("%d", &input);
+//		if (input == 0)
+//		{
+//			printf("退出计算器\n");
+//			break;
+//		}
+//		else if (input >= 1 && input <= 4)
+//		{
+//			printf("请输入两个操作数:>");
+//			scanf("%d%d", &x, &y);
+//			ret = pfArr[input](x, y);
+//			//当选择1 input就找下标为1的 Add并执行
+//			printf("ret = %d\n", ret);
+//		}
+//		else
+//		{
+//			printf("选择错误\n");
+//		}
+//
+//
+//	} while (input);//按照输入的值来判断
+//
+//
+//	return 0;
+//}
+
+
+//指向函数指针数组的指针
+//int Add(int x, int y)
+//{
+//
+//	return x + y;
+//}
+//int main()
+//{
+//	//整型数组
+//	int arr[10] = { 1,2,3,4,5,6,7 };
+//	int(*p)[10] = &arr;//p得是数组指针
+//
+//	int* arr2[5];
+//	int* (*p2)[5] = &arr2;
+//
+//	int(*pf)(int, int) = &Add;//函数指针
+//
+//	int(* pfarr[4])(int, int);//pfarr 是存放 函数指针的 数组
+//	int(*(*p3)[4])(int, int) = &pfarr;//p3就是指向函数指针数组的指针
+//	//数组元素类型  int(*)(int, int)--每个元素类型
+//
+//
+//	return 0;
+//}
+
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int Div(int x, int y)
+//{
+//	return x / y;
+//}
+//int main()
+//{
+//
+//	int(*pfarr[4])(int, int) = {Add,Sub,Mul,Div};
+//
+//	int(*(* p3)[4])(int, int) = &pfarr;//p3就是指向函数指针数组的指针
+//	//数组元素类型  int(*)(int, int)--每个元素类型
+//
+//	//通过p3找到数组里的元素
+//	int i = 0;
+//	for (i = 0; i < 4; i++)
+//	{
+//		int ret = (*p3)[i](3, 4);//函数地址 如果i=0 就 调add。。
+//		printf("%d\n", ret);
+//	}
+//	
+//	return 0;
+//}
+
+//回调函数
+//void test()
+//{
+//	printf("hehe\n");
+//}
+//
+//void print_hehe(void (*p)())//把test函数名也就是地址传过来，用函数指针来接收
+//{
+//	if (1)//条件为真
+//		p();//p是指针 指向了test函数 函数无参 所以不需要传参
+//}
+//int main()
+//{
+//	//test(); //一般都是直接调用函数
+//	print_hehe(test);
+//
+//	return 0;
+//}
+
+//回调函数的用法
 int Add(int x, int y)
 {
 	return x + y;
@@ -4411,39 +4556,47 @@ void menu()
 	printf("*** 0.exit         *****\n");
 	printf("************************\n");
 }
-int main()
+void calc(int(*pf)(int,int))//函数地址传过来 函数指针接收
 {
-	int input = 0;
 	int x = 0;
 	int y = 0;
 	int ret = 0;
-	int (*pfArr[5])(int, int) = { 0, Add, Sub, Mul, Div };
+	printf("请输入两个操作数:>");
+	scanf("%d%d", &x, &y);
+	ret = pf(x, y);//pf 就相当于 指针指向的函数的地址
+	printf("ret = %d\n", ret);
+}
+int main()
+{
+	int input = 0;
 	do
 	{
-		menu();
-		printf("请选择:>");
-		scanf("%d", &input);
-		if (input == 0)
+		menu();//从这开始 
+		printf("请选择:>");//输入是加减乘除哪一个
+		scanf("%d", &input);//1
+		
+		switch (input)//假设输入1
 		{
+		case 1://到这 
+			calc(Add);//计算函数  上去调用 把add地址传上去
+			break;
+		case 2:
+			calc(Sub);
+			break;
+		case 3:
+			calc(Mul);
+			break;
+		case 4:
+			calc(Div);
+			break;
+		case 0:
 			printf("退出计算器\n");
 			break;
-		}
-		else if (input >= 1 && input <= 4)
-		{
-			printf("请输入两个操作数:>");
-			scanf("%d%d", &x, &y);
-			ret = pfArr[input](x, y);
-			//当选择1 input就找下标为1的 Add并执行
-			printf("ret = %d\n", ret);
-		}
-		else
-		{
+		default:
 			printf("选择错误\n");
+			break;
 		}
-
-
+		
 	} while (input);//按照输入的值来判断
-
-
 	return 0;
 }
