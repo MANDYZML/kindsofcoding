@@ -4530,73 +4530,118 @@
 //}
 
 //回调函数的用法
-int Add(int x, int y)
-{
-	return x + y;
-}
-int Sub(int x, int y)
-{
-	return x - y;
-}
-int Mul(int x, int y)
-{
-	return x * y;
-}
-int Div(int x, int y)
-{
-	return x / y;
-}
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int Div(int x, int y)
+//{
+//	return x / y;
+//}
+//
+////实现一个计算器
+//void menu()
+//{
+//	printf("************************\n");
+//	printf("*** 1.Add    2.Sub *****\n");
+//	printf("*** 3.Mul    4.Div *****\n");
+//	printf("*** 0.exit         *****\n");
+//	printf("************************\n");
+//}
+//void calc(int(*pf)(int,int))//函数地址传过来 函数指针接收
+//{
+//	int x = 0;
+//	int y = 0;
+//	int ret = 0;
+//	printf("请输入两个操作数:>");
+//	scanf("%d%d", &x, &y);
+//	ret = pf(x, y);//pf 就相当于 指针指向的函数的地址
+//	//通过pf去调用哪个函数  哪个函数就被称为回调函数
+//	printf("ret = %d\n", ret);
+//}
+//int main()
+//{
+//	int input = 0;
+//	do
+//	{
+//		menu();//从这开始 
+//		printf("请选择:>");//输入是加减乘除哪一个
+//		scanf("%d", &input);//1
+//		
+//		switch (input)//假设输入1
+//		{
+//		case 1://到这 
+//			calc(Add);//计算函数  上去调用 把add地址传上去
+//			break;
+//		case 2:
+//			calc(Sub);
+//			break;
+//		case 3:
+//			calc(Mul);
+//			break;
+//		case 4:
+//			calc(Div);
+//			break;
+//		case 0:
+//			printf("退出计算器\n");
+//			break;
+//		default:
+//			printf("选择错误\n");
+//			break;
+//		}
+//		
+//	} while (input);//按照输入的值来判断
+//	return 0;
+//}
 
-//实现一个计算器
-void menu()
+
+//qsort函数
+//冒泡排序
+void bubble_sort(int arr[],int sz)
 {
-	printf("************************\n");
-	printf("*** 1.Add    2.Sub *****\n");
-	printf("*** 3.Mul    4.Div *****\n");
-	printf("*** 0.exit         *****\n");
-	printf("************************\n");
+	int i = 0;
+	for (i = 0; i < sz - 1; i++)//至少要sz-1趟冒泡排序
+	{
+		//一趟中 两两相邻进行比较
+		int j = 0;
+		for (j = 0; j < sz-1-i; j++)//sz个元素 有sz-1队要进行比较
+			                   //当比较完一个元素 第二趟时 队数也少了1
+			                 //所以 sz-1-i 每一趟比较的队数都在减少
+		{
+			if (arr[j] > arr[j + 1])//左边的数大于右边的
+			{
+				int tmp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = tmp;
+			}
+		
+		}
+	
+	}
+
 }
-void calc(int(*pf)(int,int))//函数地址传过来 函数指针接收
+void print_arr(int arr[],int sz)
 {
-	int x = 0;
-	int y = 0;
-	int ret = 0;
-	printf("请输入两个操作数:>");
-	scanf("%d%d", &x, &y);
-	ret = pf(x, y);//pf 就相当于 指针指向的函数的地址
-	printf("ret = %d\n", ret);
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
 }
 int main()
 {
-	int input = 0;
-	do
-	{
-		menu();//从这开始 
-		printf("请选择:>");//输入是加减乘除哪一个
-		scanf("%d", &input);//1
-		
-		switch (input)//假设输入1
-		{
-		case 1://到这 
-			calc(Add);//计算函数  上去调用 把add地址传上去
-			break;
-		case 2:
-			calc(Sub);
-			break;
-		case 3:
-			calc(Mul);
-			break;
-		case 4:
-			calc(Div);
-			break;
-		case 0:
-			printf("退出计算器\n");
-			break;
-		default:
-			printf("选择错误\n");
-			break;
-		}
-		
-	} while (input);//按照输入的值来判断
+	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+	//排序为升序
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	bubble_sort(arr,sz);
+	print_arr(arr,sz);
 	return 0;
 }
