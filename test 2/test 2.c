@@ -4604,30 +4604,32 @@
 
 
 //qsort函数
-//冒泡排序
-void bubble_sort(int arr[],int sz)
-{
-	int i = 0;
-	for (i = 0; i < sz - 1; i++)//至少要sz-1趟冒泡排序
-	{
-		//一趟中 两两相邻进行比较
-		int j = 0;
-		for (j = 0; j < sz-1-i; j++)//sz个元素 有sz-1队要进行比较
-			                   //当比较完一个元素 第二趟时 队数也少了1
-			                 //所以 sz-1-i 每一趟比较的队数都在减少
-		{
-			if (arr[j] > arr[j + 1])//左边的数大于右边的
-			{
-				int tmp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = tmp;
-			}
-		
-		}
-	
-	}
-
-}
+//冒泡排序--只能排整型数组
+#include<stdlib.h>
+#include<string.h>
+//void bubble_sort(int arr[],int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz - 1; i++)//至少要sz-1趟冒泡排序
+//	{
+//		//一趟中 两两相邻进行比较
+//		int j = 0;
+//		for (j = 0; j < sz-1-i; j++)//sz个元素 有sz-1队要进行比较
+//			                   //当比较完一个元素 第二趟时 队数也少了1
+//			                 //所以 sz-1-i 每一趟比较的队数都在减少
+//		{
+//			if (arr[j] > arr[j + 1])//左边的数大于右边的
+//			{
+//				int tmp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = tmp;
+//			}
+//		
+//		}
+//	
+//	}
+//
+//}
 void print_arr(int arr[],int sz)
 {
 	int i = 0;
@@ -4636,12 +4638,149 @@ void print_arr(int arr[],int sz)
 		printf("%d ", arr[i]);
 	}
 }
-int main()
+//void test1()
+//{
+//	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+//	//排序为升序
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	bubble_sort(arr, sz);
+//	print_arr(arr, sz);
+//}
+int cmp_int(const void* e1,const void *e2)//void* 是无确切类型的 不能直接解引用
+{
+	//if (*(int*)e1 > *(int*)e2)
+	//	return 1;
+	//else if (*(int*)e1 == *(int*)e2)
+	//	return 0;
+	//else //<
+	//	return -1;
+
+	return *(int*)e1 - *(int*)e2;//如果e1-e2 是大于0 就返回大于0的数字
+}
+void test2()
 {
 	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
 	//排序为升序
 	int sz = sizeof(arr) / sizeof(arr[0]);
-	bubble_sort(arr,sz);
-	print_arr(arr,sz);
+	qsort(arr,sz,sizeof(arr[0]),cmp_int);
+	print_arr(arr, sz);
+}
+//使用 qsort 排序结构体
+struct Stu
+{
+	char name[20];
+	int age;
+	double score;
+};
+int cmp_stu_by_age(const void*e1,const void*e2)//得有排序标准  按年龄来排
+//e1 e2 指向的是结构体数据  -> 是找到结构体成员 age
+{
+	return ((struct Stu*)e1) -> age - ((struct Stu*)e2)->age;
+}
+int cmp_stu_by_name(const void* e1, const void* e2)//得有排序标准  按年龄来排
+//e1 e2 指向的是结构体数据  -> 是找到结构体成员 age
+{
+	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);//名字是字符串 不能相减
+	//比较字符串用 strcmp 按照字典顺序来比较
+	//return strcmp(((struct Stu*)e2)->name, ((struct Stu*)e1)->name);//排降序
+}
+void test3()
+{
+	struct Stu arr[3] = { {"zhangsan",20,55.5},{"lisi",30,88.0},{"wangwu",10,90.0} };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	/*qsort(arr,sz,sizeof(arr[0]), cmp_stu_by_age);*///按照年龄来排
+	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);//按名字来排
+}
+//int main()
+//{
+//	//test2();
+//	test3();
+//
+//	//int a = 10;
+//	//float* pf = &a;//a是int* 类型 不兼容
+//	//void* pf = &a;//不确定指针类型就可以了
+//	//pf + 1;//不可以 因为不确定类型 不知道能访问几个字节
+//	//*pf;//不可以
+//	return 0;
+//}
+
+//qsort 基本原型-4个参数
+//void qsort(void* base,//base里面存放的是 待排序数据的起始位置
+//	size_t num, //待排序数组元素个数
+//	size_t width, //一个元素的字节大小  
+//	int(* cmp)(const void* e1, const void* e2));//函数指针
+//cmp是个比较函数  e1和e2 是两个待比较的两个元素的地址
+//比较函数 要求自定义一个--因为排序整形数据可以用 > <就行
+// 但是排序结构体数据 不方便直接 > <进行比较  
+// 使用者根据实际情况，提供一个函数，实现2个数值的比较
+
+//返回值会返回3种值
+// <0
+// ==0
+// >0
+
+
+//用 qsort 进行冒泡排序
+void Swap(char* buf1,char* buf2,int width)//交换两个数
+//假设交换 8 和 7  在内存中存储是 08 00 00 00 07 00 00 00
+//buf1 指向08 buf2 指向07  buf1 buf2 都是char类型 一次只能交换一个字节
+// 一个整形是4个字节 所以width 是4 也就是 交换了 width次
+//4对儿字节 说明交换了4次
+{
+	int i = 0;
+	for (i = 0; i < width; i++)
+	{
+		char tmp = *buf1;//临时变量tmp是一个字节的空间，一对一对来
+		*buf1 = *buf2;
+		*buf2 = tmp;
+		buf1++;
+		buf2++;
+	}
+}
+void bubble_sort(void*base,int num,int width,int(*cmp)(const void*e1,const void*e2))
+{
+	int i = 0;
+	for (i = 0; i < num - 1; i++)//num是元素个数 要进行num-1趟
+	{
+		//一趟中 两两相邻进行比较
+		int j = 0;
+		for (j = 0; j < num - 1 - i; j++)
+		{
+			//if (arr[j] > arr[j + 1])//比较
+			//默认升序
+			if(cmp((char*)base+j*width,(char*)base+(j+1)*width)>0)//cmp 比较函数  如果e1>e2 就交换顺序
+				//base强制类型转换成char* +1 就跳过一个字节 +j 就跳过j个字节 +j*width 就跳过j*width个字节
+				// 所以就是相邻俩个元素的地址  传给cmp 之后会进行比较
+				//如果返回>0 就进行交换 
+			{
+				//交换排列顺序
+				Swap((char*)base + j * width, (char*)base + (j + 1) * width,width);
+				//传两个元素起始位置 但是一个元素几个字节不知道
+				//所以把宽度也传过去                                                                                      
+			}
+
+		}
+
+	}
+
+}
+void test4()
+{
+	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+	//排序为升序
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	bubble_sort(arr, sz, sizeof(arr[0]), cmp_int);
+	print_arr(arr, sz);
+}
+int main()
+{
+	//test2();
+	test4();
+
+	//int a = 10;
+	//float* pf = &a;//a是int* 类型 不兼容
+	//void* pf = &a;//不确定指针类型就可以了
+	//pf + 1;//不可以 因为不确定类型 不知道能访问几个字节
+	//*pf;//不可以
 	return 0;
 }
