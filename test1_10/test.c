@@ -2185,27 +2185,36 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //第一行输入一个整数(0≤N≤50)。
 //第二行输入N个整数，输入用空格分隔的N个整数。
 //第三行输入想要进行删除的一个整数。
+//int main()
+//{
+//	int n = 0;
+//	int a[50] = {0};
+//	int i = 0;
+//	int b = 0;
+//	scanf("%d", &n);
+//		for (i = 0; i < n; i++)
+//		{
+//			scanf("%d", &a[i]);
+//		}
+//		scanf("%d", &b);
+//		for(i = 0; i < n; i++)
+//		{
+//			if (a[i] != b)
+//			{
+//			printf("%d ",a[i]);
+//			}
+//		}
+//	
+//
+//
+//	return 0;
+//}
+
+#include<stdio.h>
 int main()
 {
-	int n = 0;
-	int a[50] = {0};
-	int i = 0;
-	int b = 0;
-	scanf("%d", &n);
-		for (i = 0; i < n; i++)
-		{
-			scanf("%d", &a[i]);
-		}
-		scanf("%d", &b);
-		for(i = 0; i < n; i++)
-		{
-			if (a[i] != b)
-			{
-			printf("%d ",a[i]);
-			}
-		}
-	
-
-
+	float a;
+	scanf("%f", &a);
+	printf("%.0f", a);
 	return 0;
 }
