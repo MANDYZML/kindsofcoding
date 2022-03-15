@@ -2210,11 +2210,42 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	float a;
+//	scanf("%f", &a);
+//	printf("%.0f", a);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	float a;
-	scanf("%f", &a);
-	printf("%.0f", a);
-	return 0;
+	int a = 0;
+	int i = 0;
+	while (~scanf("%d", &a))//多组输入
+	{
+		int x = 0;//一行里最左边的
+		int y = 0;//一行里 最右边
+		y = a - 1;
+		for (i = 0; i < a; i++)//输入数字几 就是几行
+		{
+			int j = 0;
+			for (j = 0; j < a; j++)//一行里面怎么打印
+			//竖着和横着 数一样 都是输入的数
+			{
+				if (j == x)
+					printf("*");
+				else if (j == y)
+					printf("*");
+				else
+					printf(" ");
+			}
+			x++;
+			y--;
+			printf("\n");
+		}
+	}
+		return 0;
 }
