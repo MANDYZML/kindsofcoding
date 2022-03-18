@@ -2219,33 +2219,317 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int i = 0;
+//	while (~scanf("%d", &a))//多组输入
+//	{
+//		int x = 0;//一行里最左边的
+//		int y = 0;//一行里 最右边
+//		y = a - 1;
+//		for (i = 0; i < a; i++)//输入数字几 就是几行
+//		{
+//			int j = 0;
+//			for (j = 0; j < a; j++)//一行里面怎么打印
+//			//竖着和横着 数一样 都是输入的数
+//			{
+//				if (j == x)
+//					printf("*");
+//				else if (j == y)
+//					printf("*");
+//				else
+//					printf(" ");
+//			}
+//			x++;
+//			y--;
+//			printf("\n");
+//		}
+//	}
+//		return 0;
+//}
+
+//变种水仙花数
+//比如 665=6*65+65*6
+//1461=1*461+14*61+146*1
+//求出5位数中的lily number
+//#include<math.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 10000; i < 99999; i++)
+//	{
+//	//判断i是否为lily number
+//		int sum = 0;
+//		int j = 0;
+//		for (j = 1; j < 4; j++)
+//		{
+//			int m = i%(int)pow(10,j);//每次%的数不一样 %10 %100
+//			int n = i/(int)pow(10,j);
+//			sum += m * n;
+//		}
+//		if (sum == i)
+//		{
+//			printf("%d ", i);
+//		}
+//	
+//	}
+//
+//	return 0;
+//}
+
+
+//从键盘上输入一个字符，变成判断是否是字母
+//int main()
+//{
+//	int ch = getchar();//接收字符
+//	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch < +'Z'))
+//	{
+//		printf("YES\n");
+//	}
+//	else
+//	{
+//		printf("NO\n");
+//	}
+//	return 0;
+//}
+
+//字符串左旋
+#include<string.h>
+//void left_move(char arr[],int k)
+//{
+//	int len = strlen(arr);
+//	int j = 0;
+//	for (j = 0; j < k%len; j++)//旋转k次 就是旋转k个字符
+//	{
+//		//1.创建临时存放字符空间 把第一个字符放进去
+//		char tmp = arr[0];
+//		//2.后面的字符往前挪
+//		int i = 0;
+//		for (i = 0; i < len - 1; i++)//len-1个元素往前挪
+//		{
+//			arr[i] = arr[i + 1];
+//		}
+//		arr[len - 1] = tmp;//把临时空间的数放到最后
+//	}
+//}
+//int main()
+//{
+//	//左旋转字符代码
+//	char arr[20] = "abcdef";
+//	int k = 0;
+//	scanf("%d", &k);
+//	left_move(arr,k);//左旋转k个字符
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//逆序思路
+//void reverse(char* left,char* right)
+//{
+//	while (left < right)
+//	{
+//		char tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//void left_move(char arr[], int k)
+//{
+//	//abcdef
+//	int len = strlen(arr);
+//  k %= len;
+//	reverse(arr,arr+k-1);//逆序 a b
+//	reverse(arr+k,arr+len-1);//逆序 c d e f
+//	reverse(arr, arr + len - 1);//逆序全体
+//}
+//int main()
+//{
+//	//左旋转字符代码
+//	char arr[20] = "abcdef";
+//	//首先逆序 ba 再 fedc
+//	//之后 cdeab  就是左旋两个
+//	int k = 0;
+//	scanf("%d", &k);
+//	left_move(arr, k);//左旋转k个字符
+//	printf("%s\n", arr);
+//	return 0;
+//}
+
+//杨氏矩阵
+//每一行从左到右 每一列从上到下都是递增的
+//在矩阵中找某个数字是否存在
+//void find_k(int arr[3][3],int k,int r,int c)
+//{
+//	//右上角元素坐标
+//	int x = 0;//横坐标
+//	int y = c - 1;//竖坐标
+//	int flag = 0;
+//	while (x<r && y>=0)
+//	{
+//		if (arr[x][y] < k)//一行里 右上角的元素是一行中最大的
+//			//如果要找的k比右上角的元素大 则证明k不在这行
+//		{
+//			x++;//换到下一行
+//		}
+//		else if (arr[x][y] > k)//一行里 右上角的元素是一列里最小的
+//			//如果k比右上角的元素还小 则证明k不在这列
+//		{
+//			y--;
+//		}
+//		else//等于的情况
+//		{
+//			printf("找到了,下标是:%d %d\n", x, y);
+//			flag = 1;
+//			break;
+//		}
+//	}
+//	if(flag==0)
+//	printf("找不到\n");
+//}
+
+//另一种写法--返回型参数
+//void find_k(int arr[3][3],int k,int *pr,int *pc)
+//{
+//	//右上角元素坐标
+//	int x = 0;//横坐标
+//	int y = *pc - 1;//竖坐标
+//	int flag = 0;
+//	while (x < *pr && y >= 0)
+//	{
+//		if (arr[x][y] < k)//一行里 右上角的元素是一行中最大的
+//			//如果要找的k比右上角的元素大 则证明k不在这行
+//		{
+//			x++;//换到下一行
+//		}
+//		else if (arr[x][y] > k)//一行里 右上角的元素是一列里最小的
+//			//如果k比右上角的元素还小 则证明k不在这列
+//		{
+//			y--;
+//		}
+//		else//等于的情况
+//		{
+//			*pr = x;
+//			*pc = y;
+//			return;
+//		}
+//	}
+//	//找不到的情况
+//	*pr = -1;
+//	*pc = -1;
+//}
+//int main()
+//{
+//	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
+//	int k = 7;//找 7 在不在
+//	int x = 3;
+//	int y = 3;
+//	find_k(arr, k, &x, &y);//写&x &y 是为了能把结果带回来
+//	if (x == -1 && y == -1)
+//	{
+//		printf("找不到\n");
+//	}
+//	else
+//	{
+//		printf("找到了，下标是:%d %d\n", x, y);
+//	}
+//	return 0;
+//}
+
+//有序序列合并
+//输入包含三行，
+//第一行包含两个正整数n, m，用空格分隔。
+//n表示第二行第一个升序序列中数字的个数，
+//m表示第三行第二个升序序列中数字的个数。
+//第二行包含n个整数，用空格分隔。
+//第三行包含m个整数，用空格分隔。
+
+//#include<stdio.h>
+//
+//int main()
+//{
+//    //接收两组数
+//    int n = 0;
+//    int m = 0;
+//    scanf("%d%d", &n, &m);
+//    int arr1[1000];//int arr1[n];
+//    int arr2[1000];//int arr2[m];
+//    //接收第一个序列
+//    int i = 0;
+//    int j = 0;
+//    for (i = 0; i < n; i++)
+//    {
+//        //每一次接收一个元素
+//        scanf("%d", &arr1[i]);
+//    }
+//    //接收第二个序列
+//    for (i = 0; i < m; i++)
+//    {
+//        //每一次接收一个元素
+//        scanf("%d", &arr2[i]);
+//    }
+//    //有序的合并 打印
+//    i = 0;//遍历 序列1
+//    j = 0;//遍历 序列2
+//    while (i < n && j < m)
+//    {
+//        if (arr1[i] < arr2[j])
+//        {
+//            printf("%d ", arr1[i]);
+//            i++;//到序列的下一个数
+//        }
+//        else
+//        {
+//            printf("%d ", arr2[j]);
+//            j++;
+//        }
+//    }
+//    if (i == n)//如果n个整数都遍历完了
+//    {
+//        for (; j < m; j++)
+//        {
+//            printf("%d ", arr2[j]);//把剩下的数也打印出来
+//        }
+//    }
+//    else
+//    {
+//        for (; i < n; i++)
+//        {
+//            printf("%d ", arr1[i]);
+//        }
+//
+//    }
+//    return 0;
+//}
+
+//空心三角形
+//多组输入，一个整数（3~20），表示输出的行数，
+//也表示组成三角形边的“ * ”的数量。
 #include<stdio.h>
 int main()
 {
-	int a = 0;
-	int i = 0;
-	while (~scanf("%d", &a))//多组输入
-	{
-		int x = 0;//一行里最左边的
-		int y = 0;//一行里 最右边
-		y = a - 1;
-		for (i = 0; i < a; i++)//输入数字几 就是几行
-		{
-			int j = 0;
-			for (j = 0; j < a; j++)//一行里面怎么打印
-			//竖着和横着 数一样 都是输入的数
-			{
-				if (j == x)
-					printf("*");
-				else if (j == y)
-					printf("*");
-				else
-					printf(" ");
-			}
-			x++;
-			y--;
-			printf("\n");
-		}
-	}
-		return 0;
+    int n = 0; //底和高 都是n
+    while (scanf("%d", &n) == 1)
+    {
+        //创建个二维数组一样的正方形
+        int i = 0;//行
+        int j = 0;//列
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j <= i; j++)
+            {
+                //最上面的，最低下一行，对角线
+                if (j == 0 || i == n - 1 || i == j)
+                    printf("* ");
+                else
+                    printf("  ");
+            }
+            printf("\n");
+        }
+
+    }
+    return 0;
 }
