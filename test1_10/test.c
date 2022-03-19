@@ -2508,28 +2508,122 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //空心三角形
 //多组输入，一个整数（3~20），表示输出的行数，
 //也表示组成三角形边的“ * ”的数量。
+//#include<stdio.h>
+//int main()
+//{
+//    int n = 0; //底和高 都是n
+//    while (scanf("%d", &n) == 1)
+//    {
+//        //创建个二维数组一样的正方形
+//        int i = 0;//行
+//        int j = 0;//列
+//        for (i = 0; i < n; i++)
+//        {
+//            for (j = 0; j <= i; j++)
+//            {
+//                //最上面的，最低下一行，对角线
+//                if (j == 0 || i == n - 1 || i == j)
+//                    printf("* ");
+//                else
+//                    printf("  ");
+//            }
+//            printf("\n");
+//        }
+//
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	scanf("%x", &a);
+//	printf("%u\n", a);
+//
+//	return 0;
+//}
+//#include<stdio.h>
+//int main()
+//{
+//	printf("%#o %#X\n", 1234);
+//
+//
+//	return 0;
+//}
+//#include<stdio.h>
+//int main()
+//{
+//	int year = 0;
+//	int month = 0;
+//	int date = 0;
+//	scanf("%4d%02d%02d", &year, &month, &date);
+//	printf("year=%4d\n", year);
+//	printf("month=%02d\n", month);
+//	printf("date=%02d\n", date);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-    int n = 0; //底和高 都是n
-    while (scanf("%d", &n) == 1)
+    char ch = 0;
+    scanf("%c", &ch);
+    int i = 0;
+    int n = 3;
+    //上半部分
+    for (i = 1; i <= n; i++)
     {
-        //创建个二维数组一样的正方形
-        int i = 0;//行
-        int j = 0;//列
-        for (i = 0; i < n; i++)
+        int j = 0;
+        for (j = 0; j < n - i; j++)
         {
-            for (j = 0; j <= i; j++)
-            {
-                //最上面的，最低下一行，对角线
-                if (j == 0 || i == n - 1 || i == j)
-                    printf("* ");
-                else
-                    printf("  ");
-            }
-            printf("\n");
+            printf(" ");
         }
-
+        for (j = 0; j < 2 * i - 1; j++)
+        {
+            printf("%c", ch);
+        }
+        printf("\n");
     }
+    //下半部分
+    for (i = 1; i <= n - 1; i++)
+    {
+        int k = 0;
+        for (k = 0; k < i; k++)
+        {
+            printf(" ");
+        }
+        for (k = 0; k < 2 * (n - i) - 1; k++)
+        {
+            printf("%c", ch);
+        }
+        printf("\n");
+    }
+
     return 0;
 }
+//#include <stdio.h>
+//int main()
+//{
+//	char ch;
+//	scanf("%c", &ch);
+//	int i, j;
+//	int n = 3;
+//	for (i = 1; i <= n; i++)
+//	{
+//		for (j = 0; j < n - i; j++)
+//			printf(" ");
+//		for (j = 0; j < 2 * i - 1; j++)
+//			printf("%c", ch);
+//		printf("\n");
+//	}
+//	for (i = 1; i < n; i++)
+//	{
+//		for (j = 0; j < i; j++)
+//			printf(" ");
+//		for (j = 0; j < 2 * (n - i) - 1; j++)
+//			printf("%c", ch);
+//		printf("\n");
+//	}
+//	return 0;
+//}
