@@ -4630,14 +4630,14 @@
 //	}
 //
 //}
-void print_arr(int arr[],int sz)
-{
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		printf("%d ", arr[i]);
-	}
-}
+//void print_arr(int arr[],int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
 //void test1()
 //{
 //	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
@@ -4646,51 +4646,51 @@ void print_arr(int arr[],int sz)
 //	bubble_sort(arr, sz);
 //	print_arr(arr, sz);
 //}
-int cmp_int(const void* e1,const void *e2)//void* 是无确切类型的 不能直接解引用
-{
-	//if (*(int*)e1 > *(int*)e2)
-	//	return 1;
-	//else if (*(int*)e1 == *(int*)e2)
-	//	return 0;
-	//else //<
-	//	return -1;
-
-	return *(int*)e1 - *(int*)e2;//如果e1-e2 是大于0 就返回大于0的数字
-}
-void test2()
-{
-	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
-	//排序为升序
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	qsort(arr,sz,sizeof(arr[0]),cmp_int);
-	print_arr(arr, sz);
-}
-//使用 qsort 排序结构体
-struct Stu
-{
-	char name[20];
-	int age;
-	double score;
-};
-int cmp_stu_by_age(const void*e1,const void*e2)//得有排序标准  按年龄来排
-//e1 e2 指向的是结构体数据  -> 是找到结构体成员 age
-{
-	return ((struct Stu*)e1) -> age - ((struct Stu*)e2)->age;
-}
-int cmp_stu_by_name(const void* e1, const void* e2)//得有排序标准  按年龄来排
-//e1 e2 指向的是结构体数据  -> 是找到结构体成员 age
-{
-	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);//名字是字符串 不能相减
-	//比较字符串用 strcmp 按照字典顺序来比较
-	//return strcmp(((struct Stu*)e2)->name, ((struct Stu*)e1)->name);//排降序
-}
-void test3()
-{
-	struct Stu arr[3] = { {"zhangsan",20,55.5},{"lisi",30,88.0},{"wangwu",10,90.0} };
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	/*qsort(arr,sz,sizeof(arr[0]), cmp_stu_by_age);*///按照年龄来排
-	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);//按名字来排
-}
+//int cmp_int(const void* e1,const void *e2)//void* 是无确切类型的 不能直接解引用
+//{
+//	//if (*(int*)e1 > *(int*)e2)
+//	//	return 1;
+//	//else if (*(int*)e1 == *(int*)e2)
+//	//	return 0;
+//	//else //<
+//	//	return -1;
+//
+//	return *(int*)e1 - *(int*)e2;//如果e1-e2 是大于0 就返回大于0的数字
+//}
+//void test2()
+//{
+//	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+//	//排序为升序
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	qsort(arr,sz,sizeof(arr[0]),cmp_int);
+//	print_arr(arr, sz);
+//}
+////使用 qsort 排序结构体
+//struct Stu
+//{
+//	char name[20];
+//	int age;
+//	double score;
+//};
+//int cmp_stu_by_age(const void*e1,const void*e2)//得有排序标准  按年龄来排
+////e1 e2 指向的是结构体数据  -> 是找到结构体成员 age
+//{
+//	return ((struct Stu*)e1) -> age - ((struct Stu*)e2)->age;
+//}
+//int cmp_stu_by_name(const void* e1, const void* e2)//得有排序标准  按年龄来排
+////e1 e2 指向的是结构体数据  -> 是找到结构体成员 age
+//{
+//	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);//名字是字符串 不能相减
+//	//比较字符串用 strcmp 按照字典顺序来比较
+//	//return strcmp(((struct Stu*)e2)->name, ((struct Stu*)e1)->name);//排降序
+//}
+//void test3()
+//{
+//	struct Stu arr[3] = { {"zhangsan",20,55.5},{"lisi",30,88.0},{"wangwu",10,90.0} };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	/*qsort(arr,sz,sizeof(arr[0]), cmp_stu_by_age);*///按照年龄来排
+//	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);//按名字来排
+//}
 //int main()
 //{
 //	//test2();
@@ -4721,66 +4721,502 @@ void test3()
 
 
 //用 qsort 进行冒泡排序
-void Swap(char* buf1,char* buf2,int width)//交换两个数
+//void Swap(char* buf1,char* buf2,int width)//交换两个数
 //假设交换 8 和 7  在内存中存储是 08 00 00 00 07 00 00 00
 //buf1 指向08 buf2 指向07  buf1 buf2 都是char类型 一次只能交换一个字节
 // 一个整形是4个字节 所以width 是4 也就是 交换了 width次
 //4对儿字节 说明交换了4次
-{
-	int i = 0;
-	for (i = 0; i < width; i++)
-	{
-		char tmp = *buf1;//临时变量tmp是一个字节的空间，一对一对来
-		*buf1 = *buf2;
-		*buf2 = tmp;
-		buf1++;
-		buf2++;
-	}
-}
-void bubble_sort(void*base,int num,int width,int(*cmp)(const void*e1,const void*e2))
-{
-	int i = 0;
-	for (i = 0; i < num - 1; i++)//num是元素个数 要进行num-1趟
-	{
-		//一趟中 两两相邻进行比较
-		int j = 0;
-		for (j = 0; j < num - 1 - i; j++)
-		{
-			//if (arr[j] > arr[j + 1])//比较
-			//默认升序
-			if(cmp((char*)base+j*width,(char*)base+(j+1)*width)>0)//cmp 比较函数  如果e1>e2 就交换顺序
-				//base强制类型转换成char* +1 就跳过一个字节 +j 就跳过j个字节 +j*width 就跳过j*width个字节
-				// 所以就是相邻俩个元素的地址  传给cmp 之后会进行比较
-				//如果返回>0 就进行交换 
-			{
-				//交换排列顺序
-				Swap((char*)base + j * width, (char*)base + (j + 1) * width,width);
-				//传两个元素起始位置 但是一个元素几个字节不知道
-				//所以把宽度也传过去                                                                                      
-			}
-
-		}
-
-	}
-
-}
-void test4()
-{
-	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
-	//排序为升序
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	bubble_sort(arr, sz, sizeof(arr[0]), cmp_int);
-	print_arr(arr, sz);
-}
-int main()
-{
-	//test2();
-	test4();
+//{
+//	int i = 0;
+//	for (i = 0; i < width; i++)
+//	{
+//		char tmp = *buf1;//临时变量tmp是一个字节的空间，一对一对来
+//		*buf1 = *buf2;
+//		*buf2 = tmp;
+//		buf1++;
+//		buf2++;
+//	}
+//}
+//void bubble_sort(void*base,int num,int width,int(*cmp)(const void*e1,const void*e2))
+//{
+//	int i = 0;
+//	for (i = 0; i < num - 1; i++)//num是元素个数 要进行num-1趟
+//	{
+//		//一趟中 两两相邻进行比较
+//		int j = 0;
+//		for (j = 0; j < num - 1 - i; j++)
+//		{
+//			//if (arr[j] > arr[j + 1])//比较
+//			//默认升序
+//			if(cmp((char*)base+j*width,(char*)base+(j+1)*width)>0)//cmp 比较函数  如果e1>e2 就交换顺序
+//				//base强制类型转换成char* +1 就跳过一个字节 +j 就跳过j个字节 +j*width 就跳过j*width个字节
+//				// 所以就是相邻俩个元素的地址  传给cmp 之后会进行比较
+//				//如果返回>0 就进行交换 
+//			{
+//				//交换排列顺序
+//				Swap((char*)base + j * width, (char*)base + (j + 1) * width,width);
+//				//传两个元素起始位置 但是一个元素几个字节不知道
+//				//所以把宽度也传过去                                                                                      
+//			}
+//
+//		}
+//
+//	}
+//
+//}
+//void test4()
+//{
+//	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+//	//排序为升序
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	bubble_sort(arr, sz, sizeof(arr[0]), cmp_int);
+//	print_arr(arr, sz);
+//}
+//void test5()
+//{
+//	struct Stu arr[3] = { {"zhangsan",20,55.5},{"lisi",30,88.0},{"wangwu",10,90.0} };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	bubble_sort(arr,sz,sizeof(arr[0]), cmp_stu_by_age);//按照年龄来排
+//	//bubble_sort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);//按名字来排
+//}
+//int main()
+//{
+//	//test2();
+//	test5();
 
 	//int a = 10;
 	//float* pf = &a;//a是int* 类型 不兼容
 	//void* pf = &a;//不确定指针类型就可以了
 	//pf + 1;//不可以 因为不确定类型 不知道能访问几个字节
 	//*pf;//不可以
+//	return 0;
+//}
+
+//指针和数组笔试题
+//int main()
+//{
+//	//一维数组
+//	int a[] = { 1,2,3,4 };
+//
+//	printf("%d\n", sizeof(a)); //这里a表示整个数组 4个元素，每个元素int 4*4=16
+//	printf("%d\n", sizeof(a+0));//这里a+0表示首元素地址- 1的地址也就是整型的地址 4/8
+//	printf("%d\n", sizeof(*a));//a 首元素地址 *a表示数组第一个元素 sizeof(*a)就是第一个元素大小 4
+//	printf("%d\n", sizeof(a+1));//a 首元素地址 a+1 数组第二个元素地址 sizeof(a+1)--计算数组第二个元素地址大小 4/8
+//	printf("%d\n", sizeof(a[1]));//计算的是 数组下标为1 的第二个元素大小 4
+//	printf("%d\n", sizeof(&a));//&a 取出的数组地址 数组地址也是地址，是地址 大小就是4/8
+//	printf("%d\n", sizeof(*&a));// &a 取出的数组地址  对数组解引用 拿到整个数组计算大小--16
+//	printf("%d\n", sizeof(&a+1));//&a 取出的数组地址 +1 跳过整个数组，产生的是4后面位置的地址，是地址就是4/8
+//	printf("%d\n", sizeof(&a[0]));//a[0] 数组第一个元素地址 & 是第一个元素地址  4/8
+//	printf("%d\n", sizeof(&a[0]+1));//第一个元素+1 第二个元素地址 4/8
+//
+//	//字符数组
+//	char arr[] = { 'a','b','c','d','e','f' };
+//
+//	printf("%d\n", sizeof(arr));//arr是数组名 6个字符就是6个字节
+//	printf("%d\n", sizeof(arr + 0));//arr是首元素地址 +0 还是首元素地址 4/8
+//	printf("%d\n", sizeof(*arr));//arr是首元素地址 解引用* 就是a的地址  1
+//	printf("%d\n", sizeof(arr[1]));//arr[1] 是第二个元素 大小也是1个字节
+//	printf("%d\n", sizeof(&arr));//&arr 数组的地址  是地址就是4/8
+//	printf("%d\n", sizeof(&arr + 1));//&arr + 1 是从数组地址开始向后跳过了整个数组产生的一个地址 4/8
+//	printf("%d\n", sizeof(&arr[0] + 1));//首元素地址+1  数组第二个元素地址 4/8
+//
+//	//内存中 存的是 a b c d e f
+//	printf("%d\n", strlen(arr));//arr是首元素地址 也就是a的地址 向后数字符串长度 到\0之前 --随机值
+//	//arr数组中 没有\0 所以strlen函数会继续往后找\0，统计\0之前出现的字符个数
+//	printf("%d\n", strlen(arr + 0));//随机值 arr+0 还是首元素地址
+//	printf("%d\n", strlen(*arr));//ERROR  arr是首元素地址 *arr是数组首元素 'a'-ASCII 97 strlen会从97的位置向后数
+//	printf("%d\n", strlen(arr[1]));//ERROR  arr[1]就是'b'--98 
+//	printf("%d\n", strlen(&arr));//&arr 是数组地址 但是和arr一样都是从a开始 结果都是随机值
+//	printf("%d\n", strlen(&arr + 1));//+1 跳过整个数组后 往后数  随机值
+//	printf("%d\n", strlen(&arr[0] + 1));//&arr[0]--a的地址 +1 b的地址向后数 随机值
+//
+//
+//	return 0;
+//}
+//sizeof 计算的是对象所占内存的大小--单位是字节，类型size_t
+// 不在乎内存中存放的是什么 只在乎内存大小 ---sizeof是一个操作符
+
+// strlen 是库函数
+// 求字符串长度，从给定的地址向后访问字符，统计\0之前出现的字符个数
+// 
+//数组名是什么？
+//1.数组首元素地址
+//有两个例外
+//1.sizeof(数组名)，这里的数组名表示的是整个数组，计算的是整个数组的大小
+//2.&数组名  这里的数组名 表示整个数组，取出的是 这个数组的地址
+
+
+//int main()
+//{
+//	char arr[] = "abcdef"; //a b c d e f \0
+//
+//	printf("%d\n", sizeof(arr));//sizeof(arr) 整个数组所占内存大小  +\0  所占内存大小 7
+//	printf("%d\n", sizeof(arr + 0));//arr是数组名 也就是a的地址 +0 还是  是地址就是4/8
+//	printf("%d\n", sizeof(*arr));//首元素地址解引用  1 
+//	printf("%d\n", sizeof(arr[1]));//数组第二个元素  1
+//	printf("%d\n", sizeof(&arr));//&arr是数组地址 4/8
+//	printf("%d\n", sizeof(&arr + 1));//4/8 \0后面的地址
+//	printf("%d\n", sizeof(&arr[0] + 1));//第二个元素地址 4/8
+//
+//	//不包含\0
+//	printf("%d\n", strlen(arr));// 6
+//	printf("%d\n", strlen(arr + 0));// 6
+//	printf("%d\n", strlen(*arr));// error
+//	printf("%d\n", strlen(arr[1]));//err
+//	printf("%d\n", strlen(&arr));// 6
+//	printf("%d\n", strlen(&arr + 1));//随机值
+//	printf("%d\n", strlen(&arr[0] + 1));//5 从b开始往后数
+//
+//	char* p = "abcdef";//p里面存了 首字符a的地址
+//
+//	printf("%d\n", sizeof(p));//4/8 p是指针变量大小，计算的是指针变量的大小
+//	printf("%d\n", sizeof(p + 1));//char*指针+1 向后跳一个字节 b的地址  4/8
+//	printf("%d\n", sizeof(*p));// *p就是a  1
+//	printf("%d\n", sizeof(p[0]));//p[0]-> *(p+0)- *p  1
+//	printf("%d\n", sizeof(&p));//&p 取的是 指针变量p在内存中的地址 4/8
+//	printf("%d\n", sizeof(&p + 1));//&p+1是跳过p之后的地址  4/8
+//	printf("%d\n", sizeof(&p[0] + 1));//&p[0] a的地址+1 =b的地址 4/8
+//	
+//	printf("%d\n", strlen(p));// 6
+//	printf("%d\n", strlen(p + 1));// b的地址向后数  5
+//	printf("%d\n", strlen(*p));//err
+//	printf("%d\n", strlen(p[0]));//err
+//	printf("%d\n", strlen(&p));//随机值 
+//	printf("%d\n", strlen(&p + 1));//随机值
+//	printf("%d\n", strlen(&p[0] + 1));//从b的地址向后数 5
+//
+//	//二维数组
+//	int a[3][4] = { 0 };
+//
+//	printf("%d\n", sizeof(a));//计算整个数组总大小 3*4*4=48
+//	printf("%d\n", sizeof(a[0][0])); // 4 第一行第一个元素大小
+//	printf("%d\n", sizeof(a[0]));//a[0]是第一行的数组名  4*4=16
+//	//sizeof(a[0]) 是第一行的数组名单独放在sizeof内部，计算的是第一行的大小
+//	printf("%d\n", sizeof(a[0] + 1));//a[0]作为第一行数组名 并没有单独放在sizeof内部，有没有被取地址
+//	//所以a[0]是数组首元素的地址--第一行第一个元素地址 +1 表示第一行第二个  4/8
+//	printf("%d\n", sizeof(*(a[0] + 1)));//第一行第二个元素解引用 4
+//	printf("%d\n", sizeof(a + 1));//a表示首元素地址--也就是第一行的地址 所以a+1 第二行地址 4/8
+//	printf("%d\n", sizeof(*(a + 1)));// 对第二行解引用 16
+//	printf("%d\n", sizeof(&a[0] + 1));//a[0]是第一行数组名  &a[0]取出的就是第一行的地址
+//	//&a[0] + 1 就是第二行的地址  4/8
+//	printf("%d\n", sizeof(*(&a[0] + 1)));//拿到了第二行 16
+//	printf("%d\n", sizeof(*a));//a就是首元素地址 也就是第一行的地址 *a就是第一行 4*4=16
+//	printf("%d\n", sizeof(a[3]));//因为确定了类型和大小 所以 16
+//
+//	return 0;
+//} 
+
+//指针笔试题
+//int main()
+//{
+//	int a[5] = { 1,2,3,4,5 };//&a的类型是 int(*)[5] 数组指针类型
+//	int* ptr = (int*)(&a + 1);//&a是取出整个数组 +1 还是这个类型 
+//	//要想放到ptr中 需要强制类型转换
+//	printf("%d%d", *(a + 1), *(ptr - 1));
+//	//a是首元素地址+1 指向2 在解引用 --2
+//	// &a+1 类型转换 也就是ptr 跳过了一个数组  -1 就是指向5 在解引用--5
+//	// 2    5
+//	return 0;
+//}
+
+//struct Test//大小20字节
+//{
+//	int Num;
+//	char* pcName;
+//	short sDate;
+//	char cha[2];
+//	short sBa[4];
+//}*p;
+//int main()
+//{
+//	p =(struct Test*)0x100000;//结构体指针+1 相当于+20--要转换成16进制
+//	printf("%p\n", p + 0x1);//0x100014
+//	printf("%p\n", (unsigned long)p + 0x1);//0x100001
+//	//p本来应该加结构体大小  但是被强制类型转换了
+//	//unsigned long --整数+1 就是+一个字节 
+//	//如果强制类型转换成指针 才要考虑+1跳过几个字节
+//	printf("%p\n", (unsigned int*)p + 0x1);//0x100004
+//	//整型指针+1 就是+4个字节  
+//	return 0;
+//}// 0x 是16进制
+
+//int main()
+//{
+//	int a[4] = { 1,2,3,4 };
+//	int* ptr1 = (int*)(&a + 1);
+//	//&a 取出数组地址 +1 跳过整个数组 到4的后面
+//	int* ptr2 = (int*)((int)a + 1);
+//	//数组名表示首元素地址 也就是1的地址 强制类型转换成整型 +1 就是+1 
+//	//内存中  这样小端存储
+//	//01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00
+//	//a是数组名 也就是首元素地址 +1  也就是指向了第一个 00 
+//	//在被强制类型转换成整型指针 赋给ptr2 也就是ptr指向了00
+//	//ptr2是整型指针 解引用  向后访问4个字节  00 00 00 02
+//	//要还原成小端 02 00 00 00
+//	printf("%x,%x", ptr1[-1], *ptr2);//4  2000000 02的0不打印了
+//	//ptr1[-1] 就是 *(ptr1-1) 4
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a[3][2] = { (0,1),(2,3),(4,5) };//这是逗号表达式
+//	//逗号表达式后面的结果才是最终结果  1  3  5
+//	//所以二维数组是
+//	// 1  3
+//	// 5  0
+//	// 0  0
+//	int* p;
+//	p = a[0];//a[0]是第一行的数组名 没有单独放在sizeof内部
+//	//所以是首元素地址 1的地址=p
+//	printf("%d", p[0]);//p[0]=*(p+0)  1
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a[5][5];
+//	int(*p)[4];
+//	p = a;
+//	printf("%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);
+//	return 0;
+//}
+//p[4][2] 是 *(*(p+4)+2)
+
+//int main()
+//{
+//	int aa[2][5] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int* ptr1 = (int*)(&aa + 1); 
+//	//&aa + 1 跳过整个数组 指向10的后头的地址 
+//	// 然后把这个地址强制转换成 int*
+//	//赋给整型指针 ptr1 -1 就是指向了10
+//	int* ptr2 = (int*)(*(aa + 1));
+//	//aa 是数组名 没有& 也没有单独放在sizeof 内部
+//	//所以aa 就是首元素地址--第一行的地址
+//	//+1 就是指向第二行的地址 
+//	//*(aa + 1)== aa[1]-第二行数组名
+//	//没有& 也没有单独放在sizeof 内部--所以是数组首元素地址
+//	//所以* 是拿到6的地址 ptr2-1 就指向5了
+//	printf("%d %d", *(ptr1 - 1), *(ptr2 - 1));
+//	return 0;
+//}
+//1 2 3 4 5
+//6 7 8 9 10  内存中的形式
+
+//int main()
+//{
+//	char* a[] = { "work","at","alibaba" };
+//	char** pa = a;//a 数组名 也就是首元素地址--下标为0的首元素地址
+//	pa++;//指向了下标为1的地址--at 的a的地址
+//	printf("%s\n", *pa);//打印字符串  通过下标为1里面a的地址
+//	//打印字符串 at
+//	return 0;
+//}
+
+//a数组的3个元素--存放了3个字符串的首字符地址
+//work\0  ---w
+//at\0   --- a
+//alibaba\0  ---a
+
+
+//int main()
+//{
+//	char* c[] = { "ENTER","NEW","POINT","FIRST" };//c数组放的每个字符串首元素
+//	char** cp[] = { c + 3,c + 2,c + 1,c };
+//	char*** cpp = cp;
+//
+//	printf("%s\n", **++cpp);//POINT
+//	//先++ 就是原本指向c+3 变成指向c+2--P 在解引用 找到c+2的内容
+//	//在* 也就是找到P的地址 之后%s形式打印 打印POINT
+//	printf("%s\n", *-- * ++cpp + 3);//ER
+//	//++优先级高 先算++ 刚才指向c+2 ++指向c+1 --N 
+//	//解引用 找到 c+1的空间 之后-- 就相当于 
+//	//c+1这块空间存的不是c+1 而是c 也不指向N了 也指向了E
+//	//再解引用 就找到了E 的空间 之后+3
+//	//+1 指向N +2指向T +3指向E 之后向后打印 打印ER
+//	printf("%s\n", *cpp[-2] + 3);//ST
+//	//cpp[-2]--> *(cpp-2)--> **(cpp-2)+3
+//	//刚才cpp指向c(c+1)的位置 
+//	//c-1 是指向 c+2  c-2指向c+3 之后解引用相当于拿到了c+3空间的内容‘
+//	//c+3又是指向了F 解引用 拿到了F空间的内容
+//	//F的地址 +3 指向了S %s打印  打印ST
+//	printf("%s\n", cpp[-1][-1] + 1);//EW
+//	//cpp[-1][-1]-->*(*(CPP-1)-1)+1 
+//	//目前cpp指向c(c+1)的位置 CPP-1 指向了 c+2的位置
+//	//解引用*(CPP-1)  找到了c+2的空间内容 
+//	// *(CPP-1)-1 就变成c+1 也就是不指向P
+//	//指向了 N 在解引用--*(*(CPP-1)-1) 指向了N的内容
+//	//+1 指向了 E  打印EW
+//	return 0;
+//}
+//c数组中 存了 ENTER  NEW POINT FIRST --类型char*
+//cp中存了 c数组的每个字符串的首元素地址 E N P F --类型char**
+//c + 3  c + 2  c + 1  c
+// F      P      N     E
+//CPP 又存了cp的首元素 也就是指向了 c+3--F  类型char***
+
+
+//进阶3 字符函数和字符串函数
+//int main()
+//{
+//	char ch = 'a';//单引号引起的叫字符
+//	"abcdef";//双引号引起的叫字符串
+//	         //C语言没有字符串类型
+//	return 0;
+//}
+
+//strlen
+//int main()
+//{
+	//char arr[] = "abcdef";
+	//没有\0的情况
+	//char arr[] = { 'a','b','c','d','e','f' };//结果是19  是随机值
+	//因为 数组只开辟了6个字符的空间 f的后面放了什么不知道
+	//strlen 是要向后 直到找到\0为止 所以在\0之前有19个数
+
+	//char arr[10] = { 'a','b','c','d','e','f' };//答案是 6
+	//10位的空间 只初始化了6位 剩下4个没初始化的编译器会默认初始化成0--也就是\0
+	//int len = strlen(arr);//string length 
+	//数组名是首元素地址 也就是起始地址 之后往后数 到\0之前有多少字符
+	//printf("%d\n", len);
+	//return 0;
+
+	//size_t strlen(const char* str);
+
+	//if (strlen("abc") - strlen("qwerty") > 0)// 3-6=-3
+	//{
+	//	printf(">\n");
+	//	//因为strlen返回的是 无符号数 所以-3 将会是一个很大多数
+	//	//所以是>
+
+	//}
+	//类型强转
+//	if ((int)strlen("abc") - (int)strlen("qwerty") > 0)// 3-6=-3
+//	{
+//		printf(">\n");
+//		//因为strlen返回的是 无符号数 所以-3 将会是一个很大多数
+//		//所以是>
+//	}
+//	else
+//	{
+//		printf("<=\n");//结果是-3 可能就会以为是<=
+//	}
+//	return 0;
+//}
+
+//模拟实现strlen
+#include<assert.h>
+////int my_strlen(const char* str) 也可以
+//size_t my_strlen(const char* str)//存首字符a的地址
+//{
+//	int count = 0;
+//	assert(str != NULL);
+//	while(*str != '\0')
+//	{
+//		count++;
+//		str++;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	int len = my_strlen(arr);
+//	printf("%d\n", len);
+//	return 0;
+//}
+
+//strcpy--字符串拷贝
+//int main()
+//{
+//	char arr1[20] = { 0 };
+//	char arr2[] = "abcdef";//隐藏了\0 同时把\0也拷贝过去
+//	//char arr2[] = { 'a','b','c'};//这样是不行的，因为没有\0 会导致越界 并且 程序崩溃
+//	//char arr2[] = { 'a','b','c','\0'};//这样是可以的
+//	//char arr2[10] = { 'a','b','c' };//这样也可以 因为只初始化了3个 后面七个 默认初始化成 7个\0
+//	strcpy(arr1,arr2);//把arr2的内容拷贝放到arr1里面
+//	printf("%s\n", arr1);
+//	return 0;
+//}
+
+//strcpy函数的模拟实现
+//my_strcpy(const char* dest, const char* src)//源头 目的地
+//{
+//	//assert(dest != NULL);
+//	//assert(src != NULL);
+//	assert(dest && src);//任何一个为空都有问题
+//	while (*src != '\0')//但是\0也应该被拷贝 所以这里有点问题
+//	{
+//		*dest = *src;
+//		dest++;
+//		src++;
+//	
+//	}
+//	*dest = *src;//拷贝\0
+//}
+
+//strcpy 函数 返回的是目标空间的起始地址
+//char* my_strcpy(char* dest, const char* src)//源头 目的地
+//{
+//	//assert(dest != NULL);
+//	//assert(src != NULL);
+//	assert(src && dest);//任何一个为空都有问题
+//	char* ret = dest;//保存目标空间起始地址
+//	while (*dest++ = *src++)//赋值表达式
+//		//当h的ASCII赋值给dest 不是0 进来 之后dest++  src++
+//		//一直到后面的\0 *src是\0赋值给 dest 这个表达式的结果就是\0
+//		// \0 的ASCII值是0 0为假 表达式就停下来了 
+//		//所以这个代码做到了拷贝\0
+//	{
+//	     ;
+//	}
+//	return ret;//返回目标空间起始地址
+//}
+//int main()
+//{
+//	char arr1[20] = { 0 };
+//	char* arr2 = "hello bit";
+//
+//	my_strcpy(arr1, arr2);
+//	printf("%s\n", arr1);
+//	return 0;
+//}
+
+//strcat---字符串追加
+//int main()
+//{
+//	char arr1[20] = "hello";
+//	char arr2[] = "bit";
+//	strcat(arr1, arr2);//把arr2的内容追加到arr1后面
+//	printf("%s\n",arr1);//hello bit
+//	return 0;
+//}
+
+//模拟实现strcat
+//1.找目标空间中的\0
+//2.找到\0后 把源字符串拷贝到目标空间
+char* my_strcat(char* dest,char* src)
+{
+	assert(src && dest);
+	char* ret = *dest;
+	//找目标空间中的\0
+	while (*dest)//不等于\0 就进来++
+	{
+		dest++;
+	}
+	//拷贝
+	while (*dest++ = *src++)//把源字符串放到目标空间后面
+	{
+		;
+	}
+	return ret;
+} 
+int main()
+{
+	char arr1[20] = "hello";//目标空间
+	char arr2[] = "bit";//源字符串
+	my_strcat(arr1, arr2);//把arr2的内容追加到arr1后面
+	printf("%s\n", arr1);//hello bit
+	//printf("%s\n", my_strcat(arr1, arr2));
 	return 0;
 }
