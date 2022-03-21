@@ -5195,28 +5195,248 @@
 //模拟实现strcat
 //1.找目标空间中的\0
 //2.找到\0后 把源字符串拷贝到目标空间
-char* my_strcat(char* dest,char* src)
+//char* my_strcat(char* dest,char* src)
+//{
+//	assert(src && dest);
+//	char* ret = *dest;
+//	//找目标空间中的\0
+//	while (*dest)//不等于\0 就进来++
+//	{
+//		dest++;
+//	}
+//	//拷贝
+//	while (*dest++ = *src++)//把源字符串放到目标空间后面
+//	{
+//		;
+//	}
+//	return ret;
+//} 
+//int main()
+//{
+//	char arr1[20] = "hello";//目标空间
+//	char arr2[] = " bit";//源字符串
+//	my_strcat(arr1, arr2);//把arr2的内容追加到arr1后面
+//	printf("%s\n", arr1);//hello bit
+//	//printf("%s\n", my_strcat(arr1, arr2));
+//	return 0;
+//}
+
+//自己给自己追加
+//char* my_strcat(char* dest,char* src)
+//{
+//	assert(src && dest);
+//	char* ret = *dest;
+//	//找目标空间中的\0
+//	while (*dest)//不等于\0 就进来++
+//	{
+//		dest++;
+//	}
+//	//拷贝
+//	while (*dest++ = *src++)//把源字符串放到目标空间后面
+//	{
+//		;
+//	}
+//	return ret;
+//} 
+//int main()
+//{
+//	char arr[20] = "bit";
+//	my_strcat(arr,arr);//自己给自己追加
+//	printf("%s\n", arr);  
+//	return 0;
+//}
+
+//strcmp--字符块比较
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "abq";//c和q比 c的ASCII值比q小
+//	//所以arr1 小于 arr2
+//	char arr2[] = "abc";//就d和\0比较 d的ASCII比0大 
+//	//所以arr1大于 arr2
+//	char arr2[] = "abcdef";//同时遇到\0 那么就是相等
+//
+//	int ret = strcmp(arr1,arr2);
+//	//strcmp函数比较的不是字符串的长度
+//	//而是比较字符串中对应位置上的字符的大小，
+//	//如果相同，就比较下一对儿，直到不同或者都遇到\0
+//	//字符比较  比较的是ASCII值
+//
+//	if (ret > 0)
+//	{
+//		printf(">\n");
+//	}
+//	else if (ret == 0)
+//	{
+//		printf("== \n");
+//	}
+//	else
+//	{
+//		printf("<\n");
+//	}
+//	printf("%d\n", ret);
+//	// 1  0  -1
+//	return 0;
+//}
+
+//实现 strcmp函数
+//int my_strcmp(const char* s1,const char* s2)
+//{
+//	assert(s1 && s2);
+//	while (*s1 == *s2)
+//	{
+//		if (*s1 == '\0')//说明s1 s2都遇到了\0
+//		{
+//			return 0;//相等
+//		}
+//		s1++;
+//		s2++;
+//	}
+//	//不相等
+//	/*if (*s1 > *s2)
+//	{
+//		return 1;
+//	}
+//	else
+//		return -1;*/
+//	return *s1 - *s2;
+//}
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "abcq";//c和q比 c的ASCII值比q小
+//	//char arr2[] = "abc";//就d和\0比较 d的ASCII比0大 
+//	//char arr2[] = "abcdef";//同时遇到\0 那么就是相等
+//
+//	int ret = my_strcmp(arr1, arr2);
+//
+//	if (ret > 0)
+//	{
+//		printf(">\n");
+//	}
+//	else if (ret == 0)
+//	{
+//		printf("== \n");
+//	}
+//	else
+//	{
+//		printf("<\n");
+//	}
+//	printf("%d\n", ret);
+//	// 1  0  -1
+//	return 0;
+//}
+
+//strncpy
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "qwertyuiop";
+//	strncpy(arr1, arr2, 3);//就拷贝3个字符
+//	printf("%s\n", arr1);
+//	return 0;
+//} 
+
+//strncat
+//int main()
+//{  
+//	char arr1[20] = "abcdef";
+//	char arr2[] = "qwertyuiop";
+//	strncat(arr1, arr2, 5);//arr2的5个字符追加到arr1后面
+//	printf("%s\n", arr1);
+//	return 0;
+//} 
+
+//strncmp
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	//char arr2[] = "qwertyuiop";
+//	char arr2[] = "abcdq";//因为只比较4个 前四个相等
+//	//所以结果是相等 虽然第五个不相等
+//	//结果是 返回 0
+//
+//	int ret = strncmp(arr1, arr2, 4);//前4个和前四个比较 
+//	//a<q 返回-1
+//	printf("%d\n", ret);
+//	return 0;
+//}
+
+//strstr
+//int main()
+//{
+//	char arr1[] = "abcdefabcdef";
+//	char arr2[] = "cdef";
+//	char* ret = strstr(arr1,arr2);//在arr1里面找有没有arr2子符串
+//	//如果有 就返回第一次出现的地址 所以是char*
+//	//如果没有 则返回空指针
+//	if (ret == NULL)
+//	{
+//		printf("找不到子串\n");
+//	}
+//	else
+//	{
+//		printf("%s\n", ret);
+//		//返回子符串开始的起始地址 向后打印
+//	}
+//	return 0; 
+//}
+
+//模拟实现strstr 函数
+char* my_strstr(const char* str1,const char* str2)
 {
-	assert(src && dest);
-	char* ret = *dest;
-	//找目标空间中的\0
-	while (*dest)//不等于\0 就进来++
+	assert(str1 && str2);
+
+	const char* s1 = str1;//起始地址  替代str1往后走
+	const char* s2 = str2;
+
+	const char* cur = str1;//记录每次开始匹配的位置
+	while (*cur)//判断等不等于\0 不等于就进来
 	{
-		dest++;
+		s1 = cur;//到这里 第二次比较的时候 相当于s1也++
+		//s1 和 cur 又指向同样的位置
+		//紧接着在判断 s1 s2是否相等 不相等 就再下去 cur++
+		s2 = str2;
+		//假设 s2和s1比的时候 前三个字符一样 
+		//第四个字符和 s1不一样的时候 s2要回到起始位置 s1要继续++ 在进行比较 
+		//str2 里存的就是 arr2的起始位置
+		while (*s1 && *s2 && (*s1 == *s2))//都不等于\0的时候才能进来
+			//其中有一个==0 为假 就不会进来
+		{
+			s1++;
+			s2++;
+		}
+		//*s1 != *s2 就到这
+		//一开始cur和s1 指向同样的起始位置 因为不相等
+		//所以 cur++ 到下一个字符 在和 s2 进行比较
+		if (*s2 == '\0')//说明子串都被找到了
+		{
+			return (char*)cur;
+		//cur记录了 这一次匹配成功，找到子串的s1起始位置
+		//所以返回匹配成功 s1中cur的起始位置
+		}
+		cur++;//上去
+		//像arr2 cdef 和 arr1 比较 cde一样 但是arr1是cdeq
+		//当比较到f和q的时候 不相等 s2回到子符串起始位置
+		//而s1 回到刚才比较的位置后一个 也就是之前 cur 然后++的位置
+		// cur++ 的位置 接着赋给s1 和 s2 接着进行比较
 	}
-	//拷贝
-	while (*dest++ = *src++)//把源字符串放到目标空间后面
-	{
-		;
-	}
-	return ret;
-} 
+	//*cur==\0 说明这个字符串都被找完了 都没找到
+	return NULL;//找不到的情况
+}
 int main()
 {
-	char arr1[20] = "hello";//目标空间
-	char arr2[] = "bit";//源字符串
-	my_strcat(arr1, arr2);//把arr2的内容追加到arr1后面
-	printf("%s\n", arr1);//hello bit
-	//printf("%s\n", my_strcat(arr1, arr2));
-	return 0;
+	char arr1[] = "abcdeqabcdef";
+	char arr2[] = "cdef";
+	char* ret = my_strstr(arr1,arr2);
+	if (ret == NULL)
+	{
+		printf("找不到子串\n");
+	}
+	else
+	{
+		printf("%s\n", ret);
+		//返回子符串开始的起始地址 向后打印
+	}
+	return 0; 
 }

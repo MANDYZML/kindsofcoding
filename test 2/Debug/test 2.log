@@ -1,3 +1,2 @@
 ﻿  test 2.c
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c(5201,1): warning C4047: “初始化”:“char *”与“char”的间接级别不同
   test 2.vcxproj -> C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\Debug\test 2.exe
