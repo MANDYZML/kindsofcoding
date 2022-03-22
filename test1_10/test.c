@@ -2564,44 +2564,44 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-    char ch = 0;
-    scanf("%c", &ch);
-    int i = 0;
-    int n = 3;
-    //上半部分
-    for (i = 1; i <= n; i++)
-    {
-        int j = 0;
-        for (j = 0; j < n - i; j++)
-        {
-            printf(" ");
-        }
-        for (j = 0; j < 2 * i - 1; j++)
-        {
-            printf("%c", ch);
-        }
-        printf("\n");
-    }
-    //下半部分
-    for (i = 1; i <= n - 1; i++)
-    {
-        int k = 0;
-        for (k = 0; k < i; k++)
-        {
-            printf(" ");
-        }
-        for (k = 0; k < 2 * (n - i) - 1; k++)
-        {
-            printf("%c", ch);
-        }
-        printf("\n");
-    }
-
-    return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//    char ch = 0;
+//    scanf("%c", &ch);
+//    int i = 0;
+//    int n = 3;
+//    //上半部分
+//    for (i = 1; i <= n; i++)
+//    {
+//        int j = 0;
+//        for (j = 0; j < n - i; j++)
+//        {
+//            printf(" ");
+//        }
+//        for (j = 0; j < 2 * i - 1; j++)
+//        {
+//            printf("%c", ch);
+//        }
+//        printf("\n");
+//    }
+//    //下半部分
+//    for (i = 1; i <= n - 1; i++)
+//    {
+//        int k = 0;
+//        for (k = 0; k < i; k++)
+//        {
+//            printf(" ");
+//        }
+//        for (k = 0; k < 2 * (n - i) - 1; k++)
+//        {
+//            printf("%c", ch);
+//        }
+//        printf("\n");
+//    }
+//
+//    return 0;
+//}
 //#include <stdio.h>
 //int main()
 //{
@@ -2627,3 +2627,15 @@ int main()
 //	}
 //	return 0;
 //}
+
+#include<stdio.h>
+int main()
+{
+	int a = 0;
+	int b = 0;
+	scanf("a=%d,b=%d", &a, &b);
+	printf("a=%d,b=%d\n", b, a);
+
+
+	return 0;
+}
