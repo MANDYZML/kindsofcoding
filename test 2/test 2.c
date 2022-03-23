@@ -5383,60 +5383,308 @@
 //}
 
 //模拟实现strstr 函数
-char* my_strstr(const char* str1,const char* str2)
-{
-	assert(str1 && str2);
+//char* my_strstr(const char* str1,const char* str2)
+//{
+//	assert(str1 && str2);
+//
+//	const char* s1 = str1;//起始地址  替代str1往后走
+//	const char* s2 = str2;
+//
+//	const char* cur = str1;//记录每次开始匹配的位置
+//	while (*cur)//判断等不等于\0 不等于就进来
+//	{
+//		s1 = cur;//到这里 第二次比较的时候 相当于s1也++
+//		//s1 和 cur 又指向同样的位置
+//		//紧接着在判断 s1 s2是否相等 不相等 就再下去 cur++
+//		s2 = str2;
+//		//假设 s2和s1比的时候 前三个字符一样 
+//		//第四个字符和 s1不一样的时候 s2要回到起始位置 s1要继续++ 在进行比较 
+//		//str2 里存的就是 arr2的起始位置
+//		while (*s1 && *s2 && (*s1 == *s2))//都不等于\0的时候才能进来
+//			//其中有一个==0 为假 就不会进来
+//		{
+//			s1++;
+//			s2++;
+//		}
+//		//*s1 != *s2 就到这
+//		//一开始cur和s1 指向同样的起始位置 因为不相等
+//		//所以 cur++ 到下一个字符 在和 s2 进行比较
+//		if (*s2 == '\0')//说明子串都被找到了
+//		{
+//			return (char*)cur;
+//		//cur记录了 这一次匹配成功，找到子串的s1起始位置
+//		//所以返回匹配成功 s1中cur的起始位置
+//		}
+//		cur++;//上去
+//		//像arr2 cdef 和 arr1 比较 cde一样 但是arr1是cdeq
+//		//当比较到f和q的时候 不相等 s2回到子符串起始位置
+//		//而s1 回到刚才比较的位置后一个 也就是之前 cur 然后++的位置
+//		// cur++ 的位置 接着赋给s1 和 s2 接着进行比较
+//	}
+//	//*cur==\0 说明这个字符串都被找完了 都没找到
+//	return NULL;//找不到的情况
+//}
+//int main()
+//{
+//	char arr1[] = "abcdeqabcdef";
+//	char arr2[] = "cdef";
+//	char* ret = my_strstr(arr1,arr2);
+//	if (ret == NULL)
+//	{
+//		printf("找不到子串\n");
+//	}
+//	else
+//	{
+//		printf("%s\n", ret);
+//		//返回子符串开始的起始地址 向后打印
+//	}
+//	return 0; 
+//}
 
-	const char* s1 = str1;//起始地址  替代str1往后走
-	const char* s2 = str2;
+//strtok--切割
+#include<stdio.h>
+#include<string.h>
+//int main()
+//{
+//	char arr[] = "manlinzhang4@gmail.com";
+//	char buf[30] = { 0 };
+//	strcpy(buf, arr);//把arr的内容 临时拷贝一份放到buf
+//	const char* sep = "@.";//分隔符集合 把分割符字符串首字符地址赋给sep
+//	//分隔符是 "@."
+//
+//	printf("%s\n",strtok(buf, sep));//只找第一个标记 返回m的地址
+//	//假设传的第一个参数不为空指针null，也就是会找到@ 
+//	//并且把@改成\0 并且把这分割的字符串首地址传过去
+//	//同时会记住刚刚找完的位置 下一次会从这个位置继续往后找
+//	//找到. 又是一个分隔符
+//	printf("%s\n", strtok(NULL, sep));//是从保存好的位置继续往后找 返回g的地址
+//	//如果传的第一个参数为NULL,
+//	//函数将在同一个字符串中被保存的位置开始，查找下一个标记
+//	
+//	printf("%s\n", strtok(NULL, sep));//又从. 分隔符的位置向后打印com 返回c的地址
+//	return 0;
+//}
 
-	const char* cur = str1;//记录每次开始匹配的位置
-	while (*cur)//判断等不等于\0 不等于就进来
-	{
-		s1 = cur;//到这里 第二次比较的时候 相当于s1也++
-		//s1 和 cur 又指向同样的位置
-		//紧接着在判断 s1 s2是否相等 不相等 就再下去 cur++
-		s2 = str2;
-		//假设 s2和s1比的时候 前三个字符一样 
-		//第四个字符和 s1不一样的时候 s2要回到起始位置 s1要继续++ 在进行比较 
-		//str2 里存的就是 arr2的起始位置
-		while (*s1 && *s2 && (*s1 == *s2))//都不等于\0的时候才能进来
-			//其中有一个==0 为假 就不会进来
-		{
-			s1++;
-			s2++;
-		}
-		//*s1 != *s2 就到这
-		//一开始cur和s1 指向同样的起始位置 因为不相等
-		//所以 cur++ 到下一个字符 在和 s2 进行比较
-		if (*s2 == '\0')//说明子串都被找到了
-		{
-			return (char*)cur;
-		//cur记录了 这一次匹配成功，找到子串的s1起始位置
-		//所以返回匹配成功 s1中cur的起始位置
-		}
-		cur++;//上去
-		//像arr2 cdef 和 arr1 比较 cde一样 但是arr1是cdeq
-		//当比较到f和q的时候 不相等 s2回到子符串起始位置
-		//而s1 回到刚才比较的位置后一个 也就是之前 cur 然后++的位置
-		// cur++ 的位置 接着赋给s1 和 s2 接着进行比较
-	}
-	//*cur==\0 说明这个字符串都被找完了 都没找到
-	return NULL;//找不到的情况
-}
+//优化
+//int main()
+//{
+//	char arr[] = "manlinzhang4@gmail.com";
+//	char buf[30] = { 0 };
+//	strcpy(buf, arr);//把arr的内容 临时拷贝一份放到buf
+//	const char* sep = "@.";//分隔符集合 把分割符字符串首字符地址赋给sep
+//	//分隔符是 "@."
+//	char* str = NULL;
+//	for (str = strtok(buf, sep); str != NULL;str=strtok(NULL,sep))
+//		//如果不等于空指针，说明这次获取了了个正确字符串
+//		//当上来 strtok函数再次调用 NULL 从保存好的位置继续往后执行 放到str
+//		//str != NULL 又进来 直到有一次 str为空指针 就不进来了
+//	{
+//		printf("%s\n", str);//打印这个字符串
+//	}
+//
+//	//printf("%s\n", strtok(buf, sep));//只找第一个标记 返回m的地址
+//	//假设传的第一个参数不为空指针null，也就是会找到@ 
+//	//并且把@改成\0 并且把这分割的字符串首地址传过去
+//	//同时会记住刚刚找完的位置 下一次会从这个位置继续往后找
+//	//找到. 又是一个分隔符
+//	
+//	//printf("%s\n", strtok(NULL, sep));//是从保存好的位置继续往后找 返回g的地址
+//	//如果传的第一个参数为NULL,
+//	//函数将在同一个字符串中被保存的位置开始，查找下一个标记
+//
+//	//printf("%s\n", strtok(NULL, sep));//又从. 分隔符的位置向后打印com 返回c的地址
+//	return 0;
+//}
+
+//strerror
+#include<limits.h>
+#include<errno.h>
+#include<stdlib.h>
+//int main()
+//{
+//
+//	//printf("%s\n", strerror(0));//给错误码，转换成对应的错误信息
+//	//错误信息是字符串  strerror函数返回错误码所对应错误信息的字符串首字符地址
+//	//printf("%s\n", strerror(1));
+//	//printf("%s\n", strerror(2));
+//	//printf("%s\n", strerror(3));
+//
+//	//int* p = (int*)malloc(40);//向堆区申请内存 40个字节 放到整型指针
+//	int* p = (int*)malloc(INT_MAX);//申请 整形最大值 的空间
+//	if (p == NULL)//也就是malloc开辟空间失败 会返回空指针
+//	{
+//		//printf("%s\n", strerror(errno));//打印失败原因
+//		//malloc调用失败的时候 会把错误码放到errno全局变量中
+//		perror("Malloc");//打印错误信息 前面加上自定义信息
+//		return 1;
+//	}
+//	return 0;
+//}
+
+//字符分类函数
+//isdigit 如果是数字字符 返回非0值 0-9
+//不是数字字符 返回 0
+#include<ctype.h>
+//int main()
+//{
+//	//判断数字字符
+//	//int ret = isdigit('4');
+//	//int ret = isdigit('q');
+//	//判断大小写
+//	char ch = 'a';
+//	int ret = islower(ch);
+//	printf("%d\n", ret);
+//	return 0;
+//}
+
+//字符转换函数
+//int main()
+//{
+//	char ch = 'a';
+//	putchar(toupper(ch));//转大写  putchar打印一个字符
+//	putchar(tolower(ch));//转小写 
+//	return 0;
+//}
+
+//memcpy 内存操作函数
+//void* memcpy(void* dest, const void* src, size_t count);
+//int main()
+//{
+//	int arr1[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int arr2[5] = { 0 };//要把12345 拷贝过来
+//	memcpy(arr2,arr1,20);//把arr1的5个整型拷贝到arr2中 一个整形4个字节 
+//	                    //20个字节
+//	return 0;
+//}
+
+//模拟实现
+//void* my_memcpy(void* dest,const void* src,size_t count)
+//{
+//	assert(dest && src);
+//	void* ret = dest;
+//	while (count--)//count不为0 进来
+//	{
+//		*(char*)dest = *(char*)src;//一个字节一个字节拿
+//		dest = (char*)dest + 1;//也就是dest++ 跳过一个字节
+//		src = (char*)src + 1;
+//
+//		//另一种写法
+//		/*++(char*)dest;
+//		++(char*)src;*/
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	//int arr1[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	//int arr2[5] = { 0 };//要把12345 拷贝过来
+//	//my_memcpy(arr2, arr1, 20);//把arr1的5个整型拷贝到arr2中 一个整形4个字节 
+//	//					//20个字节
+//
+//	//把12345的数据考到34567上
+//	int arr1[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	              // 1 2 1 2 3 4 5 8 9 10
+//	//但是现在结果是  1 2 1 2 1 2 1 8 9 10
+//	//my_memcpy(arr1+2, arr1, 20);
+//	memmove(arr1+2,arr1,20);//可以实现重叠内存的拷贝
+//
+//	int i = 0;
+//	int sz = sizeof(arr1) / sizeof(arr1[0]);
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr1[i]);
+//	}
+//	return 0;
+//}
+//void* memmove(void* dest, const void* src, size_t count);
+
+//模拟实现 memmove
+//void* my_memcpy(void* dest, const void* src, size_t count)
+//{
+//	assert(dest && src);
+//	void* ret = dest;
+//	while (count--)//count不为0 进来
+//	{
+//		*(char*)dest = *(char*)src;//一个字节一个字节拿
+//		dest = (char*)dest + 1;//也就是dest++ 跳过一个字节
+//		src = (char*)src + 1;
+//
+//		//另一种写法
+//		/*++(char*)dest;
+//		++(char*)src;*/
+//	}
+//	return ret;
+//}
+//void* my_memmove(void* dest,const void* src,size_t count)
+//{
+//	assert(dest && src);
+//	void* ret = dest;
+//	//一种判断方法
+//	if (dest < src)
+//	{
+//	//从前向后拷贝
+//		while (count--)
+//		{
+//			*(char*)dest = *(char*)src;
+//			dest = (char*)dest + 1;
+//			src = (char*)src + 1;
+//		}
+//	}
+//	else
+//	{
+//	//从后向前拷贝
+//		while (count--)//count本来是20 -- 变成19
+//		{
+//			*((char*)dest+count)=*((char*)src + count);
+//			//+19 就是到了 07 00 00 00 最后00 位置
+//			//* 找到了最后一个的字节
+//		}
+//		return ret;
+//     }
+//	 
+//	//另一种
+//	//if(dest>src && dest<((char*)src+count))
+//	//{
+//	////从后向前
+// //   }
+//	//else
+//	//{
+//	////从前向后
+//	//}
+//}
+//int main()
+//{
+//	//把12345的数据考到34567上
+//	int arr1[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	               // 1 2 1 2 3 4 5 8 9 10
+//     //但是现在结果是  1 2 1 2 1 2 1 8 9 10
+//	//my_memmove(arr1 + 2, arr1, 20);//可以实现重叠内存的拷贝
+//	my_memmove(arr1, arr1 + 2, 20);//34567 放到12345
+//
+//	int i = 0;
+//	int sz = sizeof(arr1) / sizeof(arr1[0]);
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr1[i]);
+//	}
+//	return 0;
+//}
+
+//memcmp
+//int main()
+//{
+//	int arr1[] = { 1,2,3,4,5 };
+//	int arr2[] = { 1,2,3,4,0x11223305 };
+//	int ret = memcmp(arr1, arr2, 18);//16个字节 比较1234
+//	printf("%d\n", ret);//前16个字节相同 返回0
+//	return 0;
+//}
+
+//memset
 int main()
 {
-	char arr1[] = "abcdeqabcdef";
-	char arr2[] = "cdef";
-	char* ret = my_strstr(arr1,arr2);
-	if (ret == NULL)
-	{
-		printf("找不到子串\n");
-	}
-	else
-	{
-		printf("%s\n", ret);
-		//返回子符串开始的起始地址 向后打印
-	}
-	return 0; 
+	int arr[] = { 1,2,3,4,5 };
+	//把数组每个字节都设置成0
+	memset(arr, 0, 20);//以字节为单位设置
+	return 0;
 }
