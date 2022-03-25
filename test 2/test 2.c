@@ -5681,10 +5681,206 @@
 //}
 
 //memset
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5 };
+//	//把数组每个字节都设置成0
+//	memset(arr, 0, 20);//以字节为单位设置
+//	return 0;
+//}
+
+//自定义类型
+//struct Stu
+//{
+//	char name[20];
+//	int age;
+//	double score;
+//}s1,s2,s3;
+//
+//
+//struct Book
+//{
+//	char name[20];
+//	float price;
+//	char id[12];
+//};
+//
+//struct  //匿名结构体
+//{
+//	char name[20];
+//	char id[12];
+//}ss;//用匿名结构体类型 创建了变量
+////匿名结构体只能用一次
+//int main()
+//{
+//	struct Book b1;
+//	struct Stu s2, s3;
+//	return 0;
+//}
+
+//结构的自引用  列表实现
+//struct Node  //节点
+//{
+//	int data;//数据域
+//	//指向下一个 struct Node 节点的地址
+//	struct Node* next;//指针
+//};
+//
+//typedef 就是类型重命名
+//typedef struct Node  //节点
+//{
+//	int data;//数据域
+//	//指向下一个 struct Node 节点的地址
+//	struct Node* next;//指针
+//}Node;//把struct Node 重新起了个名字叫Node
+//
+//typedef struct Node  //节点
+//{
+//	int data;//数据域
+//	//指向下一个 struct Node 节点的地址
+//	struct Node* next;//指针
+//}Node,* pNode;
+////pNode --> struct Node* //对结构体指针进行重命名
+//
+//int main()
+//{
+//	struct Node n1;
+//	Node n2;
+//	return 0;
+//}
+
+//struct Book
+//{
+//	char name[20];
+//	float price;
+//	char id[12];//书号
+//}s = {"鹏哥c语言",55.5f,"PGC001"};
+////s创建的时候 进行初始化
+//
+////结构体嵌套
+//struct Node
+//{
+//	struct Book b;
+//	struct Node* next;
+//};
+//int main()
+//{
+//	struct Book s2 = { "数据结构",66.6f,"HG001" };
+//	struct Node n = { {"汤神java",66.8,"TG001"},NULL};//两个成员
+//	return 0;
+//}
+
+//结构体内存对齐
+//struct S1
+//{
+//	char c1;//1个字节
+//	int i;//4
+//	char c2;//1
+//};//以为只需要6个字节空间大小就可  但是结果是 12 
+//
+//struct S2 
+//{
+//	char c1;//1个字节
+//	char c2;//1
+//	int i;//4
+//};
+//
+//struct S3
+//{
+//	double d;
+//	char c;
+//	int i;
+//}; // 16
+
+//struct S4
+//{
+//	char c1;//1
+//	struct S3 s3;//16
+//	double d;//8
+//
+//};
+//#include <stddef.h>
+//int main()
+//{
+//	printf("%u\n", sizeof(struct S4));//32
+
+	/*printf("%u\n", offsetof(struct S1, c1));
+	printf("%u\n", offsetof(struct S1, i));
+	printf("%u\n", offsetof(struct S1, c2));*/
+
+
+	/*printf("%u\n", offsetof(struct S3, d));
+	printf("%u\n", offsetof(struct S3, c));
+	printf("%u\n", offsetof(struct S3, i));*/
+
+	/*struct S1 s;
+	struct S2 s2;*/
+	//printf("%d\n", sizeof(s));//s所占内存空间大小 12
+	//printf("%d\n", sizeof(s2));//8
+//	//printf("%d\n", sizeof(struct S3));//16
+//	return 0;
+//}
+
+//offsetof-宏
+//计算结构体成员相当于起始位置的偏移量
+
+//修改默认对齐数
+//#pragma pack(4)//把默认对齐数改成4  原本是8
+//struct S
+//{
+//	char c;
+//	double d;
+//}; //16  这个结构体是按照4个字节来对齐
+//#pragma pack()
+//int main()
+//{
+//	struct S s;//16
+//	printf("%d\n", sizeof(s)); //12
+//	return 0;
+//}
+
+//位段
+//struct AA 
+//{
+//	int _a;//取值范围 INT_MIN-INT_MAX
+//	int _b;
+//	int _c;
+//	int _d;
+//};
+//
+//struct A //A就是一个位段类型
+//{
+//	int _a : 2;//2代表所占内存的比特位
+//	int _b : 5;//_b这个成员只占5个bit位
+//	int _c : 10;
+//	int _d : 30;
+//};
+////_a 如果只有两个比特位 表示的二进制 只有 00 01 10 11
+////                                      0  1  2  3
+//int main()
+//{
+//	printf("%d\n", sizeof(struct A));//8  8个字节 两个整型
+//	printf("%d\n", sizeof(struct AA));//16 4个整型
+//	//A 比 AA 节省空间
+//	return 0;
+//}
+
+//例子
+struct S
+{
+	char a : 3;
+	char b : 4;
+	char c : 5;
+	char d : 4;
+};
 int main()
 {
-	int arr[] = { 1,2,3,4,5 };
-	//把数组每个字节都设置成0
-	memset(arr, 0, 20);//以字节为单位设置
+	struct S s = { 0 };//初始化成0
+	printf("%d\n", sizeof(s)); //3 3个字节
+	s.a = 10;
+	s.b = 12;
+	s.c = 3;
+	s.d = 4;
+
 	return 0;
 }
