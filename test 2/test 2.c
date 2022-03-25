@@ -5866,21 +5866,121 @@
 //}
 
 //例子
-struct S
+//struct S
+//{
+//	char a : 3;
+//	char b : 4;
+//	char c : 5;
+//	char d : 4;
+//};
+//int main()
+//{
+//	struct S s = { 0 };//初始化成0
+//	printf("%d\n", sizeof(s)); //3 3个字节
+//	s.a = 10;
+//	s.b = 12;
+//	s.c = 3;
+//	s.d = 4;
+//
+//	return 0;
+//}
+
+//枚举的类型
+//enum Sex
+//{
+//	MALE,
+//	FEMALE,
+//	SECRET
+//};
+//
+//enum Day
+//{
+//	Mon,
+//	Tues,
+//	Wed,
+//	Thur,
+//	Fri,
+//	Sat,
+//	Sun
+//
+//};
+//
+//enum Color
+//{
+//	RED=5, //原本是 0 1 2 red被初始化成5后 依次是 5 6 7
+//	GREEN = 8,// 依次是 5 8 9  +1
+//	BLUE
+//};//给枚举常量加上= 不是赋值  是初始化
+//int main()
+//{
+//	printf("%d\n", RED);
+//	printf("%d\n", GREEN);
+//	printf("%d\n", BLUE);
+//	/*enum Sex s = MALE;
+//	enum Sex s2 = FEMALE;
+//	enum Day d = Fri;
+//	enum Color c = GREEN;*/
+//	return 0;
+//}
+
+//联合
+//联合体的关键字-- union
+//声明一个联合体类型
+//union Un   //定义了一个un类型
+//{
+//	char c;//1
+//	int i;//4
+//};
+//
+//int main()
+//{
+//	union Un u;
+//	u.c = 0x55;//
+//	u.i = 0;
+//	//内存会跟着改
+//	//u.c的时候 55 00 00 00 
+//	//u.i 00 00 00 00
+//	/*printf("%d\n", sizeof(u));
+//	 
+//	printf("%p\n", &u);
+//	printf("%p\n", &(u.c));
+//	printf("%p\n", &(u.i));*/
+//
+//	return 0;
+//}
+
+//判断大小端
+check_sys()
 {
-	char a : 3;
-	char b : 4;
-	char c : 5;
-	char d : 4;
-};
+	union Un
+	{
+		char c;
+		int i;
+	}u;//用上面的类型创建了u 对象
+	u.i = 1;//01 00 00 00
+	return u.c;//return c 是返回公用的第一个字节 也就是 01
+}
 int main()
 {
-	struct S s = { 0 };//初始化成0
-	printf("%d\n", sizeof(s)); //3 3个字节
-	s.a = 10;
-	s.b = 12;
-	s.c = 3;
-	s.d = 4;
+	if (1 == check_sys())
+	    { 
+		printf("小端\n");
+		}
+		else
+		{
+			printf("大端\n");
+		}
 
+
+	//int i = 1;
+   // 小端存储  01 00 00 00
+	//if (1 == *(char*)&i)//指向第一个字节
+	//{
+	//	printf("小端\n");
+	//}
+	//else
+	//{
+	//	printf("大端\n");
+	//}
 	return 0;
 }
