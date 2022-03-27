@@ -40,8 +40,9 @@ void PrintContact(const Contact* pc)
 {
 	assert(pc);
 	int i = 0;
+	printf("%-20s %-5s %-5s %-12s %-30s\n", "姓名", "年龄", "性别", "电话", "地址");//打印标题
 	for (i = 0; i < pc->sz; i++)
 	{
-		printf("%s %d %s %s %s\n", pc->data[i].name, pc->data[i].age, pc->data[i].sex, pc->data[i].tele, pc->data[i].addr);
+		printf("%-20s %-5d %-5s %-12s %-30s\n", pc->data[i].name, pc->data[i].age, pc->data[i].sex, pc->data[i].tele, pc->data[i].addr);
 	}
 }
