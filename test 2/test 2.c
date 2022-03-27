@@ -5950,40 +5950,40 @@
 //}
 
 //判断大小端
-//check_sys()
-//{
-//	union Un
-//	{
-//		char c;//1
-//		int i;//4
-//	}u;//用上面的类型创建了u 对象
-//	u.i = 1;//01 00 00 00  i被改 c也跟着被改
-//	return u.c;//return c 是返回共用的第一个字节 也就是 01
-//}
-//int main()
-//{
-//	if (1 == check_sys())
-//	    { 
-//		printf("小端\n");
-//		}
-//		else
-//		{
-//			printf("大端\n");
-//		}
-//
+check_sys()
+{
+	union Un
+	{
+		char c;//1
+		int i;//4
+	}u;//用上面的类型创建了u 对象
+	u.i = 1;//01 00 00 00  i被改 c也跟着被改
+	return u.c;//return c 是返回共用的第一个字节 也就是 01
+}
+int main()
+{
+	if (1 == check_sys())
+	    { 
+		printf("小端\n");
+		}
+		else
+		{
+			printf("大端\n");
+		}
 
-	//int i = 1;
-   // 小端存储  01 00 00 00
-	//if (1 == *(char*)&i)//指向第一个字节
-	//{
-	//	printf("小端\n");
-	//}
-	//else
-	//{
-	//	printf("大端\n");
-	//}
-//	return 0;
-//}
+
+	int i = 1;
+    //小端存储  01 00 00 00
+	if (1 == *(char*)&i)//指向第一个字节
+	{
+		printf("小端\n");
+	}
+	else
+	{
+		printf("大端\n");
+	}
+	return 0;
+}
 
 //联合体大小的计算
 //union Un
