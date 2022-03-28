@@ -2628,14 +2628,51 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	return 0;
 //}
 
-#include<stdio.h>
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("a=%d,b=%d", &a, &b);
+//	printf("a=%d,b=%d\n", b, a);
+//
+//
+//	return 0;
+//}
+
+//左旋
+int is_left_move(const char* str1,const char* str2)//str1是不是str2旋转得来的
+{
+	assert(str1 && str2);
+
+	//确保两个字符串长度相等
+	int len1 = strlen(str1);
+	int len2 = strlen(str2);
+	if (len1 != len2)
+		return 0;
+	
+	//1.在str2后边追加一个str2
+	strncat(str2, str2, strlen(str2));
+	//判断str1是不是追加后的子串
+	char* ret = strstr(str2, str1);//判断str2中能不能找到str1
+	if (ret == NULL)//说明不是子串
+	{
+		return 0;
+	}
+	else // 是子串
+	{
+		return 1;
+	}
+}
 int main()
 {
-	int a = 0;
-	int b = 0;
-	scanf("a=%d,b=%d", &a, &b);
-	printf("a=%d,b=%d\n", b, a);
+	char arr1[20] = "abcdef";
+	char arr2[20] = "efabcd";
 
-
+	int ret = is_left_move(arr2, arr1);//arr2是不是arr1旋转得来的
+	if (ret == 1)
+		printf("yes\n");
+	else
+		printf("no\n");
 	return 0;
 }
