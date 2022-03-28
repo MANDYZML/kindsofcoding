@@ -34,9 +34,10 @@ void test()
 			AddContact(&con);
 			break;
 		case DEL:
-
+			DelContact(&con);
 			break;
 		case SEARCH:
+			SearchContact(&con);
 			break;
 		case MODIFY:
 			break;

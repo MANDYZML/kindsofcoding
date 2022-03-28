@@ -47,3 +47,9 @@ void AddContact(Contact* pc);//&con传过来 指针接收
 
 //打印通讯录中的信息
 void PrintContact(const Contact* pc);//只打印不修改 所以+const
+
+//删除指定联系人
+void DelContact(Contact* pc);
+
+//查找指定联系人
+void SearchContact(const Contact* pc);

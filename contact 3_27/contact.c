@@ -46,3 +46,66 @@ void PrintContact(const Contact* pc)
 		printf("%-20s %-5d %-5s %-12s %-30s\n", pc->data[i].name, pc->data[i].age, pc->data[i].sex, pc->data[i].tele, pc->data[i].addr);
 	}
 }
+
+//找到返回下标  找不到返回-1
+int FindByName(const Contact* pc,char name[])
+{
+	assert(pc);
+	int i = 0;
+	for (i = 0; i < pc->sz; i++)
+	{
+		if (0 == strcmp(pc->data[i].name, name))//两个字符串 进行比较
+		{
+			return i;
+		}
+	}
+	//找不到下标
+	return -1;
+}
+
+void DelContact(Contact* pc)
+{
+	assert(pc);
+	if (pc->sz == 0)//通讯录里没有元素了
+	{
+		printf("通讯录已空，无法删除\n");
+		return;
+	}
+	//删除
+	//1.找到要删除的人
+	char name[NAME_MAX] = { 0 };
+	printf("请输入要删除人的名字;>");
+	scanf("%s", name);
+	int pos = FindByName(pc, name);//在pc所指向的通讯录里通过名字来找
+	//找到了返回下标 --pos
+	if (pos == -1)
+	{
+		printf("要删除的人不存在\n");
+		return;
+	}
+	//2.删除
+	int j = 0;
+	for (j = pos; j < pc->sz-1; j++)//pos是要被删除的位置
+	{
+		pc->data[j] = pc->data[j + 1];//因为删除j的位置 所以后面的覆盖到这个位置
+	}
+	pc->sz--;//删除以后 元素个数也在减少
+	printf("删除成功\n");
+}
+
+void SearchContact(const Contact* pc)
+{
+	char name[NAME_MAX] = { 0 };
+	printf("请输入要查找人的名字;>");
+	scanf("%s", name);
+	int pos = FindByName(pc, name);//在pc所指向的通讯录里通过名字来找
+	//找到了返回下标 --pos
+	if (pos == -1)
+	{
+		printf("要查找的人不存在\n");
+		return;
+	}
+	printf("%-20s %-5s %-5s %-12s %-30s\n", "姓名", "年龄", "性别", "电话", "地址");//打印标题
+	printf("%-20s %-5d %-5s %-12s %-30s\n", pc->data[pos].name, pc->data[pos].age, pc->data[pos].sex, pc->data[pos].tele, pc->data[pos].addr);
+
+}
