@@ -5950,40 +5950,40 @@
 //}
 
 //判断大小端
-check_sys()
-{
-	union Un
-	{
-		char c;//1
-		int i;//4
-	}u;//用上面的类型创建了u 对象
-	u.i = 1;//01 00 00 00  i被改 c也跟着被改
-	return u.c;//return c 是返回共用的第一个字节 也就是 01
-}
-int main()
-{
-	if (1 == check_sys())
-	    { 
-		printf("小端\n");
-		}
-		else
-		{
-			printf("大端\n");
-		}
-
-
-	int i = 1;
-    //小端存储  01 00 00 00
-	if (1 == *(char*)&i)//指向第一个字节
-	{
-		printf("小端\n");
-	}
-	else
-	{
-		printf("大端\n");
-	}
-	return 0;
-}
+//check_sys()
+//{
+//	union Un
+//	{
+//		char c;//1
+//		int i;//4
+//	}u;//用上面的类型创建了u 对象
+//	u.i = 1;//01 00 00 00  i被改 c也跟着被改
+//	return u.c;//return c 是返回共用的第一个字节 也就是 01
+//}
+//int main()
+//{
+//	if (1 == check_sys())
+//	    { 
+//		printf("小端\n");
+//		}
+//		else
+//		{
+//			printf("大端\n");
+//		}
+//
+//
+//	int i = 1;
+//    //小端存储  01 00 00 00
+//	if (1 == *(char*)&i)//指向第一个字节
+//	{
+//		printf("小端\n");
+//	}
+//	else
+//	{
+//		printf("大端\n");
+//	}
+//	return 0;
+//}
 
 //联合体大小的计算
 //union Un
@@ -5996,3 +5996,88 @@ int main()
 //	printf("%d\n", sizeof(union Un));//8  因为要对齐
 //	return 0;
 //}
+
+
+//动态内存管理
+//int main()
+//{
+//	//申请的空间不能改变
+//	int arr1[10];//向内存申请40个字节的空间
+//	char arr2[40];//也是向内存申请40个字节的空间
+//	return 0;
+//}
+
+#include<stdlib.h>
+//int main()
+//{
+//	//申请空间
+//	malloc(40);//向内存申请40个字节的空间
+//	          //malloc 就会在堆区找40个字节的空间
+//	         //之后会被空间的起始地址返回来
+//	int* ptr = (int*)malloc(40);//希望空间里放的都是整形 
+//	           //malloc函数返回的是void* 所以强制类型转换
+//	int* p = ptr;//ptr要指向空间起始位置  不能轻易动
+//	if (p == NULL)//申请失败
+//	{
+//		perror("malloc");//提醒在malloc出错
+//		return 1;
+//	}
+//	//开辟成功
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	//解引用p 一次访问四个字节 10次就能访问40个字节
+//	{
+//		*p = i;//给每个整型初始化 0 1 2 3...
+//		p++;
+//	}
+//
+//	//释放空间
+//	free(ptr);//释放从起始位置向后的空间
+//	//当释放这块空间--也就是把空间还给系统  
+//	//但是ptr还指向这块空间  ptr就是野指针
+//	ptr = NULL;
+//	return 0;
+//}
+
+//另一种写法
+#include<stdlib.h>
+//int main()
+//{
+//	//申请空间
+//	malloc(40);//向内存申请40个字节的空间
+//			  //malloc 就会在堆区找40个字节的空间
+//			 //之后会被空间的起始地址返回来
+//	int* ptr = (int*)malloc(40);
+//	if (ptr == NULL)//申请失败
+//	{
+//		perror("malloc");//提醒在malloc出错
+//		return 1;
+//	}
+//	//开辟成功
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//		//解引用p 一次访问四个字节 10次就能访问40个字节
+//	{
+//		*(ptr + i) = i;
+//	}
+//
+//	//释放空间
+//	free(ptr);
+//	ptr = NULL;
+//	return 0;
+//}
+
+//int main()
+//{
+//	int* p = NULL;
+//	free(p);//啥事都不发生 因为没有malloc
+//	return 0;
+//}
+
+int main()
+{
+	//int* p = (int*)malloc(40);
+	 //申请10个整型的空间
+	int* p = (int*)calloc(10, sizeof(int));// sizeof(int) 一个元素大小 4个字节
+	return 0;
+}
