@@ -6007,6 +6007,7 @@
 //	return 0;
 //}
 
+//malloc
 #include<stdlib.h>
 //int main()
 //{
@@ -6074,10 +6075,249 @@
 //	return 0;
 //}
 
-int main()
-{
-	//int* p = (int*)malloc(40);
-	 //申请10个整型的空间
-	int* p = (int*)calloc(10, sizeof(int));// sizeof(int) 一个元素大小 4个字节
-	return 0;
-}
+//calloc
+//int main()
+//{
+//	//int* p = (int*)malloc(40);
+//	 //申请10个整型的空间
+//	int* p = (int*)calloc(10, sizeof(int));// sizeof(int) 一个元素大小 4个字节
+//	if (p == NULL)//开辟失败
+//	{
+//		perror("calloc");
+//		return 1;
+//	}
+//	//使用
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%d ", *(p + i));
+//	}
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//realloc
+//int main()
+//{
+//	int* p = (int*)malloc(40);
+//	if (p == NULL)//开辟失败
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	//使用
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		*(p + i) = i;//0 1 2 3 4 5 6 7 8 9
+//	}
+//	
+//	//空间不够，希望能放20个元素，考虑扩容
+//	int* ptr=(int*)realloc(p, 80);//把ptr指向的空间扩容成80个字节的
+//	//ptr指向40个字节的起始地址 一个整型4个字节 20个元素 80个字节
+//	if (ptr != NULL)
+//	{
+//	//因为如果整个内存都找不到80个字节的地方 
+//	//并且realloc 会把原来的空间free 所以不能直接用p
+//		p = ptr;
+//	}
+//	//空间扩容成功 开始使用
+//	//不再使用，就释放
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//常见的动态内存错误
+//1.对NULL指针的解引用操作
+//解决办法：对malloc函数的返回值进行判断
+//int main()
+//{
+//	int* p =(int*) malloc(1000);//malloc有可能返回一个空指针放到p里面
+//	int i = 0;
+//	//进行判断
+//	if (p == NULL)
+//	{
+//		return 1;
+//	}
+//	//使用
+//	for (i = 0; i < 250; i++)
+//	{
+//		*(p + i) = i;//i=0的时候 +0 等于没加
+//		//p+i还是空指针 对空指针进行解引用 
+//		//就会形成内存访问失败  非法访问内存
+//	}
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//2.对动态开辟空间的越界访问
+//对内存边界进行检查
+//int main()
+//{
+//	int* p = (int*)malloc(100);//只有25个整形空间
+//	int i = 0;
+//	//进行判断
+//	if (p == NULL)
+//	{
+//	 return 1;
+//	}
+//	//使用
+//	//越界访问了 
+//	for (i = 0; i <= 25; i++)//<=  访问了26个 
+//	{
+//		*(p + i) = i;
+//	}
+//
+//	return 0;
+//}
+
+//3.对非动态内存使用free释放
+//int main()
+//{
+//	int a = 10;
+//	int* p = &a;
+//
+//	free(p);//p指向的空间不是动态内存开辟的
+//	p = NULL;
+//	return 0;
+//}
+
+//使用free释放一块动态开辟内存的一部分
+//int main()
+//{
+//	int* p = (int*)malloc(100);
+//	if (p = NULL)
+//	{
+//		return 1;
+//	}
+//	//使用 前10个整型赋值成0-9
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		*p = i;
+//		p++;
+//	}
+//	//释放空间
+//	free(p);//p指向了9的后面 并没有指向起始位置
+//	p = NULL;
+//	return 0;
+//}
+
+//5.对同一块动态内存多次释放
+//int main()
+//{
+//	int* p = malloc(100);
+//	if (p == NULL)
+//		return 1;
+//	free(p);
+//	//...
+//	free(p);//多次释放
+//	p = NULL;
+//	return 0;
+//}
+
+//6.动态开辟内存忘记释放(内存泄露)
+//void test()
+//{
+//	int* p = malloc(100);
+//	//使用--没有释放 内存泄漏
+//	//free(p);
+//	//p=NULL;
+//}
+//int main()
+//{
+//	test();
+//
+//	return 0;
+//}
+//
+//int* f2(void)
+//{
+//	int* ptr;//ptr没有初始化 没有指向 里面都是随机值
+//	*ptr = 10;//把10放到随机值 也就是放到野指针里面
+//	return ptr;//所以是错误的
+//}
+
+//经典笔试题
+//1.
+//void GetMemory(char** p)
+//{
+//	*p = (char*)malloc(100);
+//}
+//void Test(void)
+//{
+//	char* str = NULL;
+//	GetMemory(&str);
+//	strcpy(str, "hello word");
+//	printf(str);
+//	free(str);
+//	str = NULL;
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//2.
+//char* GetMemory(void)
+//{
+//	char p[] = "hello world";
+//	return p;
+//}
+//void Test(void)
+//{
+//	char* str = NULL;
+//	str = GetMemory();
+//	printf(str);
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//3.
+//void GetMemory(char** p, int num)
+//{
+//	*p = (char*)malloc(num);
+//}
+//void Test(void)
+//{
+//	char* str = NULL;
+//	GetMemory(&str, 100);
+//	strcpy(str, "hello");
+//	printf(str);
+//	//忘记释放
+//	free(str);
+//	str = NULL;
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//4.
+//void Test(void)
+//{
+//	char* str = (char*)malloc(100);
+//	strcpy(str, "hello");
+//	free(str);
+//	str = NULL;
+//
+//	if (str != NULL)
+//	{
+//		strcpy(str, "world");
+//		printf(str);
+//	}
+//}
+//
+//int main()
+//{
+//	Test();
+//	return 0;
+//}

@@ -2,24 +2,78 @@
 
 #include"contact.h"
 
+//静态的版本
+//void InitContact(Contact* pc)//pc指向con  con有两个成员 data sz
+//{
+//	assert(pc);
+//	pc->sz = 0;//找到指向的里面的对象 初始化
+//	memset(pc->data, 0, sizeof(pc->data));//data拿到的是数组名 首元素地址
+//	//sizeof(pc->data) sizeof(数组名) 能计算整个数组的大小 单位是多少字节
+//		//之后把整个数组都初始化成0
+//}
+
+//动态的版本
 void InitContact(Contact* pc)//pc指向con  con有两个成员 data sz
 {
 	assert(pc);
 	pc->sz = 0;//找到指向的里面的对象 初始化
-	memset(pc->data, 0, sizeof(pc->data));//data拿到的是数组名 首元素地址
-	//sizeof(pc->data) sizeof(数组名) 能计算整个数组的大小 单位是多少字节
-		//之后把整个数组都初始化成0
+	pc->capacity = DEFAULT_SZ;
+	pc->data = (PeoInfo*)malloc(pc->capacity * sizeof(PeoInfo));
+	//3* 一个人的信息=等于第一次开辟3个人的信息字节个数
+
+	if (pc->data == NULL)//说明空间开辟失败了
+	{
+		perror("InitContact::malloc");
+		return;
+	}
+	memset(pc->data, 0, pc->capacity * sizeof(PeoInfo));
+	//从data开始向后pc->capacity * sizeof(PeoInfo) 这么多个字节都初始化成0
 }
 
+//销毁通讯录
+void DestroyContact(Contact* pc)
+{
+	free(pc->data);
+	pc->data = NULL;
+	pc->capacity = 0;
+	pc->sz = 0;
+	printf("销毁成功\n");
+}
+
+void CheckCapacity(Contact* pc)
+{
+	//增容代码
+	if (pc->sz == pc->capacity)//需要考虑增容
+	{
+		PeoInfo* tmp = (PeoInfo*)realloc(pc->data, (pc->capacity + 2) * sizeof(PeoInfo));
+		//(pc->capacity + 2) * sizeof(PeoInfo) 元素个数+2 * 每个元素大小=总大小
+		if (tmp != NULL)//说明容量调整成功
+		{
+			pc->data = tmp;
+		}
+		else//增容失败
+		{
+			perror("CheckCapacity::realloc");
+			return;
+		}
+		pc->capacity += 2;//容量也增加2
+		printf("增容成功\n");
+	}
+}
 
 void AddContact(Contact* pc)
 {
 	assert(pc);
-	if (pc->sz == MAX)//也就是已经放了最大了 1000个 放不了更多的了
-	{
-		printf("通讯录已满，无法添加\n");
-		return;
-	}
+	//静态的版本
+	//if (pc->sz == MAX)//也就是已经放了最大了 1000个 放不了更多的了
+	//{
+	//	printf("通讯录已满，无法添加\n");
+	//	return;
+	//}
+	
+	//动态的版本
+	CheckCapacity(pc);
+	
 	//录入信息
 	printf("请输入名字:>");//name是数组 数组名本来就是地址  不需要取地址
 	scanf("%s", pc->data[pc->sz].name);//把名字放到通讯录的sz作为下标的data数组元素上 
@@ -109,3 +163,4 @@ void SearchContact(const Contact* pc)
 	printf("%-20s %-5d %-5s %-12s %-30s\n", pc->data[pos].name, pc->data[pos].age, pc->data[pos].sex, pc->data[pos].tele, pc->data[pos].addr);
 
 }
+

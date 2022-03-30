@@ -20,6 +20,7 @@ void test()
 	int input = 0;
 	//创建通讯录  下面才能进行增删查改
 	Contact con;//通讯录 con里面有数组叫data  还有sz
+
 	//初始化通讯录
 	InitContact(&con);//因为初始化要改变con的值
 
@@ -47,6 +48,7 @@ void test()
 			PrintContact(&con);
 			break;
 		case EXIT:
+			DestroyContact(&con);
 			printf("退出通讯录\n");
 			break;
 		default:
