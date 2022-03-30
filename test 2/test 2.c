@@ -6321,3 +6321,82 @@
 //	Test();
 //	return 0;
 //}
+
+//柔性数组
+struct S1
+{
+	int num;
+	double d;
+	int arr[];//这个数组是未知大小--柔性数组成员
+};
+//另一种写法
+struct S2
+{
+	int num;
+	double d;
+	int arr[0];//写0并不代表0个元素，而是未知大小
+	          //柔性数组成员
+};
+
+struct S3
+{
+	int num;//4
+	int arr[0];//柔性数组成员
+};
+int main()
+{
+	//printf("%d\n", sizeof(struct S3));// 4
+	//sizeof返回的这种结构大小不包括柔性数组的内存
+	
+	//给s3类型开辟空间
+	//假设希望arr数组有10个整型 那么+40
+	struct S3*  ps = (struct S3*)malloc(sizeof(struct S3)+40);//向内存申请44个字节的空间
+	//强制类型转换为struct S3*类型
+	//因为 认为内存中放的是struct S3这样的对象
+	//地址返回来  放到struct S3*类型指针中
+	if (ps == NULL)
+	{
+		perror("malloc");
+		return 1;
+	}
+
+	//访问num
+	ps->num = 100;
+	//访问数组
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		ps->arr[i] = i;
+	}
+	/*for (i = 0; i < 10; i++)
+	{
+		printf("%d ", ps->arr[i]);
+	}*/
+	//扩容
+	struct S3* ptr =(struct S3*)realloc(ps, sizeof(struct S3) + 80);
+	//判断扩容成没成功
+	if (ptr == NULL)
+	{
+		perror("realloc\n");
+		return 1;
+	}
+	else//成功
+	{
+		ps = ptr;
+	}
+
+	//初始化 后面新开辟的
+	for (i = 10; i < 20; i++)
+	{
+		ps->arr[i] = i;
+	}
+	//继续使用开辟的空间
+	for (i = 0; i < 20; i++)
+	{
+		printf("%d ", ps->arr[i]);
+	}
+	//释放
+	free(ps);
+	ps = NULL;
+	return 0;
+}
