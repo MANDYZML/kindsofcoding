@@ -2641,38 +2641,103 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //}
 
 //左旋
-int is_left_move(const char* str1,const char* str2)//str1是不是str2旋转得来的
-{
-	assert(str1 && str2);
+//int is_left_move(const char* str1,const char* str2)//str1是不是str2旋转得来的
+//{
+//	assert(str1 && str2);
+//
+//	//确保两个字符串长度相等
+//	int len1 = strlen(str1);
+//	int len2 = strlen(str2);
+//	if (len1 != len2)
+//		return 0;
+//	
+//	//1.在str2后边追加一个str2
+//	strncat(str2, str2, strlen(str2));
+//	//判断str1是不是追加后的子串
+//	char* ret = strstr(str2, str1);//判断str2中能不能找到str1
+//	if (ret == NULL)//说明不是子串
+//	{
+//		return 0;
+//	}
+//	else // 是子串
+//	{
+//		return 1;
+//	}
+//}
+//int main()
+//{
+//	char arr1[20] = "abcdef";
+//	char arr2[20] = "efabcd";
+//
+//	int ret = is_left_move(arr2, arr1);//arr2是不是arr1旋转得来的
+//	if (ret == 1)
+//		printf("yes\n");
+//	else
+//		printf("no\n");
+//	return 0;
+//}
 
-	//确保两个字符串长度相等
-	int len1 = strlen(str1);
-	int len2 = strlen(str2);
-	if (len1 != len2)
-		return 0;
+//找单身狗
+//一个数组中只有两个数字是出现一次，其他所有数字都出现了两次。
+//编写一个函数找出这两个只出现一次的数字。
+
+//1 2 3 4 5 1 2 3 4
+//找出只出现了一次的数字
+//这次是
+//1 2 3 4 5 1 2 3 4 6
+//找出两个只出现一次的数字
+
+//分组
+//异或特点  相同为0  相异为1
+//5的二进制  101
+//6的二进制  110
+//异或       011
+//把所有数字 最低位为1的放一个组  最低位为0的放一个组
+//5 6 一定在两个组
+//1 3 5 1 3--最低位为1  两组异或 得到5
+//2 4 2 4 6--最低位为0           得到6
+
+
+void find_single_dog(int arr[],int sz)
+{
+	int single1 = 0;
+	int single2 = 0;
+	//1.所有数字异或
+	int ret = 0;
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		ret ^= arr[i];
+	}
+	//2.计算ret的二进制中第几位是1
+	//如果有两个单身狗 ret一定不是0 二进制序列肯定有1
+	int pos = 0;
+	for (i = 0; i < 32; i++)
+	{
+		if (((ret >> i) & 1) == 1)//i=0的时候 ==1 也就是最低位是1
+		{
+			break;
+		}
 	
-	//1.在str2后边追加一个str2
-	strncat(str2, str2, strlen(str2));
-	//判断str1是不是追加后的子串
-	char* ret = strstr(str2, str1);//判断str2中能不能找到str1
-	if (ret == NULL)//说明不是子串
-	{
-		return 0;
 	}
-	else // 是子串
+	//i里放的就是第几位是1
+	//把第i位为0的放在一个组中(异或在一起)
+	pos = i;//pos记录第几位
+	for (i = 0; i < sz; i++)
 	{
-		return 1;
+		if (((arr[i] >> pos) & 1) == 0)//说明arr[i]的pos位是0
+		{
+			single1 ^= arr[i];
+		}
 	}
+	single2 = ret ^ single1;
+	printf("%d %d\n", single1, single2);
 }
 int main()
 {
-	char arr1[20] = "abcdef";
-	char arr2[20] = "efabcd";
+	int arr[] = { 1,2,3,4,5,1,2,3,4,6 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	find_single_dog(arr, sz);
 
-	int ret = is_left_move(arr2, arr1);//arr2是不是arr1旋转得来的
-	if (ret == 1)
-		printf("yes\n");
-	else
-		printf("no\n");
 	return 0;
 }
