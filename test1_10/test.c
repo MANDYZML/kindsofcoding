@@ -2698,46 +2698,57 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //2 4 2 4 6--最低位为0           得到6
 
 
-void find_single_dog(int arr[],int sz)
-{
-	int single1 = 0;
-	int single2 = 0;
-	//1.所有数字异或
-	int ret = 0;
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		ret ^= arr[i];
-	}
-	//2.计算ret的二进制中第几位是1
-	//如果有两个单身狗 ret一定不是0 二进制序列肯定有1
-	int pos = 0;
-	for (i = 0; i < 32; i++)
-	{
-		if (((ret >> i) & 1) == 1)//i=0的时候 ==1 也就是最低位是1
-		{
-			break;
-		}
-	
-	}
-	//i里放的就是第几位是1
-	//把第i位为0的放在一个组中(异或在一起)
-	pos = i;//pos记录第几位
-	for (i = 0; i < sz; i++)
-	{
-		if (((arr[i] >> pos) & 1) == 0)//说明arr[i]的pos位是0
-		{
-			single1 ^= arr[i];
-		}
-	}
-	single2 = ret ^ single1;
-	printf("%d %d\n", single1, single2);
-}
+//void find_single_dog(int arr[],int sz)
+//{
+//	int single1 = 0;
+//	int single2 = 0;
+//	//1.所有数字异或
+//	int ret = 0;
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		ret ^= arr[i];
+//	}
+//	//2.计算ret的二进制中第几位是1
+//	//如果有两个单身狗 ret一定不是0 二进制序列肯定有1
+//	int pos = 0;
+//	for (i = 0; i < 32; i++)
+//	{
+//		if (((ret >> i) & 1) == 1)//i=0的时候 ==1 也就是最低位是1
+//		{
+//			break;//等于1 就跳出 说明现在的i位就是1
+//		}
+//	}
+//	//i里放的就是第几位是1
+//	//把第i位为0的放在一个组中(异或在一起)
+//	pos = i;//pos记录第几位
+//	for (i = 0; i < sz; i++)
+//	{
+//		if (((arr[i] >> pos) & 1) == 0)//说明arr[i]的pos位是0
+//		{
+//			single1 ^= arr[i];
+//		}
+//	}
+//	single2 = ret ^ single1;
+//	printf("%d %d\n", single1, single2);
+//}
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,1,2,3,4,6 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	find_single_dog(arr, sz);
+//
+//	return 0;
+//}
+
+#include<stdio.h>
 int main()
 {
-	int arr[] = { 1,2,3,4,5,1,2,3,4,6 };
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	find_single_dog(arr, sz);
-
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	scanf("%#x,%#0", &a, &b);
+	c = a + b;
+	printf("%d\n", c);
 	return 0;
 }
