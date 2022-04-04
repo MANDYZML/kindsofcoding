@@ -2741,14 +2741,25 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int c = 0;
+//	scanf("%x %o", &a, &b);
+//	c = a + b;
+//	printf("%d\n", c);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	int a = 0;
+	float a = 0;
 	int b = 0;
-	int c = 0;
-	scanf("%#x,%#0", &a, &b);
-	c = a + b;
-	printf("%d\n", c);
+	scanf("%f", &a);
+	b = (int)a % 10;
+	printf("%d", b);
 	return 0;
 }
