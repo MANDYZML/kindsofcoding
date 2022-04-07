@@ -13,33 +13,22 @@
 //}
 
 //动态的版本
-void InitContact(Contact* pc)//pc指向con  con有两个成员 data sz
-{
-	assert(pc);
-	pc->sz = 0;//找到指向的里面的对象 初始化
-	pc->capacity = DEFAULT_SZ;
-	pc->data = (PeoInfo*)malloc(pc->capacity * sizeof(PeoInfo));
-	//3* 一个人的信息=等于第一次开辟3个人的信息字节个数
-
-	if (pc->data == NULL)//说明空间开辟失败了
-	{
-		perror("InitContact::malloc");
-		return;
-	}
-	memset(pc->data, 0, pc->capacity * sizeof(PeoInfo));
-	//从data开始向后pc->capacity * sizeof(PeoInfo) 这么多个字节都初始化成0
-}
-
-//销毁通讯录
-void DestroyContact(Contact* pc)
-{
-	free(pc->data);
-	pc->data = NULL;
-	pc->capacity = 0;
-	pc->sz = 0;
-	printf("销毁成功\n");
-}
-
+//void InitContact(Contact* pc)//pc指向con  con有两个成员 data sz
+//{
+//	assert(pc);
+//	pc->sz = 0;//找到指向的里面的对象 初始化
+//	pc->capacity = DEFAULT_SZ;
+//	pc->data = (PeoInfo*)malloc(pc->capacity * sizeof(PeoInfo));
+//	//3* 一个人的信息=等于第一次开辟3个人的信息字节个数
+//
+//	if (pc->data == NULL)//说明空间开辟失败了
+//	{
+//		perror("InitContact::malloc");
+//		return;
+//	}
+//	memset(pc->data, 0, pc->capacity * sizeof(PeoInfo));
+//	//从data开始向后pc->capacity * sizeof(PeoInfo) 这么多个字节都初始化成0
+//}
 void CheckCapacity(Contact* pc)
 {
 	//增容代码
@@ -59,6 +48,57 @@ void CheckCapacity(Contact* pc)
 		pc->capacity += 2;//容量也增加2
 		printf("增容成功\n");
 	}
+
+}
+//初始化通讯录--文件的版本
+void LoadContact(Contact* pc)
+{
+	//打开文件
+	FILE* pf = fopen("contact.dat", "rb");
+	if (pf == NULL)
+	{
+		perror("LoadContact::fopen");
+		return;
+	}
+	//读文件
+	PeoInfo tmp = { 0 };
+	while (fread(&tmp,sizeof(PeoInfo),1,pf))
+	{
+		CheckCapacity(pc);
+		pc->data[pc->sz] = tmp;//读一个信息就放到tmp
+	}
+	//关闭文件
+	fclose(pf);
+	pf = NULL;
+}
+void InitContact(Contact* pc)//pc指向con  con有两个成员 data sz
+{
+	assert(pc);
+	pc->sz = 0;//找到指向的里面的对象 初始化
+	pc->capacity = DEFAULT_SZ;
+	pc->data = (PeoInfo*)malloc(pc->capacity * sizeof(PeoInfo));
+	//3* 一个人的信息=等于第一次开辟3个人的信息字节个数
+
+	if (pc->data == NULL)//说明空间开辟失败了
+	{
+		perror("InitContact::malloc");
+		return;
+	}
+	memset(pc->data, 0, pc->capacity * sizeof(PeoInfo));
+	//从data开始向后pc->capacity * sizeof(PeoInfo) 这么多个字节都初始化成0
+
+	//加载文件信息到通讯录中
+	LoadContact(pc);
+}
+
+//销毁通讯录
+void DestroyContact(Contact* pc)
+{
+	free(pc->data);
+	pc->data = NULL;
+	pc->capacity = 0;
+	pc->sz = 0;
+	printf("销毁成功\n");
 }
 
 void AddContact(Contact* pc)
