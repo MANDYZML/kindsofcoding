@@ -48,6 +48,7 @@ void test()
 			PrintContact(&con);
 			break;
 		case EXIT:
+			SaveContact(&con);//先保存这个通讯录
 			DestroyContact(&con);
 			printf("退出通讯录\n");
 			break;

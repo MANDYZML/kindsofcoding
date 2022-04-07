@@ -6623,6 +6623,32 @@
 //}
 
 //二进制输入
+//struct S
+//{
+//	char name[20];
+//	int age;
+//	double d;
+//};
+//int main()
+//{
+//	struct S s = { "张三",20,95.5 };
+//	//打开文件
+//	FILE* pf = fopen("test3.txt", "wb");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//写文件--二进制的方式写
+//	fwrite(&s, sizeof(struct S), 1, pf);//写到pf
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//二进制输出
+//读操作
 struct S
 {
 	char name[20];
@@ -6631,18 +6657,19 @@ struct S
 };
 int main()
 {
-	struct S s = { "张三",20,95.5 };
+	struct S s = { 0 };
 	//打开文件
-	FILE* pf = fopen("test3.txt", "wb");
+	FILE* pf = fopen("test3.txt", "rb");
 	if (pf == NULL)
 	{
 		perror("fopen");
 		return 1;
 	}
-	//写文件--二进制的方式写
-	fwrite(&s,sizeof(struct S),1, pf);//写到pf
+	//读文件文件--二进制的方式读
+	fread(&s, sizeof(struct S), 1, pf);//从pf中读
+	printf("%s %d %lf\n", s.name, s.age, s.d);
 	//关闭文件
-	fclose(pf);
+	fclose(pf); 
 	pf = NULL;
 	return 0;
 }

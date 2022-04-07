@@ -164,3 +164,21 @@ void SearchContact(const Contact* pc)
 
 }
 
+void SaveContact(const Contact* pc)
+{
+	FILE* pf = fopen("contact.dat", "wb");
+	if (pf == NULL)
+	{
+		perror("SaveContact::fopen");
+		return;
+	}
+	//写文件
+	int i = 0;
+	for (i = 0; i < pc->sz; i++)
+	{
+		fwrite(pc->data+i,sizeof(PeoInfo),1,pf);//写到pf
+	}
+	//关闭文件
+	fclose(pf);
+	pf = NULL;
+}

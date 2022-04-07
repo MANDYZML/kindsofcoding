@@ -69,3 +69,6 @@ void DelContact(Contact* pc);
 
 //查找指定联系人
 void SearchContact(const Contact* pc);
+
+//保存通讯录的信息到文件
+void SaveContact(const Contact* pc);
