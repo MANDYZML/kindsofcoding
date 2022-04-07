@@ -6323,80 +6323,326 @@
 //}
 
 //柔性数组
-struct S1
-{
-	int num;
-	double d;
-	int arr[];//这个数组是未知大小--柔性数组成员
-};
-//另一种写法
-struct S2
-{
-	int num;
-	double d;
-	int arr[0];//写0并不代表0个元素，而是未知大小
-	          //柔性数组成员
-};
+//struct S1
+//{
+//	int num;
+//	double d;
+//	int arr[];//这个数组是未知大小--柔性数组成员
+//};
+////另一种写法
+//struct S2
+//{
+//	int num;
+//	double d;
+//	int arr[0];//写0并不代表0个元素，而是未知大小
+//	          //柔性数组成员
+//};
 
-struct S3
+//struct S3
+//{
+//	int num;//4
+//	int arr[0];//柔性数组成员
+//};
+//int main()
+//{
+//	//printf("%d\n", sizeof(struct S3));// 4
+//	//sizeof返回的这种结构大小不包括柔性数组的内存
+//	
+//	//给s3类型开辟空间
+//	//假设希望arr数组有10个整型 那么+40
+//	struct S3*  ps = (struct S3*)malloc(sizeof(struct S3)+40);//向内存申请44个字节的空间
+//	//强制类型转换为struct S3*类型
+//	//因为 认为内存中放的是struct S3这样的对象
+//	//地址返回来  放到struct S3*类型指针中
+//	if (ps == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//
+//	//访问num
+//	ps->num = 100;
+//	//访问数组
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		ps->arr[i] = i;
+//	}
+//	/*for (i = 0; i < 10; i++)
+//	{
+//		printf("%d ", ps->arr[i]);
+//	}*/
+//	//扩容
+//	struct S3* ptr =(struct S3*)realloc(ps, sizeof(struct S3) + 80);
+//	//判断扩容成没成功
+//	if (ptr == NULL)
+//	{
+//		perror("realloc\n");
+//		return 1;
+//	}
+//	else//成功
+//	{
+//		ps = ptr;
+//	}
+//
+//	//初始化 后面新开辟的
+//	for (i = 10; i < 20; i++)
+//	{
+//		ps->arr[i] = i;
+//	}
+//	//继续使用开辟的空间
+//	for (i = 0; i < 20; i++)
+//	{
+//		printf("%d ", ps->arr[i]);
+//	}
+//	//释放
+//	free(ps);
+//	ps = NULL;
+//	return 0;
+//}
+
+//struct S4
+//{
+//	int num;
+//	int* arr;
+//};
+//int main()
+//{
+//	//给num开辟空间
+//	struct S4 * ps = (struct S4*)malloc(sizeof(struct S4));
+//	//让arr指向的空间可大可小
+//	if (ps == NULL)
+//	{
+//		return 1;
+//	}
+//	ps->arr = (int*)malloc(40);//给arr开辟空间
+//	if (ps->arr == NULL)//arr开辟失败，但是前面成功
+//	{
+//		free(ps);
+//		ps = NULL;
+//		return 1;
+//	}
+//	//两次空间都开辟成功 来到这
+//
+//	//释放
+//	free(ps->arr);
+//	ps->arr = NULL;
+//	free(ps);
+//	ps = NULL;
+//	return 0;
+//}
+
+//打开和关闭文件
+//FILE* fopen(const char* filename, const char* mode);
+ 
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");//打开这个文件 用read 读来打开
+//	//fopen在打开文件时  创建一个跟这个文件相关联的一个FILE*文件信息区
+//	//同时fopen返回文件信息区--FILE 的起始地址
+//	//所以fopen 返回类型是FILE*
+//
+//	//文件读取失败
+//	if (pf == NULL)//打开失败返回空指针
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//打开成功--读文件 因为"r"
+//	//...
+//	
+//	//关闭文件
+//	fclose(pf);//关闭pf所指向的文件
+//	pf = NULL;
+//	return 0;
+//}
+
+//3.文件的顺序读写
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "w");
+//
+//	//文件读取失败
+//	if (pf == NULL)//打开失败返回空指针
+//	{
+//		perror("fopen");
+//		return 1;
+//	}  
+//	//写文件 --输出操作
+//	//假设有字符串abcdef  要写到文件里面
+//	//fputc('a', pf);//写到FILE*指针 pf 关联的文件里面去
+//	//fputc('b', pf);
+//	//fputc('c', pf);
+//	//fputc('d', pf);
+//	//fputc('e', pf);
+//	//fputc('f', pf);
+//	//fputc('g', pf);
+//
+//	//把a-z 全写进去
+//	char ch = 'a';
+//	for (ch = 'a'; ch <= 'z'; ch++)
+//	{
+//		fputc(ch, pf);
+//	
+//	}
+//	//关闭文件
+//	fclose(pf);//关闭pf所指向的文件
+//	pf = NULL;
+//	return 0;
+//}
+//int fputc(int c, FILE* stream);
+
+//读文件
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");
+//
+//	//文件读取失败
+//	if (pf == NULL)//打开失败返回空指针
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//读文件 --把txt里面的内容读到程序里面去-输入操作
+//	int ch = 0;
+//	while ((ch = fgetc(pf)) != EOF)//从pf关联的文件里面读
+//	{
+//		printf("%c ", ch);//把txt里面的内容都读出来了
+//	}
+//	
+//	//关闭文件
+//	fclose(pf);//关闭pf所指向的文件
+//	pf = NULL;
+//	return 0;
+//}
+
+//fgetc不仅仅可以在文件上读取，还可以在标准输入上读取--键盘
+//int main()
+//{
+//	int ch = fgetc(stdin);//说明从标准输入流里面读
+//	//printf("%c\n", ch);
+//	fputc(ch,stdout);//打印到标准输出-- 屏幕上
+//	return 0;
+//}
+
+//一行一行来
+//写操作
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("test.txt", "w");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//写文件--一次写一行
+//	fputs("qwertyuiop\n", pf);
+//	fputs("xxxxxxxxxx\n", pf);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//读操作
+//int main()
+//{
+//	char arr[256] = { 0 };//一个数组可以存256个字符
+//	//打开文件
+//	FILE* pf = fopen("test.txt", "r");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//读文件--一次读一行
+//	//fgets(arr,255,pf);//放到arr255个  从 pf流里面去读
+//	//printf("%s", arr);
+//	//fgets(arr, 255, pf);
+//	//printf("%s", arr);
+//	//不知道有几行 用循环 当读到空指针就不会继续读
+//	while (fgets(arr, 256, pf)!= NULL)
+//	{
+//		printf("%s", arr);
+//	}
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//} 
+
+//struct S
+//{
+//	char name[20];
+//	int age;
+//	double d;
+//};
+//int main()
+//{
+//	struct S s = { 0 };//读的数据放到s里面
+//	//打开文件 
+//	FILE* pf = fopen("test2.txt", "r");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//读文件
+//	fscanf(pf,"%s %d %lf", s.name, &(s.age), &(s.d));//从pf中读
+//	//printf("%s %d %lf\n", s.name, s.age, s.d);
+//	printf(stdout,"%s %d %lf\n", s.name, s.age, s.d);
+//	//关闭文件
+//	fclose(pf);
+//	pf == NULL;
+//
+//	return 0;
+//}
+
+//struct S
+//{
+//	char name[20];
+//	int age;
+//	double d;
+//};
+//int main()
+//{
+//	char buf[256] = { 0 };
+//	struct S s = { "zhangsan",20,95.5 };
+//	struct S tmp = { 0 };
+//	sprintf(buf, "%s %d %lf", s.name, s.age, s.d);
+//	//先把一个格式化数据通过 sprintf 放到buf 转换成字符串
+//
+//	printf("%s\n", buf);//字符串打印
+//
+//	//从buf字符串中提取结构体数据
+//	sscanf(buf, "%s %d %lf", tmp.name, &(tmp.age), &(tmp.d));
+//		//再从字符串中提取结构体
+//	printf("%s %d %lf", tmp.name, tmp.age, tmp.d);//格式化打印
+//	return 0;
+//}
+
+//二进制输入
+struct S
 {
-	int num;//4
-	int arr[0];//柔性数组成员
+	char name[20];
+	int age;
+	double d;
 };
 int main()
 {
-	//printf("%d\n", sizeof(struct S3));// 4
-	//sizeof返回的这种结构大小不包括柔性数组的内存
-	
-	//给s3类型开辟空间
-	//假设希望arr数组有10个整型 那么+40
-	struct S3*  ps = (struct S3*)malloc(sizeof(struct S3)+40);//向内存申请44个字节的空间
-	//强制类型转换为struct S3*类型
-	//因为 认为内存中放的是struct S3这样的对象
-	//地址返回来  放到struct S3*类型指针中
-	if (ps == NULL)
+	struct S s = { "张三",20,95.5 };
+	//打开文件
+	FILE* pf = fopen("test3.txt", "wb");
+	if (pf == NULL)
 	{
-		perror("malloc");
+		perror("fopen");
 		return 1;
 	}
-
-	//访问num
-	ps->num = 100;
-	//访问数组
-	int i = 0;
-	for (i = 0; i < 10; i++)
-	{
-		ps->arr[i] = i;
-	}
-	/*for (i = 0; i < 10; i++)
-	{
-		printf("%d ", ps->arr[i]);
-	}*/
-	//扩容
-	struct S3* ptr =(struct S3*)realloc(ps, sizeof(struct S3) + 80);
-	//判断扩容成没成功
-	if (ptr == NULL)
-	{
-		perror("realloc\n");
-		return 1;
-	}
-	else//成功
-	{
-		ps = ptr;
-	}
-
-	//初始化 后面新开辟的
-	for (i = 10; i < 20; i++)
-	{
-		ps->arr[i] = i;
-	}
-	//继续使用开辟的空间
-	for (i = 0; i < 20; i++)
-	{
-		printf("%d ", ps->arr[i]);
-	}
-	//释放
-	free(ps);
-	ps = NULL;
+	//写文件--二进制的方式写
+	fwrite(&s,sizeof(struct S),1, pf);//写到pf
+	//关闭文件
+	fclose(pf);
+	pf = NULL;
 	return 0;
 }
