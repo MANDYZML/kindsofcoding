@@ -6649,27 +6649,169 @@
 
 //二进制输出
 //读操作
-struct S
-{
-	char name[20];
-	int age;
-	double d;
-};
+//struct S
+//{
+//	char name[20];
+//	int age;
+//	double d;
+//};
+//int main()
+//{
+//	struct S s = { 0 };
+//	//打开文件
+//	FILE* pf = fopen("test3.txt", "rb");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//读文件文件--二进制的方式读
+//	fread(&s, sizeof(struct S), 1, pf);//从pf中读
+//	printf("%s %d %lf\n", s.name, s.age, s.d);
+//	//关闭文件
+//	fclose(pf); 
+//	pf = NULL;
+//	return 0;
+// 
+
+
+//对文件进行随机读写
+//读操作
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("test.txt", "r");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//随机读文件  一个字符一个字符读
+//	int ch = fgetc(pf);//返回的是字符的ASCII值 
+//	printf("%c\n", ch);//里面放着abcdef 读出来a
+//	
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);//b
+//
+//	//想直接读e
+//	//fseek(pf,2,SEEK_CUR);//现在指向c 从当前位置向后偏移两个
+//	
+//	//想读f
+//	//fseek(pf, -1, SEEK_END);//从最后开始往前读
+//   
+//	//从a往后读4 到e
+//	fseek(pf, 4, SEEK_SET);//从起始位置往后读
+//
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);//e
+//
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+//写操作
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("test.txt", "w");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//随机写文件  一个字符一个字符写
+//	fputc('a', pf);//写完a就指向了b
+//	fputc('b', pf);
+//	fputc('c', pf);
+//	fputc('d', pf);//写完d就指向了d的后面
+//
+//	//现在想把d改成w
+//	fseek(pf, -3, SEEK_CUR);//从当前位置向前偏移
+//	fputc('w', pf);//把b改成w
+//
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("test.txt", "w");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//	//随机写文件  一个字符一个字符写
+//	fputc('a', pf);//写完a就指向了b
+//	fputc('b', pf);
+//	fputc('c', pf);
+//	fputc('d', pf);//写完d就指向了d的后面
+//
+//	//现在想把d改成w
+//	fseek(pf, -3, SEEK_CUR);//从当前位置向前偏移
+//	fputc('w', pf);//把b改成w
+//
+//	long pos = ftell(pf);
+//	printf("%ld\n", pos);//打印long类型的偏移量--2
+//	//刚才把b改成w 指针就指向了c 从起始位置a到c 是2
+//
+//	//让文件指针的位置回到文件的起始位置
+//	rewind(pf);
+//
+//	//再次计算偏移量
+//	pos = ftell(pf);
+//	printf("%ld\n", pos);//应该是0
+//
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a = 10000;
+//	FILE* pf = fopen("test.txt", "wb");
+//	if (pf == NULL)
+//	{
+//		perror("fopen");
+//		return 1;
+//	}
+//
+//	fwrite(&a, 4, 1, pf);//把a整型 二进制的形式写到pf文件中
+//	//一次写4个字节 写1次
+//
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+//预定义符号
+
 int main()
 {
-	struct S s = { 0 };
-	//打开文件
-	FILE* pf = fopen("test3.txt", "rb");
+	int i = 0;
+	FILE* pf = fopen("log.txt", "a");
 	if (pf == NULL)
 	{
-		perror("fopen");
 		return 1;
 	}
-	//读文件文件--二进制的方式读
-	fread(&s, sizeof(struct S), 1, pf);//从pf中读
-	printf("%s %d %lf\n", s.name, s.age, s.d);
-	//关闭文件
-	fclose(pf); 
+	for (i = 0; i < 10; i++)
+	{
+		fprintf(pf,"name:%s FILE:%s line:%d data:%s time:%s i=%d\n", __func__,__FILE__, __LINE__, __DATE__, __TIME__,i);
+	}
+	fclose(pf);
 	pf = NULL;
 	return 0;
 }
