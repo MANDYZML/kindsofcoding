@@ -6799,19 +6799,241 @@
 
 //预定义符号
 
+//int main()
+//{
+//	int i = 0;
+//	FILE* pf = fopen("log.txt", "a");
+//	if (pf == NULL)
+//	{
+//		return 1;
+//	}
+//	for (i = 0; i < 10; i++)
+//	{
+//		fprintf(pf,"name:%s FILE:%s line:%d data:%s time:%s i=%d\n", __func__,__FILE__, __LINE__, __DATE__, __TIME__,i);
+//	}
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//#define  
+//1.定义标识符常量
+//2.定义宏
+
+//#define NUM 100//定义的时候末尾尽量不加;
+//#define STR "abcdef"
+//int main()
+//{
+//	int num = NUM;//预处理之后 NUM就被替换成100
+//	char* str = STR;//STR被替换成"abcdef" 首字符a的地址赋给str
+//
+//	return 0;
+//}
+
+//#define reg register//重新定义了个符号名 内容是register
+//int main()
+//{
+//	int reg num = 100;
+//
+//	return 0;
+//}
+
+//定义宏
+
+//#define MAX(x,y) x>y?x:y//宏的内容是求x y较大值
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int c = MAX(a, b);
+//	//把ab传过去 整体x y 都要被替换成 a b
+//	//预处理后被替换成 int c = (a>b?a:b);
+//	printf("%d\n", c);
+//
+//	return 0;
+//}
+
+//#define SQUARE(X) X*X //求平方
+
+
+//#define SQUARE(X) ((X)*(X))
+//
+//int main()
+//{
+//	int a = 10;
+//	int r = SQUARE(a);
+//	int r = SQUARE(a + 1);//打印出来是 19
+//	//int r = a+1 * a+1  不经过任何计算 直接先传 
+//	//        9+ 1*9  +1 = 19
+//	printf("%d\n", r);//100
+//	return 0;
+//}
+
+//#define DOUBLE(x) (x)+(x)
+//所以应该写为
+//#define DOUBLE(x) ((x)+(x))
+//
+//int main()
+//{
+//	int b = 20;
+//	int ret = 3*DOUBLE(b);//DOUBLE(b)应该是40 40*3=120
+//	//因为被替换为 int ret = 3*(b)+(b); 结果是80
+//	printf("%d\n", ret);//打印出来80
+//	return 0;
+//}
+
+//所以要用宏的方式--宏是可以做到的
+
+
+//void print(int n)
+//{
+//	printf("the value of n is %d\n", n);
+//	//这样始终打印出来的话 是 n 跟期望的不一样
+//}
+
+//#define PRINT(N) printf("the value of " #N " is %d\n",N)
+//
+//int main()
+//{
+//	int a = 10;
+//	PRINT(a);
+//	//printf("the value of a is %d\n", a);//10
+//
+//	//如果传过去PRINT(a)
+// //#N 就会变成  printf("the value of " "a" " is %d\n",a)
+// //也就是 不会把a做任何替换 直接转换成对应的字符串
+//
+//
+//	int b = 20;
+//	PRINT(b);
+//	//printf("the value is %d\n", b);//20
+//	
+//	//会被替换成
+//	//printf("the value of " "b" " is %d\n", b)
+//
+//	return 0;
+//}
+
+//c语言中
+//int main()
+//{
+//	printf("hello bit\n");
+//	printf("hello ""bit\n");
+//	return 0;
+//}//打印出来是一样的
+
+
+//另一个版本
+//#define PRINT(N,format) printf("the value of " #N " is " format"\n",N)
+//              // 格式
+//int main()
+//{
+//	int a = 20;
+//	double pai = 3.14;
+//
+//	PRINT(a, "%d");
+//	PRINT(pai,"%lf");
+//	return 0;
+//}
+
+//##的例子
+//#define CAT(name,num) name##num
+//         //class 105   class105
+//int main()
+//{
+//	int class105 = 105;
+//	printf("%d\n", CAT(class, 105));//105
+//
+//	return 0;
+//}
+
+//带副作用的宏参数
+ 
+//int main()
+//{
+//	int a = 2;
+//	int b = a + 1;//3 这种写法a没变
+//	int b = ++a;//这种写法 a变了 对a产生了副作用
+//	return 0;
+//}
+
+//#define MAX(x,y) ((x)>(y)?(x):(y))
+
+//int main()
+//{
+//	int a = 5;
+//	int b = 8;
+//	//int c = MAX(a++, b++);
+//	//int c = ((a++)>(b++)?(a++):(b++));
+//	//先使用再++  5    8  为假不算  9--> 又++ b=10
+//
+//	printf("%d\n", c);//9
+//	printf("%d\n", a);//6
+//	printf("%d\n", b);//10
+//
+//	return 0;
+//}
+
+//求较大值
+//1.宏
+//#define MAX(x,y) ((x)>(y)?(x):(y))
+////2.函数
+//int Max(int x, int y)
+//{
+//	return x > y ? x : y;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int b = 20;
+//	int c = 0;
+//	c = MAX(a, b);
+//
+//	c = Max(a, b);//函数
+//	return 0;
+//}
+
+//#define MALLOC(num,type)  (type*)malloc(num*sizeof(type))
+//
+//int main()
+//{
+//	//开辟10个整型的空间
+//	int* p = (int*)malloc(10 * sizeof(int));
+//	int* p2 = MALLOC(10, int);
+//	//int* p2 = (int*)malloc(10 * sizeof(int));
+//
+//#undef MALLOC
+//	//MALLOC(20, char);//这里用不了了 因为移除了已经
+//	return 0;
+//}
+
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		arr[i] = i;
+//
+//#if 1 //1为真 就编译
+////#if 0  //就是不编译
+//		printf("%d ", arr[i]);//这行代码可有可无
+//#endif
+//	}
+//
+//	return 0;
+//}
+
+#define NUM 2
 int main()
 {
-	int i = 0;
-	FILE* pf = fopen("log.txt", "a");
-	if (pf == NULL)
-	{
-		return 1;
-	}
-	for (i = 0; i < 10; i++)
-	{
-		fprintf(pf,"name:%s FILE:%s line:%d data:%s time:%s i=%d\n", __func__,__FILE__, __LINE__, __DATE__, __TIME__,i);
-	}
-	fclose(pf);
-	pf = NULL;
+#if NUM==1
+	printf("hehe\n");
+#elif NUM==2
+	printf("haha\n");
+#else
+	printf("heihei\n");
+#endif
 	return 0;
 }
