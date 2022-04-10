@@ -2753,13 +2753,128 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	float a = 0;
+//	int b = 0;
+//	scanf("%f", &a);
+//	b = (int)a % 10;
+//	printf("%d", b);
+//	return 0;
+//}
+
+//模拟实现atoi
+//把字符串转换成整型
+
+//int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
+////也就是str指针 指向了字符 '1'
+////要把字符1234 转换成 1234(一千两百三十四)
+//{
+//	int n = 0;
+//	while (*str)//!= \0 就进来
+//	{
+//		n = n * 10 + *str-'0';
+//		//*str里面是字符 '3'-'0'==> 51-48=3（数字）
+//		//一开始 n是0 0*10+1=1 把1赋给n
+//		//1*10+2= 12   赋给n
+//		//12*10+3 = 123 赋给n
+//		//123*10+4=123
+//		str++;//指针向后走
+//	}
+//	return n;//n这时候是1234
+//}//但是这代码不行
+
+//空指针问题
+//空字符串 ""
+//数组里面有非数字字符 "1234abc"
+//前面有空白字符 "    1234"
+//前面有正负号"-1234"
+//溢出 "123444444444444444" --整数没那么大
+
 #include<stdio.h>
+#include<assert.h>
+#include<ctype.h>
+#include<limits>
+//设置非法--因为非法情况较多
+enum Status
+{
+	VALID,//合法的
+	INVALID//非法的
+}status = INVALID;//默认是非法的
+
+int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
+//也就是str指针 指向了字符 '1'
+//要把字符1234 转换成 1234(一千两百三十四)
+{
+	int flag = 1;//=1 表示正数
+	assert(str);//保证str不是空指针
+	//判断 不为空字符串
+	if (*str == '\0')
+	{
+		return 0;//如果返回0 就说明传过去的数组是非法的
+	}
+	//判断前面有无空白字符
+	while (isspace(*str))//isspace用来判断空白字符
+	{
+	//如果是空白字符 就进来
+		str++;//++把空格或者其他跳过去
+	}
+	//判断 前面有无正负号
+	if (*str == '+')
+	{
+		flag = 1;
+		str++;//把正号跳过去
+	}
+	else if (*str == '-')
+	{
+		flag = -1;
+		str++;
+	}
+
+	//判断是不是数字字符 "123a4"
+	long long n = 0;//这才能存下比整型更大的值
+	while (*str!= '\0')//判断 数字字符
+	{
+		if (isdigit(*str))
+		{
+			//是数字字符就进来
+			n = n * 10 + flag * (*str - '0');
+			//希望 要么全是负数乘  要么都是正数乘
+			//通过上面的flag 结果 flag* 也就是-1* 能保证后面乘的都是负数
+			//也就是n都是负数
+			//如果上面的flag是=1 那么 每次算出来的都是正数 n也是正数
+			if (n < INT_MIN )//说明越界了
+			{
+				n = INT_MIN;
+				break;
+			}
+			else
+			{
+				n = INT_MAX;
+			}
+
+		}
+		else//不是数字字符
+		{
+			n = 0;
+			break;
+		}
+		str++;
+	}
+	if (*str == '\0')
+	{
+		status = VALID;//置成合法状态
+	}
+	return (int)n;
+}
 int main()
 {
-	float a = 0;
-	int b = 0;
-	scanf("%f", &a);
-	b = (int)a % 10;
-	printf("%d", b);
+	char arr[20] = "1234";//里面都是字符
+	int ret = my_atoi(arr);
+	if (status == VALID)
+	   printf("合法转化:%d\n", ret);
+	else
+	   printf("非法转化:%d\n", ret);
 	return 0;
 }
