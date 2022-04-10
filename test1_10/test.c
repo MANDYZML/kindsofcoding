@@ -1321,7 +1321,7 @@
 //	printf("%d个1\n", count);
 //	return 0;
 //}
-#include <stdio.h>
+//#include <stdio.h>
 //int main()
 //{
 //	int num = 0;
@@ -1450,8 +1450,8 @@
 
 
 //模拟实现库函数strlen
-#include<stdio.h>
-#include<assert.h>
+//#include<stdio.h>
+//#include<assert.h>
 //int my_strlen(const char*str)
 //{
 //	int count = 0;
@@ -1649,8 +1649,8 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //ABCD左旋一个字符得到BCDA
 //ABCD左旋两个字符得到CDAB
 
-#include<stdio.h>
-#include<string.h>
+//#include<stdio.h>
+//#include<string.h>
 //int main()
 //{
 //	char arr[] = {0};
@@ -2296,7 +2296,7 @@ j = i++;*///后置++ 所以i先把x=1赋给j j=1 之后i自增=2
 //}
 
 //字符串左旋
-#include<string.h>
+//#include<string.h>
 //void left_move(char arr[],int k)
 //{
 //	int len = strlen(arr);
@@ -2809,6 +2809,7 @@ int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
 {
 	int flag = 1;//=1 表示正数
 	assert(str);//保证str不是空指针
+
 	//判断 不为空字符串
 	if (*str == '\0')
 	{
@@ -2834,9 +2835,9 @@ int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
 
 	//判断是不是数字字符 "123a4"
 	long long n = 0;//这才能存下比整型更大的值
-	while (*str!= '\0')//判断 数字字符
-	{
-		if (isdigit(*str))
+	while (*str  != '\0')//说明字符串还没结束
+	{ 
+		if (isdigit(*str))//判断 数字字符
 		{
 			//是数字字符就进来
 			n = n * 10 + flag * (*str - '0');
@@ -2857,7 +2858,6 @@ int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
 		}
 		else//不是数字字符
 		{
-			n = 0;
 			break;
 		}
 		str++;
@@ -2866,15 +2866,16 @@ int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
 	{
 		status = VALID;//置成合法状态
 	}
+
 	return (int)n;
 }
 int main()
 {
-	char arr[20] = "1234";//里面都是字符
+	char arr[100] = "-11111111111111111111";//里面都是字符
 	int ret = my_atoi(arr);
 	if (status == VALID)
-	   printf("合法转化:%d\n", ret);
+	   printf("合法转化: %d\n", ret);
 	else
-	   printf("非法转化:%d\n", ret);
+	   printf("非法转化: %d\n", ret);
 	return 0;
-}
+} 

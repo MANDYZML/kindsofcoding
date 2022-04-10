@@ -3,4 +3,4 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\cstdio(33,1): error C2059: 语法错误:“;”
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\cstdio(33,1): error C2449: 在文件范围内找到“{”(是否缺少函数头?)
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\cstdio(91,1): error C2059: 语法错误:“}”
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(2881,1): fatal error C1004: 发现意外的文件尾
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test1_10\test.c(2882,1): fatal error C1004: 发现意外的文件尾
