@@ -7094,89 +7094,89 @@
 //	return 0;
 //}
 
-#include<assert.h>
-#include<ctype.h>
-//设置非法--因为非法情况较多
-enum Status
-{
-	VALID,//合法的
-	INVALID//非法的
-}status = INVALID;//默认是非法的
-
-int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
-//也就是str指针 指向了字符 '1'
-//要把字符1234 转换成 1234(一千两百三十四)
-{
-	int flag = 1;//=1 表示正数
-	assert(str);//保证str不是空指针
-
-	//判断 不为空字符串
-	if (*str == '\0')
-	{
-		return 0;//如果返回0 就说明传过去的数组是非法的
-	}
-	//判断前面有无空白字符
-	while (isspace(*str))//isspace用来判断空白字符
-	{
-		//如果是空白字符 就进来
-		str++;//++把空格或者其他跳过去
-	}
-	//判断 前面有无正负号
-	if (*str == '+')
-	{
-		flag = 1;
-		str++;//把正号跳过去
-	}
-	else if (*str == '-')
-	{
-		flag = -1;
-		str++;
-	}
-
-	//判断是不是数字字符 "123a4"
-	long long n = 0;//这才能存下比整型更大的值
-	while (*str != '\0')//说明字符串还没结束
-	{
-		if (isdigit(*str))//判断 数字字符
-		{
-			//是数字字符就进来
-			n = n * 10 + flag * (*str - '0');
-			//希望 要么全是负数乘  要么都是正数乘
-			//通过上面的flag 结果 flag* 也就是-1* 能保证后面乘的都是负数
-			//也就是n都是负数
-			//如果上面的flag是=1 那么 每次算出来的都是正数 n也是正数
-			if (n < INT_MIN)//说明越界了
-			{
-				n = INT_MIN;
-				break;
-			}
-			else
-			{
-				n = INT_MAX;
-				break;
-			}
-
-		}
-		else//不是数字字符
-		{
-			break;
-		}
-		str++;
-	}
-	if (*str == '\0')
-	{
-		status = VALID;//置成合法状态
-	}
-
-	return (int)n;
-}
-int main()
-{
-	char arr[100] = "111111111111111";//里面都是字符
-	int ret = my_atoi(arr);
-	if (status == VALID)
-		printf("合法转化: %d\n", ret);
-	else
-		printf("非法转化: %d\n", ret);
-	return 0;
-}
+//#include<assert.h>
+//#include<ctype.h>
+////设置非法--因为非法情况较多
+//enum Status
+//{
+//	VALID,//合法的
+//	INVALID//非法的
+//}status = INVALID;//默认是非法的
+//
+//int my_atoi(const char* str)//传过来数组 首字符地址  指针接收
+////也就是str指针 指向了字符 '1'
+////要把字符1234 转换成 1234(一千两百三十四)
+//{
+//	int flag = 1;//=1 表示正数
+//	assert(str);//保证str不是空指针
+//
+//	//判断 不为空字符串
+//	if (*str == '\0')
+//	{
+//		return 0;//如果返回0 就说明传过去的数组是非法的
+//	}
+//	//判断前面有无空白字符
+//	while (isspace(*str))//isspace用来判断空白字符
+//	{
+//		//如果是空白字符 就进来
+//		str++;//++把空格或者其他跳过去
+//	}
+//	//判断 前面有无正负号
+//	if (*str == '+')
+//	{
+//		flag = 1;
+//		str++;//把正号跳过去
+//	}
+//	else if (*str == '-')
+//	{
+//		flag = -1;
+//		str++;
+//	}
+//
+//	//判断是不是数字字符 "123a4"
+//	long long n = 0;//这才能存下比整型更大的值
+//	while (*str != '\0')//说明字符串还没结束
+//	{
+//		if (isdigit(*str))//判断 数字字符
+//		{
+//			//是数字字符就进来
+//			n = n * 10 + flag * (*str - '0');
+//			//希望 要么全是负数乘  要么都是正数乘
+//			//通过上面的flag 结果 flag* 也就是-1* 能保证后面乘的都是负数
+//			//也就是n都是负数
+//			//如果上面的flag是=1 那么 每次算出来的都是正数 n也是正数
+//			if (n < INT_MIN)//说明越界了
+//			{
+//				n = INT_MIN;
+//				break;
+//			}
+//			else
+//			{
+//				n = INT_MAX;
+//				break;
+//			}
+//
+//		}
+//		else//不是数字字符
+//		{
+//			break;
+//		}
+//		str++;
+//	}
+//	if (*str == '\0')
+//	{
+//		status = VALID;//置成合法状态
+//	}
+//
+//	return (int)n;
+//}
+//int main()
+//{
+//	char arr[100] = "111111111111111";//里面都是字符
+//	int ret = my_atoi(arr);
+//	if (status == VALID)
+//		printf("合法转化: %d\n", ret);
+//	else
+//		printf("非法转化: %d\n", ret);
+//	return 0;
+//}
