@@ -7180,3 +7180,67 @@
 //		printf("非法转化: %d\n", ret);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//	int i = 0;
+//	int b = 0;
+//	int c = 0;
+//	b = a / 10;
+//	c = b % 10;
+//	printf("%d\n", c);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//	int X = 0;
+//	int N = 0;
+//	int a = 0;
+//	scanf("%d%d", &X, &N);
+//	a = X + N;
+//	if (a <= 7)
+//	{
+//		printf("%d\n", a);
+//	}
+//	while(a > 7)
+//	{
+//		a -= 7;
+//	}
+//	printf("%d\n", a);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;// X
+//	int b = 0;// N
+//	int c = 0;
+//	scanf("%d %d", &a, &b);
+//	c = a + b;//c就是X和N的相加求和
+//	while (c > 7)
+//	{
+//		c = c - 7;//C循环减去7直至C小于7为止
+//	}
+//	if (c <= 7)//判断C是否满足1<=C<=7的条件
+//		printf("%d", c);
+//	return 0;
+//}
+
+#include <stdio.h>
+int main()
+{
+	int x, n;
+	scanf("%d %d", &x, &n);
+	x = (x + n) % 7;
+	if (x == 0)
+		printf("7");
+	else
+		printf("%d", x);
+	return 0;
+}
