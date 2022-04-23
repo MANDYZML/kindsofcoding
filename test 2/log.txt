@@ -1,0 +1,10 @@
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=0
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=1
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=2
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=3
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=4
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=5
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=6
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=7
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=8
+name:main FILE:C:\Program Files (x86)\Microsoft Visual Studio\2019\Code\kindsofcoding\test 2\test 2.c line:6812 data:Apr  8 2022 time:23:21:18 i=9
