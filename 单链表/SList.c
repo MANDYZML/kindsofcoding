@@ -33,6 +33,8 @@ SLTNode* BuySListNode(SLTDataType x)
 void SListPushBack(SLTNode** pphead, SLTDataType x)//传一级指针过来 二级指针来接收
 //*pphead 就是 plist
 {
+	assert(pphead);
+
 	//新结点 
 	SLTNode* newnode = BuySListNode(x);
 	
@@ -69,6 +71,8 @@ void SListPushFront(SLTNode** pphead, SLTDataType x)
 //尾删
 void SListPopBack(SLTNode** pphead)
 {
+	assert(pphead);
+
 	//当没有结点
 	assert(*pphead);//非空就继续往下走
 
@@ -99,6 +103,7 @@ void SListPopBack(SLTNode** pphead)
 //头删
 void SListPopFront(SLTNode** pphead)
 {
+	assert(pphead);
 	assert(*pphead != NULL);
 	//if (*pphead == NULL)
 		//return;
@@ -123,12 +128,82 @@ SLTNode* SListFind(SLTNode* phead, SLTDataType x)
 	return NULL;
 }
 
+//在pos位置之前插入
 void SListInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x)
 {
+	assert(pos);
+	assert(pphead);
 	//头插
 	if (pos == *pphead)
 	{
 		SListPopFront(pphead, x);
 
 	}
+	else //不是头插
+	{
+		SLTNode* prev = *pphead;
+		while (prev-> next != pos)
+		{
+			prev = prev->next;
+
+		}
+		SLTNode* newnode = BuySListNode(x);
+		prev->next = newnode;
+		newnode->next = pos;
+	}
+}
+
+//删除pos位置的值
+void SListErase(SLTNode** pphead, SLTNode* pos)
+{
+	assert(pphead);
+	assert(pos);
+
+	if (*pphead = pos)//头删
+	{
+		SListPopFront(pphead);
+	}
+	else //不是头删 pos肯定有前一个 找到它的前一个
+	{
+		SLTNode* prev = *pphead;
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+
+		}//当prev的next找指向了pos 说明prev就是pos前一个了
+
+		//让prev的next指向pos的后一个
+		prev->next = pos->next;
+		free(pos);//删除pos
+		pos = NULL;
+	}
+}
+
+//在pos之后插入
+void SListInsertAfter(SLTNode* pos, SLTDataType x)
+{
+	assert(pos);
+	/*SLTNode* newnode = BuySListNode(x);
+	newnode->next = pos->next;
+	pos->next = newnode;*/ //这样写要注意顺序不能写反
+
+	//这样的写法不在乎链接顺序
+	SLTNode* newnode = BuySListNode(x);
+	SLTNode* next = pos->next;
+	pos->next = newnode;
+	newnode->next = pos->next;
+}
+
+
+//删除pos位置之后的值
+void SlistEraseAfter(SLTNode* pos)
+{
+	assert(pos);
+	if (pos->next == NULL)//就是尾
+		return;
+	SLTNode* del = pos->next;
+	//pos->next = pos->next->next;
+	pos->next = del->next;
+	free(del);
+	del = NULL;
 }

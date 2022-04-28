@@ -120,15 +120,24 @@ void TestSList5()
 	SLTNode* pos = SListFind(plist, 4);
 
 	//找第n个位置
-	/*cur=plist
-	while (n--)
-	{
+	//*cur=plist
+	//while (n--)
+	//{
 
 
-	}*/
+	//}*/
 	if (pos)//不等于空
 	{
 		SListInsert(&plist, pos, 40);
+	}
+	SListPrint(plist);
+
+	//删除
+	pos = SListFind(plist, 4);
+
+	if (pos)//不等于空
+	{
+		SListErase(&plist, pos);
 	}
 	SListPrint(plist);
 }
