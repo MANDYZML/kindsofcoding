@@ -7,7 +7,7 @@ LTNode* BuyListNode(LTDataType x)
 {
 	//创建个结点
 	LTNode* node = (LTNode*)malloc(sizeof(LTNode));
-	if (node = NULL)
+	if (node == NULL)
 	{
 		perror("mallo fail");
 		exit(-1);//终止程序
@@ -59,5 +59,49 @@ void ListPushBack(LTNode* phead, LTDataType x)
 	tail->next = newnode;//连接上新的结点
 	newnode->prev = tail;
 	newnode->next = phead;//指向头
+	phead->prev = newnode;
+}
 
+//头插
+void ListPushFront(LTNode* phead, LTDataType x)
+{
+	assert(phead);
+	LTNode* newnode = BuyListNode(x);
+	LTNode* next = phead->next; //把头节点的next保存
+
+	phead->next = newnode;//指向新节点
+	newnode->prev = phead;
+	newnode->next = next;
+	next->prev = newnode;
+}
+
+//尾删
+void ListPopBack(LTNode* phead)
+{
+	assert(phead);
+	assert(phead->next != phead);
+	assert(!ListEmpty(phead));//不等于空 就继续
+
+	LTNode* tail = phead->prev;//先找尾
+	LTNode* tailPrev = tail->prev; //尾的前一个
+
+	free(tail);
+	tailPrev->next = phead;
+	phead->prev = tailPrev;
+}
+
+//头删
+void ListPopFront(LTNode* phead)
+{
+	assert(phead);
+
+
+}
+
+//判断列表是不是空
+bool ListEmpty(LTNode* phead)
+{
+	assert(phead);
+
+	return phead->next == phead;//指向自己 就是空 为真
 }
