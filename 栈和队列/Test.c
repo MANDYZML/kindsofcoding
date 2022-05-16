@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Stack.h"
+#include"Queue.h"
 
 void TestStack()
 {
@@ -25,8 +26,27 @@ void TestStack()
 
 }
 
+void TestQueue()
+{
+	Queue q; //里面有两个指针
+	QueueInit(&q);//初始化  传结构体地址   
+	QueuePush(&q, 1);
+	QueuePush(&q, 2);
+	QueuePush(&q, 3);
+	QueuePush(&q, 4);
+	QueuePush(&q, 5);
+
+	while (!QueueEmpty(&q))//队列不为空就进来
+	{
+		printf("%d ", QueueFront(&q));//取对头的数据
+		QueuePop(&q);//第二个数据变成对头 接着才能取
+	}
+	printf("\n");
+}
+
 int main()
 {
-	TestStack();
+	//TestStack();
+	TestQueue();
 	return 0;
 }
