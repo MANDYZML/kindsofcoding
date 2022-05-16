@@ -12,6 +12,12 @@ typedef struct ListNode
 	LTDataType data;
 }LTNode;
 
+//struct List
+//{
+//	LTNode* phead;
+//	int size;
+//};
+
 //初始化
 //void ListInit(LTNode** pphead);
 LTNode* ListInit();//用返回值
@@ -31,4 +37,16 @@ void ListPopBack(LTNode* phead);
 //头删
 void ListPopFront(LTNode* phead);
 
+//在pos位置之前插入x
+void ListInsert(LTNode* pos, LTDataType x);
+
+//删除pos位置的结点
+void ListErase(LTNode* pos);
+
+
 bool ListEmpty(LTNode* phead);
+//求链表长度
+int ListSize(LTNode* phead);
+
+//双向列表的销毁
+void ListDestory(LTNode* plist);

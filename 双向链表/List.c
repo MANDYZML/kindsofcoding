@@ -54,25 +54,28 @@ void ListPrint(LTNode* phead)
 void ListPushBack(LTNode* phead, LTDataType x)
 {
 	assert(phead);
-	LTNode* newnode = BuyListNode(x); //创建一个新的结点
-	LTNode* tail = phead->prev;//尾指向最开头的前面
-	tail->next = newnode;//连接上新的结点
-	newnode->prev = tail;
-	newnode->next = phead;//指向头
-	phead->prev = newnode;
+	//LTNode* newnode = BuyListNode(x); //创建一个新的结点
+	//LTNode* tail = phead->prev;//尾指向最开头的前面
+	//tail->next = newnode;//连接上新的结点
+	//newnode->prev = tail;
+	//newnode->next = phead;//指向头
+	//phead->prev = newnode;
+
+	ListInsert(phead, x);
 }
 
 //头插
 void ListPushFront(LTNode* phead, LTDataType x)
 {
 	assert(phead);
-	LTNode* newnode = BuyListNode(x);
-	LTNode* next = phead->next; //把头节点的next保存
+	//LTNode* newnode = BuyListNode(x);
+	//LTNode* next = phead->next; //把头节点的next保存
 
-	phead->next = newnode;//指向新节点
-	newnode->prev = phead;
-	newnode->next = next;
-	next->prev = newnode;
+	//phead->next = newnode;//指向新节点
+	//newnode->prev = phead;
+	//newnode->next = next;
+	//next->prev = newnode;
+	ListInsert(phead->next, x);
 }
 
 //尾删
@@ -82,20 +85,23 @@ void ListPopBack(LTNode* phead)
 	assert(phead->next != phead);
 	assert(!ListEmpty(phead));//不等于空 就继续
 
-	LTNode* tail = phead->prev;//先找尾
-	LTNode* tailPrev = tail->prev; //尾的前一个
+	//LTNode* tail = phead->prev;//先找尾
+	//LTNode* tailPrev = tail->prev; //尾的前一个
 
-	free(tail);
-	tailPrev->next = phead;
-	phead->prev = tailPrev;
+	//free(tail);
+	//tailPrev->next = phead;
+	//phead->prev = tailPrev;
+
+	ListErase(phead->prev);
 }
 
 //头删
 void ListPopFront(LTNode* phead)
 {
 	assert(phead);
+	assert(phead->next != phead);
 
-
+	ListErase(phead->next);
 }
 
 //判断列表是不是空
@@ -104,4 +110,60 @@ bool ListEmpty(LTNode* phead)
 	assert(phead);
 
 	return phead->next == phead;//指向自己 就是空 为真
+}
+
+//在pos位置之前插入x
+void ListInsert(LTNode* pos, LTDataType x)
+{
+	assert(pos);
+	LTNode* prev = pos->prev; //定义一个newnode前面的点
+	LTNode* newnode = BuyListNode(x);//新创建一个节点
+
+	prev->next = newnode;
+	newnode->prev = prev;
+	newnode->next = pos;
+	pos->prev = newnode;
+}   
+
+//删除pos位置的结点
+void ListErase(LTNode* pos)
+{
+	assert(pos);
+	LTNode* prev = pos->prev;
+	LTNode* next = pos->next;
+
+	prev->next = next;
+	next->prev = prev;
+	free(pos);
+}
+
+//求链表长度
+int ListSize(LTNode* phead)
+{
+	assert(phead);
+	//遍历链表 等于phead就结束
+	LTNode* cur = phead->next;//哨兵位的后一个 开始遍历
+	int size = 0;
+	while (cur != phead)
+	{
+		++size;
+		cur = cur->next; //往后走
+	}
+	return size;
+}
+
+//列表的销毁
+void ListDestory(LTNode* phead)
+{
+	assert(phead);
+	//遍历链表 等于phead就结束
+	LTNode* cur = phead->next;//哨兵位的后一个 开始遍历
+	int size = 0;
+	while (cur != phead)
+	{
+		LTNode* next = cur->next;//保存一下next
+		ListErase(cur);
+		cur = next;
+	}
+	free(phead);
 }

@@ -33,14 +33,22 @@ void TestList2()
 	//Î²É¾
 	ListPopBack(plist);
 	ListPrint(plist);
+
 	ListPopBack(plist);
 	ListPrint(plist);
+
 	ListPopBack(plist);
 	ListPrint(plist);
+
 	ListPopBack(plist);
 	ListPrint(plist);
+
 	ListPopBack(plist);
 	ListPrint(plist);
+
+	//Ïú»Ù
+	ListDestory(plist);
+	plist = NULL;
 }
 int main()
 {
