@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS 1
+#include"Heap.h"
 
 //数据存在一个节点里  一个节点就是一个结构体
 //struct TreeNode 
@@ -18,15 +19,54 @@
 //	DataType data; //假设里面存的是根节点A
 //};
 
+void TestHeap()
+{
+	HP hp;
+	HeapInit(&hp);
+	int a[] = { 27,15,19,18,28,34,65,49,25,37 };
+	for (int i = 0; i < sizeof(a) / sizeof(int); ++i)//把所有数据依次插入 构成一个堆
+	{
+		HeapPush(&hp, a[i]);//把数组当中的值依次插入进堆里面
+	}
+	HeapPrint(&hp);
 
+	HeapPush(&hp, 10);
+	HeapPrint(&hp);
+
+	HeapPop(&hp);
+	HeapPrint(&hp);
+	HeapPop(&hp);
+	HeapPrint(&hp);
+	HeapPop(&hp);
+	HeapPrint(&hp);
+	HeapPop(&hp);
+	HeapPrint(&hp);
+}
+
+//堆 排序
+void TestHeapSort()
+{
+	//升序打印--小堆
+	//降序打印--大堆
+	HP hp;
+	HeapInit(&hp);
+	int a[] = { 27,15,19,18,28,34,65,49,25,37 };
+	for (int i = 0; i < sizeof(a) / sizeof(int); ++i)//把所有数据依次插入 构成一个堆
+	{
+		HeapPush(&hp, a[i]);//把数组当中的值依次按小堆插入进堆里面
+	}
+
+	while (!HeapEmpty(&hp))
+	{
+		//小堆 顺序不用变
+		printf("%d ", HeapTop(&hp));//取堆顶
+		HeapPop(&hp);
+	}
+	printf("\n");//升序打印--小堆
+}
 int main()
 {
-	Heap hp;
-	HeadInit(&hp);
-	int a[] = { 27,15,19,18,28,34,65,49,25,37 };
-	for ()
-	{
-		HeapPush(&hp, a[i]);//把数组当中的值一次插入进堆里面
-	}
+	//TestHeap();
+	TestHeapSort();
 	return 0;
 }
