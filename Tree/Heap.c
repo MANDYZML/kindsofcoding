@@ -28,7 +28,7 @@ void HeapInit(HP* php)
 }
 
 //销毁堆
-void HeapDrstroy(HP* php)
+void HeapDestroy(HP* php)
 {
 	assert(php);
 	free(php->a);
@@ -43,8 +43,8 @@ void AdjustUp(HPDataType* a,int child)
 	while (child > 0) //进来
 	{
 		//小堆要父亲小于孩子
-		//if (a[child] < a[parent])
-		if (a[child] > a[parent])//大堆
+		if (a[child] < a[parent])
+		//if (a[child] > a[parent])//大堆
 		{
 			Swap(&a[child], &a[parent]);//交换值 
 			child = parent;
@@ -91,21 +91,21 @@ void AdjustDown(HPDataType* a, int size, int parent)
 	while (child < size)//child默认左孩子
 	{
          //选出孩子当中小的那个
-		//if (child+1 < size && a[child + 1] < a[child])//如果右孩子小于左孩子
+		if (child+1 < size && a[child + 1] < a[child])//如果右孩子小于左孩子
 		//选出孩子当中大的那个
-		if (child+1 < size && a[child + 1] > a[child])//如果右孩子小于左孩子
+		//if (child+1 < size && a[child + 1] > a[child])//如果右孩子大于左孩子
 		{
 			++child;//变成小的是右孩子
 		}
 		//到这里 child一定是小的那个
 		//孩子跟父亲比较
-		//if (a[child] < a[parent])//因为是小堆 父亲要小于孩子
-		if (a[child] > a[parent])//因为是大堆 父亲要大于孩子
+		if (a[child] < a[parent])//因为是小堆 父亲要小于孩子
+		//if (a[child] > a[parent])//因为是大堆 父亲要大于孩子
 		
 		{
 			Swap(&a[child], &a[parent]);
 			parent = child;//让父亲到孩子的位置来
-			child = parent * 2 + 1;//再接着这个父亲算孩子算孩子
+			child = parent * 2 + 1;//再接着这个父亲算孩子
 		}
 		else //说明 小的孩子都大于父亲  两孩子都大于父亲
 		{

@@ -22,9 +22,13 @@ void HeapPrint(HP* php);
 //初始化
  void HeapInit(HP* php);
 //销毁堆
-void HeapDrstroy(HP* php);
+void HeapDestroy(HP* php);
+//向上调整
+void AdjustUp(HPDataType* a, int child);
 //插入数据
 void HeapPush(HP* php, HPDataType x);
+//向下调整
+void AdjustDown(HPDataType* a, int size, int parent);
 //把堆里的数据删除 
 void HeapPop(HP* php);
 //取堆顶的数据 --取最大的数据
