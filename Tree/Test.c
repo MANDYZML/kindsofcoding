@@ -298,7 +298,16 @@ int TreeKLevel(BTNode* root, int k)
 //求树的深度
 int TreeDepth(BTNode* root)
 {
+	if (root == NULL)
+	{
+		return 0;//空树的高度是0
+	}
+	//求左子树的高度和右子树的高度
+	int leftDepth = TreeDepth(root->left);//求左树高度
+	int rightDepth = TreeDepth(root->right);//右树
 
+	return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
+	//算出左子树或者右子树谁是最深的 之后加根
 }
 
 //二叉树查找值为x的结点
@@ -355,6 +364,8 @@ int main()
 
 	printf("LeafSize:%d\n", TreeLeafSize(root));
 	printf("KLevelSize:%d\n", TreeKLevel(root,2));
+
+	printf("TreeKDepth:%d\n", TreeDepth(root));
 
 
 	return 0;
