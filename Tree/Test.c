@@ -424,6 +424,7 @@ int TreeComplete(BTNode* root)
 		QueuePop(&q);//删了队头的数据
 		if (front)//队头是非空
 		{
+			QueueDestroy(&q);
 			return false;
 		}
 	}
