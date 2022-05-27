@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Heap.h"
 #include<time.h>
+#include"Queue.h"
 
 //数据存在一个节点里  一个节点就是一个结构体
 //struct TreeNode 
@@ -344,6 +345,95 @@ BTNode* TreeFind(BTNode* root, BTDataType x)
 	return NULL;
 }
 
+//后序销毁
+void TreeDestroy(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return; 
+	}
+	TreeDestroy(root->left);
+	TreeDestroy(root->right);
+	printf("%p:%d\n", root, root->data);
+	free(root);
+}
+
+//层序遍历
+void LevelOrder(BTNode* root)
+{
+	//定义一个队列
+	Queue q;
+	QueueInit(&q);//初始化
+	if (root)
+	{
+		QueuePush(&q, root);//把根节点指针先放进去
+	}
+	while (!QueueEmpty(&q))//队列不等于空就继续
+	{
+		BTNode* front = QueueFront(&q);//出队头的数据
+		printf("%d ", front->data);
+		QueuePop(&q);//删了队头的数据
+
+		if (front->left)//队列头 左孩子不等于空
+		{
+			QueuePush(&q, front->left);//左孩子进入队列
+		}
+		if (front->right)//队列头 右孩子不等于空
+		{
+			QueuePush(&q, front->right);//右孩子进入队列
+		}
+	}
+	//队列为空就结束了
+	printf("\n");
+	QueueDestroy(&q);
+}
+
+// 判断二叉树是否是完全二叉树
+int TreeComplete(BTNode* root)
+{
+	//层序遍历
+	Queue q;
+	QueueInit(&q);//初始化
+	if (root)
+	{
+		QueuePush(&q, root);//把根节点指针先放进去
+	}
+	while (!QueueEmpty(&q))//队列不等于空就继续
+	{
+		BTNode* front = QueueFront(&q);//出队头的数据
+		QueuePop(&q);//删了队头的数据
+
+		if (front)//如果队列不等于空
+		{
+			QueuePush(&q, front->left);//左孩子进入队列
+			QueuePush(&q, front->right);//右孩子进入队列
+		}
+		else //队列遇到空，跳出层序遍历
+		{
+			break;
+		}
+	}
+
+	//遍历队列
+	
+	//如果队列后面全是空，则是完全二叉树
+	//如果队列后面还有非空，则不是完全二叉树
+	while (!QueueEmpty(&q))//队列不等于空就继续
+	{
+		BTNode* front = QueueFront(&q);//取队头的数据
+		QueuePop(&q);//删了队头的数据
+		if (front)//队头是非空
+		{
+			return false;
+		}
+	}
+
+	//队列为空就结束了
+	QueueDestroy(&q);
+	return true;//队列都出完了 还没有false 就说明是完全二叉树
+
+}
+
 int main()
 { 
 	BTNode* root = CreatBinaryTree();//根节点
@@ -368,5 +458,10 @@ int main()
 	printf("TreeKDepth:%d\n", TreeDepth(root));
 
 
+	TreeDestroy(root);
+	root = NULL;
+
+	LevelOrder(root); 
+	printf("TreeComplete:%d\n", TreeComplete(root));
 	return 0;
 }
